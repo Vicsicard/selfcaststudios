@@ -207,6 +207,39 @@ export default function NarrativeTransitionPage() {
             </p>
           </div>
 
+          {/* Testimonials */}
+          <div className="max-w-4xl mx-auto mb-20">
+            <p className="text-text-light text-lg mb-8">
+              Navigate your professional evolution with confidence. Our Narrative Transition service helps you bridge your past experience with your future aspirations, creating a compelling story that resonates with your new audience.
+            </p>
+
+            <div className="mt-12 space-y-8">
+              <h3 className="text-2xl font-bold text-primary">Client Success Stories</h3>
+              
+              <div className="grid gap-6 md:grid-cols-2">
+                <div className="bg-surface rounded-custom shadow-custom-dark p-6">
+                  <blockquote className="text-lg text-text-light mb-4 italic">
+                    "The team helped me effectively communicate my journey from corporate executive to startup founder. Their insights were invaluable."
+                  </blockquote>
+                  <cite className="not-italic">
+                    <span className="block text-primary font-bold">Thomas N.</span>
+                    <span className="text-text-light">Entrepreneur</span>
+                  </cite>
+                </div>
+
+                <div className="bg-surface rounded-custom shadow-custom-dark p-6">
+                  <blockquote className="text-lg text-text-light mb-4 italic">
+                    "They helped me articulate my professional evolution in a way that maintained credibility while embracing my new direction."
+                  </blockquote>
+                  <cite className="not-italic">
+                    <span className="block text-primary font-bold">Rachel S.</span>
+                    <span className="text-text-light">Business Owner</span>
+                  </cite>
+                </div>
+              </div>
+            </div>
+          </div>
+
           {/* Call to Action */}
           <div className="max-w-4xl mx-auto text-center">
             <a

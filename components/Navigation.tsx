@@ -21,19 +21,19 @@ export default function Navigation() {
   ]
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-gradient-surface shadow-custom-elevated backdrop-blur-sm">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-gradient-surface shadow-custom-elevated backdrop-blur-sm w-full overflow-x-hidden">
       <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-20">
+        <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
           <Link 
             href="/"
-            className="text-3xl md:text-4xl font-bold text-primary hover:text-accent transition-colors tracking-tight"
+            className="text-2xl md:text-3xl lg:text-4xl font-bold text-primary hover:text-accent transition-colors tracking-tight truncate"
           >
             Self Cast Studios
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="hidden md:flex items-center space-x-4 lg:space-x-8">
             {links.map((link) => (
               <Link
                 key={link.href}
@@ -83,8 +83,8 @@ export default function Navigation() {
 
         {/* Mobile Menu */}
         {isOpen && (
-          <div className="md:hidden py-4 bg-surface-dark rounded-custom mt-2 shadow-custom-lg">
-            <div className="flex flex-col space-y-4 p-4">
+          <div className="md:hidden fixed top-[64px] left-0 right-0 bg-surface-dark shadow-custom-lg max-h-[calc(100vh-64px)] overflow-y-auto">
+            <div className="flex flex-col space-y-2 p-4">
               {links.map((link) => (
                 <Link
                   key={link.href}
@@ -93,7 +93,7 @@ export default function Navigation() {
                     isActive(link.href)
                       ? 'text-accent font-semibold'
                       : 'text-text-light hover:text-accent'
-                  } transition-colors px-4 py-2 rounded-custom hover:bg-surface`}
+                  } transition-colors px-4 py-3 rounded-custom hover:bg-surface text-lg`}
                   onClick={() => setIsOpen(false)}
                 >
                   {link.label}
@@ -101,7 +101,7 @@ export default function Navigation() {
               ))}
               <a
                 href="mailto:info@selfcaststudios.com"
-                className="bg-accent hover:bg-accent-light text-text-white px-6 py-2 rounded-custom transition-colors shadow-custom hover:shadow-custom-hover text-center"
+                className="bg-accent hover:bg-accent-light text-text-white px-6 py-3 rounded-custom transition-colors shadow-custom hover:shadow-custom-hover text-center text-lg mt-4"
                 onClick={() => setIsOpen(false)}
               >
                 Contact

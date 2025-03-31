@@ -53,9 +53,9 @@ export default function HomePage() {
             {/* Featured Video */}
             <div className="card-elevated p-8 md:p-12 shadow-custom-dark hover:shadow-custom-dark-hover transition-shadow">
               <VideoPlayer
-                src="https://imagestopost.carrd.co/assets/videos/video06.mp4?v=c0c3ab6a"
+                src="https://imagestopost.carrd.co/assets/videos/video08.mp4?v=fa27f6da"
                 title="Welcome to Self Cast Studios"
-                description="Discover how we help you take control of your narrative and shape your authentic story."
+                description="See how we help professionals like you craft and control their narrative with intention."
                 className="shadow-custom-dark brightness-[60%]"
               />
             </div>

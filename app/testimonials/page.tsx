@@ -23,18 +23,6 @@ export default function TestimonialsPage() {
       service: 'Narrative Defense',
       quote: 'When faced with industry changes, Self Cast Studios provided invaluable guidance in protecting and preserving my professional reputation.',
     },
-    {
-      name: 'David K.',
-      role: 'Tech Entrepreneur',
-      service: 'Narrative Defense',
-      quote: 'Their expertise in narrative defense helped me navigate a complex situation while maintaining my company\'s credibility and stakeholder trust.',
-    },
-    {
-      name: 'Sarah P.',
-      role: 'Legal Professional',
-      service: 'Narrative Defense',
-      quote: 'Self Cast Studios\' approach to narrative defense is both strategic and empathetic. They helped me maintain my professional standing during a sensitive time.',
-    },
 
     // Narrative Elevation Testimonials
     {
@@ -49,18 +37,6 @@ export default function TestimonialsPage() {
       service: 'Narrative Elevation',
       quote: 'Working with Self Cast Studios elevated my professional presence and opened doors to new opportunities I hadn\'t imagined possible.',
     },
-    {
-      name: 'Robert T.',
-      role: 'Financial Advisor',
-      service: 'Narrative Elevation',
-      quote: 'Their comprehensive approach to personal branding helped me establish a distinctive voice in a crowded market.',
-    },
-    {
-      name: 'Lisa H.',
-      role: 'Executive Coach',
-      service: 'Narrative Elevation',
-      quote: 'The impact on my business has been transformative. They helped me articulate my value proposition in a way that truly resonates with my target audience.',
-    },
 
     // Narrative Transition Testimonials
     {
@@ -74,18 +50,6 @@ export default function TestimonialsPage() {
       role: 'Industry Switcher',
       service: 'Narrative Transition',
       quote: 'Their guidance made my career transition feel seamless. They helped me tell my story in a way that highlighted my transferable skills.',
-    },
-    {
-      name: 'Thomas N.',
-      role: 'Entrepreneur',
-      service: 'Narrative Transition',
-      quote: 'The team helped me effectively communicate my journey from corporate executive to startup founder. Their insights were invaluable.',
-    },
-    {
-      name: 'Rachel S.',
-      role: 'Business Owner',
-      service: 'Narrative Transition',
-      quote: 'They helped me articulate my professional evolution in a way that maintained credibility while embracing my new direction.',
     }
   ]
 
@@ -113,6 +77,19 @@ export default function TestimonialsPage() {
                   src="https://imagestopost.carrd.co/assets/videos/video03.mp4?v=c0c3ab6a"
                   title="Client Testimonial - Narrative Defense"
                   description="Hear how our Narrative Defense service helped protect and preserve a client's professional reputation."
+                  className="shadow-custom-dark"
+                  isVertical={true}
+                />
+              </div>
+            )}
+
+            {/* Video Testimonial for Narrative Elevation */}
+            {service === 'Narrative Elevation' && (
+              <div className="mb-12">
+                <VideoPlayer
+                  src="https://imagestopost.carrd.co/assets/videos/video07.mp4?v=9bffb209"
+                  title="Client Testimonial - Narrative Elevation"
+                  description="Listen to how our Narrative Elevation service helped transform a client's professional presence."
                   className="shadow-custom-dark"
                   isVertical={true}
                 />

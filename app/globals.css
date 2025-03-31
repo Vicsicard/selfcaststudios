@@ -7,9 +7,39 @@
   --foreground-rgb: 26, 26, 26;
 }
 
-body {
+/* Base styles */
+html, body {
+  @apply overflow-x-hidden max-w-[100vw];
   color: rgb(var(--foreground-rgb));
   background: rgb(var(--background-rgb));
+}
+
+/* Container responsiveness */
+.container {
+  @apply px-4 md:px-6 lg:px-8 mx-auto;
+  max-width: min(100%, 1280px);
+}
+
+/* Typography responsiveness */
+h1 {
+  @apply text-3xl md:text-4xl lg:text-5xl font-bold leading-tight;
+}
+
+h2 {
+  @apply text-2xl md:text-3xl lg:text-4xl font-bold leading-tight;
+}
+
+h3 {
+  @apply text-xl md:text-2xl lg:text-3xl font-bold leading-tight;
+}
+
+p {
+  @apply text-base md:text-lg leading-relaxed;
+}
+
+/* Mobile-friendly spacing */
+.py-section {
+  @apply py-12 md:py-16 lg:py-20;
 }
 
 /* Add subtle texture to surfaces */
@@ -27,6 +57,26 @@ body {
   @apply transition-transform duration-300 hover:-translate-y-1;
 }
 
+/* Responsive grid layouts */
+.grid-responsive {
+  @apply grid gap-6 sm:grid-cols-2 lg:grid-cols-3;
+}
+
+/* Enhanced card styles */
+.card {
+  @apply bg-surface rounded-custom shadow-custom hover:shadow-custom-hover transition-all duration-300 p-6 md:p-8;
+}
+
+.card-elevated {
+  @apply bg-surface rounded-custom shadow-custom-elevated hover:shadow-custom-lg transition-all duration-300 p-6 md:p-8;
+}
+
+/* Mobile-friendly buttons */
+.btn {
+  @apply px-6 py-3 md:px-8 md:py-4 rounded-custom inline-flex items-center justify-center text-center;
+  min-width: 120px;
+}
+
 /* Plyr Video Player Custom Styles */
 .plyr {
   --plyr-color-main: theme('colors.accent.DEFAULT');
@@ -38,19 +88,12 @@ body {
   --plyr-menu-background: theme('colors.surface.DEFAULT');
   --plyr-menu-color: theme('colors.text.light');
   border-radius: theme('borderRadius.custom');
+  max-width: 100vw;
+  overflow: hidden;
 }
 
 .plyr--video.plyr--stopped .plyr__controls {
   display: none;
-}
-
-/* Enhanced card styles */
-.card {
-  @apply bg-surface rounded-custom shadow-custom hover:shadow-custom-hover transition-all duration-300;
-}
-
-.card-elevated {
-  @apply bg-surface rounded-custom shadow-custom-elevated hover:shadow-custom-lg transition-all duration-300;
 }
 
 /* Gradient text effect */
@@ -69,4 +112,24 @@ body {
 
 .hover-underline:hover::after {
   @apply w-full;
+}
+
+/* Prevent horizontal overflow */
+img, video {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Mobile-friendly tables */
+table {
+  @apply w-full overflow-x-auto block md:table;
+}
+
+/* Responsive spacing utilities */
+.space-mobile {
+  @apply space-y-6 md:space-y-8 lg:space-y-12;
+}
+
+.gap-mobile {
+  @apply gap-4 md:gap-6 lg:gap-8;
 }

@@ -49,6 +49,33 @@ export default function NarrativeDefensePage() {
               In today's interconnected world, your professional reputation is one of your most valuable assets. Our Narrative Defense service helps you protect and preserve your reputation during challenging transitions, ensuring your story remains authentic and under your control.
             </p>
 
+            {/* Client Testimonials */}
+            <div className="mt-12 space-y-8">
+              <h3 className="text-2xl font-bold text-primary">Client Success Stories</h3>
+              
+              <div className="grid gap-6 md:grid-cols-2">
+                <div className="bg-surface rounded-custom shadow-custom-dark p-6">
+                  <blockquote className="text-lg text-text-light mb-4 italic">
+                    "Their expertise in narrative defense helped me navigate a complex situation while maintaining my company's credibility and stakeholder trust."
+                  </blockquote>
+                  <cite className="not-italic">
+                    <span className="block text-primary font-bold">David K.</span>
+                    <span className="text-text-light">Tech Entrepreneur</span>
+                  </cite>
+                </div>
+
+                <div className="bg-surface rounded-custom shadow-custom-dark p-6">
+                  <blockquote className="text-lg text-text-light mb-4 italic">
+                    "Self Cast Studios' approach to narrative defense is both strategic and empathetic. They helped me maintain my professional standing during a sensitive time."
+                  </blockquote>
+                  <cite className="not-italic">
+                    <span className="block text-primary font-bold">Sarah P.</span>
+                    <span className="text-text-light">Legal Professional</span>
+                  </cite>
+                </div>
+              </div>
+            </div>
+
             <div className="grid md:grid-cols-2 gap-8 mb-12">
               <div className="card p-8">
                 <h3 className="text-xl font-semibold text-primary mb-4">

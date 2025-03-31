@@ -71,10 +71,21 @@ export default function NarrativeElevationPage() {
           {/* Introduction Video */}
           <div className="mb-16">
             <VideoPlayer
-              src="https://imagestopost.carrd.co/assets/videos/video04.mp4?v=3174e163"
+              src="https://imagestopost.carrd.co/assets/videos/video02.mp4?v=37a0fde8"
               title="Understanding Narrative Elevation"
-              description="Learn how our Narrative Elevation service helps you shape and amplify your authentic story."
-              className="shadow-custom"
+              description="Learn how our Narrative Elevation service helps you amplify your voice and establish thought leadership."
+              className="shadow-custom-dark"
+            />
+          </div>
+
+          {/* Testimonial Video */}
+          <div className="mb-16">
+            <VideoPlayer
+              src="https://imagestopost.carrd.co/assets/videos/video07.mp4?v=9bffb209"
+              title="Client Testimonial - Narrative Elevation"
+              description="Listen to how our Narrative Elevation service helped transform a client's professional presence."
+              className="shadow-custom-dark"
+              isVertical={true}
             />
           </div>
 
@@ -102,6 +113,37 @@ export default function NarrativeElevationPage() {
               We blend deep discovery, strategic messaging, and creative content production so you can amplify your voice 
               and stand out in your field.
             </p>
+            <p className="text-text-light text-lg mb-8">
+              Elevate your professional presence and establish yourself as a thought leader in your industry. Our Narrative Elevation service helps you craft and communicate your unique value proposition, amplifying your voice and expanding your influence.
+            </p>
+
+            {/* Client Testimonials */}
+            <div className="mt-12 space-y-8">
+              <h3 className="text-2xl font-bold text-primary">Client Success Stories</h3>
+              
+              <div className="grid gap-6 md:grid-cols-2">
+                <div className="bg-surface rounded-custom shadow-custom-dark p-6">
+                  <blockquote className="text-lg text-text-light mb-4 italic">
+                    "Their comprehensive approach to personal branding helped me establish a distinctive voice in a crowded market."
+                  </blockquote>
+                  <cite className="not-italic">
+                    <span className="block text-primary font-bold">Robert T.</span>
+                    <span className="text-text-light">Financial Advisor</span>
+                  </cite>
+                </div>
+
+                <div className="bg-surface rounded-custom shadow-custom-dark p-6">
+                  <blockquote className="text-lg text-text-light mb-4 italic">
+                    "The impact on my business has been transformative. They helped me articulate my value proposition in a way that truly resonates with my target audience."
+                  </blockquote>
+                  <cite className="not-italic">
+                    <span className="block text-primary font-bold">Lisa H.</span>
+                    <span className="text-text-light">Executive Coach</span>
+                  </cite>
+                </div>
+              </div>
+            </div>
+
           </div>
 
           {/* Who It's For */}
