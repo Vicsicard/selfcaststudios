@@ -1,5 +1,12 @@
-import VideoPlayer from '@/components/VideoPlayer'
 import PageHeader from '@/components/PageHeader'
+import dynamic from 'next/dynamic'
+
+const VideoPlayer = dynamic(() => import('@/components/VideoPlayer'), {
+  ssr: false,
+  loading: () => (
+    <div className="aspect-video bg-surface-dark animate-pulse rounded-custom" />
+  ),
+})
 
 export default function NarrativeDefensePage() {
   return (
