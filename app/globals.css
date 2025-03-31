@@ -1,0 +1,72 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background-rgb: 255, 255, 255;
+  --foreground-rgb: 26, 26, 26;
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: rgb(var(--background-rgb));
+}
+
+/* Add subtle texture to surfaces */
+.bg-surface, .bg-surface-dark {
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='0.02'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+
+/* Smooth transitions */
+* {
+  @apply transition-all duration-200;
+}
+
+/* Card hover effects */
+.hover-lift {
+  @apply transition-transform duration-300 hover:-translate-y-1;
+}
+
+/* Plyr Video Player Custom Styles */
+.plyr {
+  --plyr-color-main: theme('colors.accent.DEFAULT');
+  --plyr-range-fill-background: theme('colors.accent.DEFAULT');
+  --plyr-video-controls-background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75));
+  --plyr-video-control-color: theme('colors.text.white');
+  --plyr-video-control-color-hover: theme('colors.accent.light');
+  --plyr-audio-control-color-hover: theme('colors.accent.light');
+  --plyr-menu-background: theme('colors.surface.DEFAULT');
+  --plyr-menu-color: theme('colors.text.light');
+  border-radius: theme('borderRadius.custom');
+}
+
+.plyr--video.plyr--stopped .plyr__controls {
+  display: none;
+}
+
+/* Enhanced card styles */
+.card {
+  @apply bg-surface rounded-custom shadow-custom hover:shadow-custom-hover transition-all duration-300;
+}
+
+.card-elevated {
+  @apply bg-surface rounded-custom shadow-custom-elevated hover:shadow-custom-lg transition-all duration-300;
+}
+
+/* Gradient text effect */
+.gradient-text {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-accent to-accent-light;
+}
+
+/* Animated underline effect */
+.hover-underline {
+  @apply relative;
+}
+
+.hover-underline::after {
+  @apply content-[''] absolute left-0 bottom-0 w-0 h-0.5 bg-accent transition-all duration-300;
+}
+
+.hover-underline:hover::after {
+  @apply w-full;
+}
