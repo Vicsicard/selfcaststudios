@@ -1,5 +1,13 @@
 import PageHeader from '@/components/PageHeader'
 import Link from 'next/link'
+import dynamic from 'next/dynamic'
+
+const VideoPlayer = dynamic(() => import('@/components/VideoPlayer'), {
+  ssr: false,
+  loading: () => (
+    <div className="aspect-video bg-surface-dark animate-pulse rounded-custom" />
+  ),
+})
 
 export default function ServicesPage() {
   const services = [
