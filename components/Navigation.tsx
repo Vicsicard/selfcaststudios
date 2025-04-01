@@ -50,12 +50,12 @@ export default function Navigation() {
                 }`} />
               </Link>
             ))}
-            <a
-              href="mailto:info@selfcaststudios.com"
+            <Link
+              href="/contact"
               className="bg-accent hover:bg-accent-light text-text-white px-6 py-2 rounded-custom transition-colors shadow-custom hover:shadow-custom-hover"
             >
               Contact
-            </a>
+            </Link>
           </div>
 
           {/* Mobile Menu Button */}
@@ -99,13 +99,13 @@ export default function Navigation() {
                   {link.label}
                 </Link>
               ))}
-              <a
-                href="mailto:info@selfcaststudios.com"
+              <Link
+                href="/contact"
                 className="bg-accent hover:bg-accent-light text-text-white px-6 py-3 rounded-custom transition-colors shadow-custom hover:shadow-custom-hover text-center text-lg mt-4"
                 onClick={() => setIsOpen(false)}
               >
                 Contact
-              </a>
+              </Link>
             </div>
           </div>
         )}

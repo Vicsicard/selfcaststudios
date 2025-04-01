@@ -1,5 +1,8 @@
+'use client'
+
 import Link from 'next/link'
 import dynamic from 'next/dynamic'
+import { useModal } from '@/hooks/useModal'
 
 const VideoPlayer = dynamic(() => import('@/components/VideoPlayer'), {
   ssr: false,
@@ -9,6 +12,8 @@ const VideoPlayer = dynamic(() => import('@/components/VideoPlayer'), {
 })
 
 export default function HomePage() {
+  const { ModalComponent, showContactForm } = useModal()
+
   const services = [
     {
       title: 'Narrative Defense',
@@ -29,6 +34,8 @@ export default function HomePage() {
 
   return (
     <main>
+      <ModalComponent />
+      
       {/* Hero Section */}
       <div className="relative min-h-screen bg-gradient-surface-dark">
         <div className="absolute inset-0 bg-gradient-radial from-transparent to-surface-darker opacity-45" />
@@ -42,12 +49,12 @@ export default function HomePage() {
               <p className="text-xl md:text-2xl text-text-light mb-8">
                 Take control of your narrative before others define it for you.
               </p>
-              <a
-                href="mailto:info@selfcaststudios.com"
+              <button
+                onClick={() => showContactForm('Home Hero')}
                 className="inline-block bg-accent hover:bg-accent-light text-text-white px-12 py-4 rounded-custom transition-colors text-lg shadow-custom-dark hover:shadow-custom-dark-hover"
               >
                 Book a Private Consultation
-              </a>
+              </button>
             </div>
 
             {/* Featured Video */}
@@ -71,9 +78,8 @@ export default function HomePage() {
           </h2>
           <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
             {services.map((service) => (
-              <Link
+              <div
                 key={service.title}
-                href={service.href}
                 className="card p-8 hover-lift shadow-custom-dark hover:shadow-custom-dark-hover transition-shadow"
               >
                 <h3 className="text-xl font-semibold text-primary mb-4">
@@ -82,10 +88,21 @@ export default function HomePage() {
                 <p className="text-text-light mb-6">
                   {service.description}
                 </p>
-                <span className="text-accent hover:text-accent-light transition-colors hover-underline">
-                  Learn More →
-                </span>
-              </Link>
+                <div className="flex gap-4">
+                  <Link
+                    href={service.href}
+                    className="text-accent hover:text-accent-light transition-colors hover-underline"
+                  >
+                    Learn More →
+                  </Link>
+                  <button
+                    onClick={() => showContactForm(`Service - ${service.title}`)}
+                    className="text-accent hover:text-accent-light transition-colors hover-underline"
+                  >
+                    Contact Us →
+                  </button>
+                </div>
+              </div>
             ))}
           </div>
         </div>
@@ -101,12 +118,12 @@ export default function HomePage() {
             <p className="text-xl text-text-light mb-12">
               Take the first step toward transforming your personal brand and controlling your story.
             </p>
-            <a
-              href="mailto:info@selfcaststudios.com"
+            <button
+              onClick={() => showContactForm('Home CTA')}
               className="inline-block bg-accent hover:bg-accent-light text-text-white px-12 py-4 rounded-custom transition-colors text-lg shadow-custom-dark hover:shadow-custom-dark-hover"
             >
               Book a Private Consultation
-            </a>
+            </button>
           </div>
         </div>
       </div>
