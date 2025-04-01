@@ -25,7 +25,7 @@ export function useModal() {
         sourcePage={sourcePage}
         onSuccess={() => {
           setContent(<SuccessMessage />)
-          setTimeout(closeModal, 3000)
+          setTimeout(closeModal, 6000) // Increased from 3000ms to 6000ms
         }}
       />
     )
