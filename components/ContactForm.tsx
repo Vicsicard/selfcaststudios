@@ -67,7 +67,7 @@ export default function ContactForm({ sourcePage, onSuccess }: ContactFormProps)
               required
               value={formData.name}
               onChange={handleChange}
-              className="w-full px-4 py-2.5 rounded-custom border border-surface-dark focus:border-accent focus:ring-1 focus:ring-accent outline-none transition-colors bg-surface-light text-base"
+              className="w-full px-4 py-2.5 rounded-custom border-2 border-surface-dark bg-surface-dark/20 focus:border-accent focus:ring-2 focus:ring-accent/20 outline-none transition-all shadow-custom-dark hover:shadow-custom-dark-hover text-base"
               placeholder="Your name"
             />
           </div>
@@ -83,7 +83,7 @@ export default function ContactForm({ sourcePage, onSuccess }: ContactFormProps)
               required
               value={formData.email}
               onChange={handleChange}
-              className="w-full px-4 py-2.5 rounded-custom border border-surface-dark focus:border-accent focus:ring-1 focus:ring-accent outline-none transition-colors bg-surface-light text-base"
+              className="w-full px-4 py-2.5 rounded-custom border-2 border-surface-dark bg-surface-dark/20 focus:border-accent focus:ring-2 focus:ring-accent/20 outline-none transition-all shadow-custom-dark hover:shadow-custom-dark-hover text-base"
               placeholder="your@email.com"
             />
           </div>
@@ -99,8 +99,8 @@ export default function ContactForm({ sourcePage, onSuccess }: ContactFormProps)
               value={formData.message}
               onChange={handleChange}
               rows={4}
-              className="w-full px-4 py-2.5 rounded-custom border border-surface-dark focus:border-accent focus:ring-1 focus:ring-accent outline-none transition-colors bg-surface-light text-base resize-none"
-              placeholder="How can we help you?"
+              className="w-full px-4 py-2.5 rounded-custom border-2 border-surface-dark bg-surface-dark/20 focus:border-accent focus:ring-2 focus:ring-accent/20 outline-none transition-all shadow-custom-dark hover:shadow-custom-dark-hover text-base resize-none"
+              placeholder="Your message"
             />
           </div>
         </div>
