@@ -13,8 +13,10 @@ export default function ContactPage() {
   return (
     <main>
       <PageHeader
-        title="Contact Us"
-        subtitle="Get in touch with us"
+        title="Contact"
+        description="Get in touch with us"
+        backgroundImage="https://imagestopost.carrd.co/assets/images/image05.jpg?v=dc125484"
+        darkText={true}
         className="text-primary"
       />
 
@@ -31,7 +33,7 @@ export default function ContactPage() {
               <h2 className="text-2xl font-bold text-primary mb-6">Contact</h2>
               <button
                 onClick={handleContactClick}
-                className="text-text-light hover:text-accent transition-colors"
+                className="text-accent hover:text-accent-light transition-colors underline"
               >
                 Send us a message
               </button>
