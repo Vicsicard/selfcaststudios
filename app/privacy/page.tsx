@@ -57,7 +57,9 @@ export default function PrivacyPage() {
     <div>
       <PageHeader
         title="Privacy Policy"
-        description="Protecting Your Privacy with Care"
+        description="Your Privacy Matters"
+        backgroundImage="https://imagestopost.carrd.co/assets/images/image05.jpg?v=fa27f6da"
+        darkText={false}
       />
       
       <div className="container mx-auto px-4 py-section">
@@ -105,7 +107,7 @@ export default function PrivacyPage() {
             </p>
             <a
               href="mailto:privacy@selfcaststudios.com"
-              className="inline-block bg-accent hover:bg-accent-light text-text-white px-12 py-4 rounded-custom transition-colors text-lg shadow-custom hover:shadow-custom-hover"
+              className="inline-block bg-accent hover:bg-accent-light text-text-white px-6 sm:px-12 py-4 rounded-custom transition-colors text-lg shadow-custom hover:shadow-custom-hover break-all sm:break-normal mx-4"
             >
               privacy@selfcaststudios.com
             </a>

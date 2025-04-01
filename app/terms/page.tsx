@@ -75,6 +75,8 @@ export default function TermsPage() {
       <PageHeader
         title="Terms of Service"
         description="Our Commitment to You"
+        backgroundImage="https://imagestopost.carrd.co/assets/images/image05.jpg?v=fa27f6da"
+        darkText={false}
       />
       
       <div className="container mx-auto px-4 py-section">

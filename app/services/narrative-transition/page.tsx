@@ -98,7 +98,7 @@ export default function NarrativeTransitionPage() {
           {/* Introduction Video */}
           <div className="mb-16">
             <VideoPlayer
-              src="https://imagestopost.carrd.co/assets/videos/video05.mp4?v=45757319"
+              src="https://imagestopost.carrd.co/assets/videos/video04.mp4?v=fa27f6da"
               title="Understanding Narrative Transition"
               description="Learn how our Narrative Transition service helps you navigate and communicate your professional evolution."
               className="shadow-custom"

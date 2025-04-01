@@ -56,7 +56,7 @@ export default function HomePage() {
                 src="https://imagestopost.carrd.co/assets/videos/video08.mp4?v=fa27f6da"
                 title="Welcome to Self Cast Studios"
                 description="See how we help professionals like you craft and control their narrative with intention."
-                className="shadow-custom-dark brightness-[60%]"
+                className="shadow-custom-dark brightness-[85%]"
               />
             </div>
           </div>

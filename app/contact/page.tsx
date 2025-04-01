@@ -5,7 +5,9 @@ export default function ContactPage() {
     <div>
       <PageHeader
         title="Contact Us"
-        description="Get in touch with us for your media production needs"
+        description="Get in Touch"
+        backgroundImage="https://imagestopost.carrd.co/assets/images/image05.jpg?v=fa27f6da"
+        darkText={false}
       />
       
       <div className="container mx-auto px-4 py-section">
