@@ -1,13 +1,22 @@
 interface PageHeaderProps {
   title: string;
   description?: string;
+  subtitle?: string;
   backgroundImage?: string;
   darkText?: boolean;
+  className?: string;
 }
 
-export default function PageHeader({ title, description, backgroundImage, darkText = false }: PageHeaderProps) {
+export default function PageHeader({
+  title,
+  description,
+  subtitle,
+  backgroundImage,
+  darkText = false,
+  className = ''
+}: PageHeaderProps) {
   return (
-    <div className="relative py-24 mt-20">
+    <div className={`relative py-24 mt-20 ${className}`}>
       {/* Background Image */}
       {backgroundImage && (
         <div 
@@ -28,6 +37,11 @@ export default function PageHeader({ title, description, backgroundImage, darkTe
           {description && (
             <p className={`text-xl md:text-2xl ${darkText ? 'text-primary' : 'text-text-white opacity-90'}`}>
               {description}
+            </p>
+          )}
+          {subtitle && (
+            <p className={`text-lg md:text-xl ${darkText ? 'text-primary' : 'text-text-white opacity-80'}`}>
+              {subtitle}
             </p>
           )}
         </div>

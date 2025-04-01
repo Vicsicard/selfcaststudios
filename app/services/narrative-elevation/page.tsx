@@ -207,13 +207,11 @@ export default function NarrativeElevationPage() {
           <div className="bg-surface rounded-custom shadow-custom p-8 md:p-12 mb-20">
             <div className="max-w-4xl mx-auto">
               <h2 className="text-3xl md:text-4xl font-bold text-primary mb-8">Deliverables</h2>
-              <ul className="space-y-4">
-                {deliverables.map((deliverable, index) => (
-                  <li key={index} className="flex items-start">
-                    <span className="text-accent mr-3">•</span>
-                    <span className="text-text-light text-lg">{deliverable}</span>
-                  </li>
-                ))}
+              <ul className="space-y-3 text-text-light">
+                <li>Align messaging across platforms, including LinkedIn and other social media</li>
+                <li>Content calendar and posting strategy</li>
+                <li>Personal brand guidelines</li>
+                <li>Engagement tactics and best practices</li>
               </ul>
             </div>
           </div>
@@ -247,8 +245,17 @@ export default function NarrativeElevationPage() {
         </div>
       </div>
 
-      {/* Consultation CTA */}
-      <ConsultationCTA source="Service - Narrative Elevation" />
+      <div className="bg-surface-dark">
+        <div className="container mx-auto px-4 py-section">
+          <div className="max-w-3xl mx-auto text-center">
+            <h2 className="text-3xl font-bold mb-4">Ready to Transform Your Narrative?</h2>
+            <p className="text-text-light mb-8">
+              Take the first step toward crafting your authentic story with intention.
+            </p>
+            <ConsultationCTA source="Service - Narrative Elevation" />
+          </div>
+        </div>
+      </div>
     </main>
   )
 }

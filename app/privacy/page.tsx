@@ -60,6 +60,7 @@ export default function PrivacyPage() {
         description="Your Privacy Matters"
         backgroundImage="https://imagestopost.carrd.co/assets/images/image05.jpg?v=fa27f6da"
         darkText={false}
+        className="text-primary"
       />
       
       <div className="container mx-auto px-4 py-section">

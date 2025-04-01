@@ -28,7 +28,7 @@ export default function NarrativeDefensePage() {
       <div className="container mx-auto px-4 py-section">
         <div className="max-w-4xl mx-auto">
           {/* Introduction Video */}
-          <div className="mb-16">
+          <div className="mb-24">
             <VideoPlayer
               src="https://imagestopost.carrd.co/assets/videos/video01.mp4?v=37a0fde8"
               title="Understanding Narrative Defense"
@@ -38,7 +38,7 @@ export default function NarrativeDefensePage() {
           </div>
 
           {/* Testimonial Video */}
-          <div className="mb-16">
+          <div className="mb-24">
             <VideoPlayer
               src="https://imagestopost.carrd.co/assets/videos/video03.mp4?v=c0c3ab6a"
               title="Client Testimonial - Narrative Defense"
@@ -57,7 +57,7 @@ export default function NarrativeDefensePage() {
             </p>
 
             {/* Client Testimonials */}
-            <div className="mt-12 space-y-8">
+            <section className="mb-24">
               <h3 className="text-2xl font-bold text-primary">Client Success Stories</h3>
               
               <div className="grid gap-6 md:grid-cols-2">
@@ -81,35 +81,67 @@ export default function NarrativeDefensePage() {
                   </cite>
                 </div>
               </div>
-            </div>
+            </section>
 
-            <div className="grid md:grid-cols-2 gap-8 mb-12">
-              <div className="card p-8">
-                <h3 className="text-xl font-semibold text-primary mb-4">
-                  What We Offer
-                </h3>
-                <ul className="space-y-3 text-text-light">
-                  <li>Strategic narrative assessment</li>
-                  <li>Reputation monitoring</li>
-                  <li>Crisis prevention planning</li>
-                  <li>Professional story alignment</li>
-                  <li>Digital presence optimization</li>
-                </ul>
-              </div>
+            <section className="mb-24">
+              <h2 className="text-3xl font-bold text-primary mb-8">
+                What We Offer
+              </h2>
+              <div className="grid md:grid-cols-2 gap-8 mb-12">
+                <div className="card p-8">
+                  <ul className="space-y-3 text-text-light">
+                    <li>Strategic narrative assessment</li>
+                    <li>Reputation monitoring</li>
+                    <li>Crisis prevention planning</li>
+                    <li>Professional story alignment</li>
+                    <li>Digital presence optimization</li>
+                  </ul>
+                </div>
 
-              <div className="card p-8">
-                <h3 className="text-xl font-semibold text-primary mb-4">
-                  Why Choose Us
-                </h3>
-                <ul className="space-y-3 text-text-light">
-                  <li>Experienced reputation specialists</li>
-                  <li>Proactive defense strategies</li>
-                  <li>Personalized approach</li>
-                  <li>Confidential service</li>
-                  <li>Long-term protection focus</li>
-                </ul>
+                <div className="card p-8">
+                  <h3 className="text-xl font-semibold text-primary mb-4">
+                    Why Choose Us
+                  </h3>
+                  <ul className="space-y-3 text-text-light">
+                    <li>Experienced reputation specialists</li>
+                    <li>Proactive defense strategies</li>
+                    <li>Personalized approach</li>
+                    <li>Confidential service</li>
+                    <li>Long-term protection focus</li>
+                  </ul>
+                </div>
               </div>
-            </div>
+            </section>
+
+            <section className="mb-24">
+              <h2 className="text-3xl font-bold text-primary mb-8">
+                Why Choose Us
+              </h2>
+              <div className="grid md:grid-cols-2 gap-8 mb-12">
+                <div className="card p-8">
+                  <h3 className="text-xl font-semibold text-primary mb-4">
+                    What We Offer
+                  </h3>
+                  <ul className="space-y-3 text-text-light">
+                    <li>Strategic narrative assessment</li>
+                    <li>Reputation monitoring</li>
+                    <li>Crisis prevention planning</li>
+                    <li>Professional story alignment</li>
+                    <li>Digital presence optimization</li>
+                  </ul>
+                </div>
+
+                <div className="card p-8">
+                  <ul className="space-y-3 text-text-light">
+                    <li>Experienced reputation specialists</li>
+                    <li>Proactive defense strategies</li>
+                    <li>Personalized approach</li>
+                    <li>Confidential service</li>
+                    <li>Long-term protection focus</li>
+                  </ul>
+                </div>
+              </div>
+            </section>
 
             <div className="text-center">
               <button
