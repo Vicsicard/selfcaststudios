@@ -1,3 +1,5 @@
+'use client'
+
 import PageHeader from '@/components/PageHeader'
 import dynamic from 'next/dynamic'
 import { useModal } from '@/hooks/useModal'
