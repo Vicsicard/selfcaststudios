@@ -14,6 +14,11 @@ const VideoPlayer = dynamic(() => import('@/components/VideoPlayer'), {
 export default function HomePage() {
   const { ModalComponent, showContactForm } = useModal()
 
+  const handleConsultationClick = () => {
+    console.log('Button clicked')
+    showContactForm('Home Hero')
+  }
+
   const services = [
     {
       title: 'Narrative Defense',
@@ -51,15 +56,15 @@ export default function HomePage() {
               </p>
               <button
                 type="button"
-                onClick={() => showContactForm('Home Hero')}
-                className="inline-block bg-accent hover:bg-accent-light text-text-white px-12 py-4 rounded-custom transition-colors text-lg shadow-custom-dark hover:shadow-custom-dark-hover cursor-pointer"
+                onClick={handleConsultationClick}
+                className="relative z-10 inline-block bg-accent hover:bg-accent-light text-text-white px-12 py-4 rounded-custom transition-colors text-lg shadow-custom-dark hover:shadow-custom-dark-hover cursor-pointer"
               >
                 Book a Private Consultation
               </button>
             </div>
 
             {/* Featured Video */}
-            <div className="card-elevated p-8 md:p-12 shadow-custom-dark hover:shadow-custom-dark-hover transition-shadow">
+            <div className="relative z-0 card-elevated p-8 md:p-12 shadow-custom-dark hover:shadow-custom-dark-hover transition-shadow">
               <VideoPlayer
                 src="https://imagestopost.carrd.co/assets/videos/video08.mp4?v=fa27f6da"
                 title="Welcome to Self Cast Studios"
@@ -97,6 +102,7 @@ export default function HomePage() {
                     Learn More →
                   </Link>
                   <button
+                    type="button"
                     onClick={() => showContactForm(`Service - ${service.title}`)}
                     className="text-accent hover:text-accent-light transition-colors hover-underline"
                   >
@@ -120,8 +126,9 @@ export default function HomePage() {
               Take the first step toward transforming your personal brand and controlling your story.
             </p>
             <button
+              type="button"
               onClick={() => showContactForm('Home CTA')}
-              className="inline-block bg-accent hover:bg-accent-light text-text-white px-12 py-4 rounded-custom transition-colors text-lg shadow-custom-dark hover:shadow-custom-dark-hover"
+              className="inline-block bg-accent hover:bg-accent-light text-text-white px-12 py-4 rounded-custom transition-colors text-lg shadow-custom-dark hover:shadow-custom-dark-hover cursor-pointer"
             >
               Book a Private Consultation
             </button>
