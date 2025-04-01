@@ -1,7 +1,11 @@
+'use client'
+
 import Link from 'next/link'
+import { useModal } from '@/hooks/useModal'
 
 export default function Footer() {
   const currentYear = new Date().getFullYear()
+  const { ModalComponent, showContactForm } = useModal()
 
   return (
     <footer className="bg-surface py-16">
@@ -12,12 +16,12 @@ export default function Footer() {
             <h3 className="text-2xl font-bold text-primary mb-4">Self Cast Studios</h3>
             <p className="text-text-light mb-4">Shape the narrative before it shapes you.</p>
             <p className="text-text-light mb-6">Not sure where to start? Let's talk.</p>
-            <Link 
-              href="/contact"
+            <button 
+              onClick={() => showContactForm('Footer')}
               className="inline-block bg-accent hover:bg-accent-light text-text-white px-6 py-3 rounded-custom transition-colors"
             >
               Book a Private Consultation
-            </Link>
+            </button>
           </div>
 
           {/* Quick Links */}
@@ -87,6 +91,7 @@ export default function Footer() {
           </div>
         </div>
       </div>
+      <ModalComponent />
     </footer>
   )
 }
