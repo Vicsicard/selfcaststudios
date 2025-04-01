@@ -50,8 +50,9 @@ export default function HomePage() {
                 Take control of your narrative before others define it for you.
               </p>
               <button
+                type="button"
                 onClick={() => showContactForm('Home Hero')}
-                className="inline-block bg-accent hover:bg-accent-light text-text-white px-12 py-4 rounded-custom transition-colors text-lg shadow-custom-dark hover:shadow-custom-dark-hover"
+                className="inline-block bg-accent hover:bg-accent-light text-text-white px-12 py-4 rounded-custom transition-colors text-lg shadow-custom-dark hover:shadow-custom-dark-hover cursor-pointer"
               >
                 Book a Private Consultation
               </button>
