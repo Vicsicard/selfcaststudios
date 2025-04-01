@@ -1,3 +1,5 @@
+'use client'
+
 import PageHeader from '@/components/PageHeader'
 import Link from 'next/link'
 import dynamic from 'next/dynamic'
