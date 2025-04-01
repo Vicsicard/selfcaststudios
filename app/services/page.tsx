@@ -1,6 +1,10 @@
 import PageHeader from '@/components/PageHeader'
 import Link from 'next/link'
 import dynamic from 'next/dynamic'
+import Modal from '@/components/Modal'
+import ContactForm from '@/components/ContactForm'
+import { useState } from 'react'
+import SuccessMessage from '@/components/SuccessMessage'
 
 const VideoPlayer = dynamic(() => import('@/components/VideoPlayer'), {
   ssr: false,
@@ -45,6 +49,15 @@ export default function ServicesPage() {
       link: '/services/narrative-transition'
     }
   ]
+
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [showSuccess, setShowSuccess] = useState(false)
+
+  const handleSuccess = () => {
+    setIsModalOpen(false)
+    setShowSuccess(true)
+    setTimeout(() => setShowSuccess(false), 5000)
+  }
 
   return (
     <main>
@@ -130,14 +143,25 @@ export default function ServicesPage() {
           <h2 className="text-2xl md:text-3xl font-bold text-primary mb-6">
             Ready to Transform Your Narrative?
           </h2>
-          <a
-            href="mailto:defense@selfcaststudios.com"
+          <button
+            onClick={() => setIsModalOpen(true)}
             className="inline-block bg-accent hover:bg-accent-light text-text-white px-12 py-4 rounded-custom transition-colors text-lg shadow-custom hover:shadow-custom-hover"
           >
             Book a Private Consultation
-          </a>
+          </button>
         </div>
       </div>
+
+      <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+        <ContactForm sourcePage="services" onSuccess={handleSuccess} />
+      </Modal>
+
+      {showSuccess && (
+        <SuccessMessage 
+          message="Thank you for your interest! We'll be in touch soon."
+          onClose={() => setShowSuccess(false)}
+        />
+      )}
     </main>
   )
 }

@@ -1,5 +1,9 @@
+'use client'
+
 import PageHeader from '@/components/PageHeader'
 import dynamic from 'next/dynamic'
+import ConsultationCTA from '@/components/ConsultationCTA'
+import { useModal } from '@/hooks/useModal'
 
 const VideoPlayer = dynamic(() => import('@/components/VideoPlayer'), {
   ssr: false,
@@ -9,8 +13,11 @@ const VideoPlayer = dynamic(() => import('@/components/VideoPlayer'), {
 })
 
 export default function NarrativeDefensePage() {
+  const { ModalComponent, showContactForm } = useModal()
+  
   return (
     <main>
+      <ModalComponent />
       <PageHeader
         title="Narrative Defense"
         description="Your Story. Your Voice. Cast with Intention."
@@ -105,16 +112,20 @@ export default function NarrativeDefensePage() {
             </div>
 
             <div className="text-center">
-              <a
-                href="mailto:defense@selfcaststudios.com"
-                className="inline-block bg-accent hover:bg-accent-light text-text-white px-12 py-4 rounded-custom transition-colors shadow-custom-dark hover:shadow-custom-dark-hover"
+              <button
+                type="button"
+                onClick={() => showContactForm('Service - Narrative Defense (Mid-Page)')}
+                className="inline-block bg-accent hover:bg-accent-light text-text-white px-12 py-4 rounded-custom transition-colors shadow-custom-dark hover:shadow-custom-dark-hover cursor-pointer"
               >
-                Schedule a Consultation
-              </a>
+                Book a Private Consultation
+              </button>
             </div>
           </div>
         </div>
       </div>
+
+      {/* Consultation CTA */}
+      <ConsultationCTA source="Service - Narrative Defense" />
     </main>
   )
 }

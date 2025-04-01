@@ -1,5 +1,7 @@
 import PageHeader from '@/components/PageHeader'
 import dynamic from 'next/dynamic'
+import ConsultationCTA from '@/components/ConsultationCTA'
+import { useModal } from '@/hooks/useModal'
 
 const VideoPlayer = dynamic(() => import('@/components/VideoPlayer'), {
   ssr: false,
@@ -9,6 +11,8 @@ const VideoPlayer = dynamic(() => import('@/components/VideoPlayer'), {
 })
 
 export default function NarrativeTransitionPage() {
+  const { ModalComponent, showContactForm } = useModal()
+
   const targetAudience = [
     {
       title: 'Career Changers',
@@ -86,6 +90,7 @@ export default function NarrativeTransitionPage() {
 
   return (
     <main>
+      <ModalComponent />
       <PageHeader
         title="Narrative Transition"
         description="Your Story. Your Voice. Cast with Intention."
@@ -110,12 +115,12 @@ export default function NarrativeTransitionPage() {
             <p className="text-xl md:text-2xl text-text-light mb-12">
               A Source of Truth for Transformational Moments
             </p>
-            <a
-              href="mailto:defense@selfcaststudios.com"
+            <button
+              onClick={() => showContactForm('Service - Narrative Transition (Hero)')}
               className="inline-block bg-accent hover:bg-accent-light text-text-white px-12 py-4 rounded-custom transition-colors text-lg shadow-custom hover:shadow-custom-hover"
             >
               Book a Private Consultation
-            </a>
+            </button>
           </div>
 
           {/* Overview */}
@@ -240,15 +245,8 @@ export default function NarrativeTransitionPage() {
             </div>
           </div>
 
-          {/* Call to Action */}
-          <div className="max-w-4xl mx-auto text-center">
-            <a
-              href="mailto:defense@selfcaststudios.com"
-              className="inline-block bg-accent hover:bg-accent-light text-text-white px-12 py-4 rounded-custom transition-colors text-lg shadow-custom hover:shadow-custom-hover"
-            >
-              Book a Private Consultation
-            </a>
-          </div>
+          {/* Consultation CTA */}
+          <ConsultationCTA source="Service - Narrative Transition" />
         </div>
       </div>
     </main>

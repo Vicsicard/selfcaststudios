@@ -1,4 +1,13 @@
 import PageHeader from '@/components/PageHeader'
+import dynamic from 'next/dynamic'
+import { useModal } from '@/hooks/useModal'
+
+const VideoPlayer = dynamic(() => import('@/components/VideoPlayer'), {
+  ssr: false,
+  loading: () => (
+    <div className="aspect-video bg-surface-dark animate-pulse rounded-custom" />
+  ),
+})
 
 export default function AboutPage() {
   const beliefs = [
@@ -49,8 +58,11 @@ export default function AboutPage() {
     }
   ]
 
+  const { ModalComponent, showContactForm } = useModal()
+
   return (
     <main>
+      <ModalComponent />
       <PageHeader
         title="About"
         description="Your Story. Your Voice. Cast with Intention."
@@ -124,18 +136,16 @@ export default function AboutPage() {
           </div>
 
           {/* Call to Action */}
-          <div className="text-center">
-            <h2 className="text-3xl md:text-4xl font-bold text-primary mb-6">Join Us</h2>
-            <p className="text-xl text-text-light mb-12">
-              Ready to own your narrative? Explore our services or schedule a consultation to begin 
-              your journey with Self Cast Studios.
-            </p>
-            <a
-              href="mailto:info@selfcaststudios.com"
+          <div className="mt-16 text-center">
+            <h2 className="text-2xl md:text-3xl font-bold text-primary mb-6">
+              Ready to Transform Your Narrative?
+            </h2>
+            <button
+              onClick={() => showContactForm('About Page')}
               className="inline-block bg-accent hover:bg-accent-light text-text-white px-12 py-4 rounded-custom transition-colors text-lg shadow-custom hover:shadow-custom-hover"
             >
               Book a Private Consultation
-            </a>
+            </button>
           </div>
         </div>
       </div>

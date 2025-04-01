@@ -13,7 +13,7 @@ export default function ContactPage() {
       <div className="container mx-auto px-4 py-section">
         <div className="grid md:grid-cols-2 gap-12">
           {/* Contact Form */}
-          <div className="bg-surface rounded-custom shadow-custom p-8">
+          <div className="bg-surface rounded-custom shadow-custom-dark p-8">
             <h2 className="text-2xl font-bold text-primary mb-6">Send Us a Message</h2>
             <form className="space-y-6">
               <div className="grid md:grid-cols-2 gap-6">
@@ -78,7 +78,7 @@ export default function ContactPage() {
               <div className="space-y-4">
                 <div>
                   <h3 className="font-bold text-primary mb-2">Address</h3>
-                  <p className="text-text-light">123 Studio Street<br />Denver, CO 80202</p>
+                  <p className="text-text-light">Boulder, Colorado</p>
                 </div>
                 <div>
                   <h3 className="font-bold text-primary mb-2">Email</h3>
@@ -86,7 +86,7 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <h3 className="font-bold text-primary mb-2">Phone</h3>
-                  <p className="text-text-light">(303) 555-0123</p>
+                  <p className="text-text-light">(303) 900-8291</p>
                 </div>
               </div>
             </div>

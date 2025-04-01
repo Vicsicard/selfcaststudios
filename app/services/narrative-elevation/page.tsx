@@ -1,5 +1,7 @@
 import PageHeader from '@/components/PageHeader'
 import dynamic from 'next/dynamic'
+import ConsultationCTA from '@/components/ConsultationCTA'
+import { useModal } from '@/hooks/useModal'
 
 const VideoPlayer = dynamic(() => import('@/components/VideoPlayer'), {
   ssr: false,
@@ -9,6 +11,8 @@ const VideoPlayer = dynamic(() => import('@/components/VideoPlayer'), {
 })
 
 export default function NarrativeElevationPage() {
+  const { ModalComponent, showContactForm } = useModal()
+
   const services = [
     {
       title: 'Discovery & Deep Dive',
@@ -59,6 +63,7 @@ export default function NarrativeElevationPage() {
 
   return (
     <main>
+      <ModalComponent />
       <PageHeader
         title="Narrative Elevation"
         description="Your Story. Your Voice. Cast with Intention."
@@ -71,7 +76,7 @@ export default function NarrativeElevationPage() {
           {/* Introduction Video */}
           <div className="mb-16">
             <VideoPlayer
-              src="https://imagestopost.carrd.co/assets/videos/video02.mp4?v=37a0fde8"
+              src="https://imagestopost.carrd.co/assets/videos/video04.mp4?v=fa27f6da"
               title="Understanding Narrative Elevation"
               description="Learn how our Narrative Elevation service helps you amplify your voice and establish thought leadership."
               className="shadow-custom-dark"
@@ -97,12 +102,12 @@ export default function NarrativeElevationPage() {
             <p className="text-2xl md:text-3xl font-semibold text-primary mb-12">
               Your Story. Your Voice. Cast with Intention.
             </p>
-            <a
-              href="mailto:defense@selfcaststudios.com"
+            <button
+              onClick={() => showContactForm('Service - Narrative Elevation (Hero)')}
               className="inline-block bg-accent hover:bg-accent-light text-text-white px-12 py-4 rounded-custom transition-colors text-lg shadow-custom hover:shadow-custom-hover"
             >
               Book a Private Consultation
-            </a>
+            </button>
           </div>
 
           {/* Service Overview */}
@@ -230,15 +235,18 @@ export default function NarrativeElevationPage() {
             <p className="text-xl text-text-light mb-12">
               Take the first step toward transforming your personal brand.
             </p>
-            <a
-              href="mailto:defense@selfcaststudios.com"
+            <button
+              onClick={() => showContactForm('Service - Narrative Elevation (Bottom)')}
               className="inline-block bg-accent hover:bg-accent-light text-text-white px-12 py-4 rounded-custom transition-colors text-lg shadow-custom hover:shadow-custom-hover"
             >
               Book a Private Consultation
-            </a>
+            </button>
           </div>
         </div>
       </div>
+
+      {/* Consultation CTA */}
+      <ConsultationCTA source="Service - Narrative Elevation" />
     </main>
   )
 }

@@ -1,5 +1,6 @@
 import PageHeader from '@/components/PageHeader'
 import dynamic from 'next/dynamic'
+import { useModal } from '@/hooks/useModal'
 
 const VideoPlayer = dynamic(() => import('@/components/VideoPlayer'), {
   ssr: false,
@@ -53,8 +54,11 @@ export default function TestimonialsPage() {
     }
   ]
 
+  const { ModalComponent, showContactForm } = useModal()
+
   return (
     <main>
+      <ModalComponent />
       <PageHeader
         title="Testimonials"
         description="Your Story. Your Voice. Cast with Intention."
@@ -123,14 +127,14 @@ export default function TestimonialsPage() {
         {/* Call to Action */}
         <div className="mt-16 text-center">
           <h2 className="text-2xl md:text-3xl font-bold text-primary mb-6">
-            Ready to Transform Your Story?
+            Ready to Transform Your Narrative?
           </h2>
-          <a
-            href="mailto:info@selfcaststudios.com"
-            className="inline-block bg-accent hover:bg-accent-light text-text-white px-8 py-4 rounded-custom transition-colors text-lg shadow-custom-dark hover:shadow-custom-dark-hover"
+          <button
+            onClick={() => showContactForm('Testimonials Page')}
+            className="inline-block bg-accent hover:bg-accent-light text-text-white px-12 py-4 rounded-custom transition-colors text-lg shadow-custom hover:shadow-custom-hover"
           >
             Book a Private Consultation
-          </a>
+          </button>
         </div>
       </div>
     </main>

@@ -58,9 +58,11 @@ export default function ContactForm({ sourcePage, onSuccess }: ContactFormProps)
     }))
   }
 
+  const inputClasses = "w-full px-4 py-3 rounded-custom border-2 border-surface-dark bg-surface-dark/30 focus:border-accent focus:ring-2 focus:ring-accent/20 outline-none transition-all shadow-custom-dark hover:shadow-custom-dark-hover text-lg text-text-light placeholder-text-light/50"
+
   return (
     <div className="w-full">
-      <form onSubmit={handleSubmit} className="space-y-5">
+      <form onSubmit={handleSubmit} className="space-y-6">
         <div className="text-center mb-8">
           <h2 className="text-2xl sm:text-3xl font-bold text-primary">Get in Touch</h2>
           <p className="text-text-light mt-2">We'll get back to you as soon as possible.</p>
@@ -78,7 +80,7 @@ export default function ContactForm({ sourcePage, onSuccess }: ContactFormProps)
               required
               value={formData.name}
               onChange={handleChange}
-              className="w-full px-4 py-2.5 rounded-custom border-2 border-surface-dark bg-surface-dark/20 focus:border-accent focus:ring-2 focus:ring-accent/20 outline-none transition-all shadow-custom-dark hover:shadow-custom-dark-hover text-base"
+              className={inputClasses}
               placeholder="Your name"
               disabled={isSubmitting}
             />
@@ -95,7 +97,7 @@ export default function ContactForm({ sourcePage, onSuccess }: ContactFormProps)
               required
               value={formData.email}
               onChange={handleChange}
-              className="w-full px-4 py-2.5 rounded-custom border-2 border-surface-dark bg-surface-dark/20 focus:border-accent focus:ring-2 focus:ring-accent/20 outline-none transition-all shadow-custom-dark hover:shadow-custom-dark-hover text-base"
+              className={inputClasses}
               placeholder="your@email.com"
               disabled={isSubmitting}
             />
@@ -111,57 +113,27 @@ export default function ContactForm({ sourcePage, onSuccess }: ContactFormProps)
               required
               value={formData.message}
               onChange={handleChange}
-              rows={4}
-              className="w-full px-4 py-2.5 rounded-custom border-2 border-surface-dark bg-surface-dark/20 focus:border-accent focus:ring-2 focus:ring-accent/20 outline-none transition-all shadow-custom-dark hover:shadow-custom-dark-hover text-base resize-none"
-              placeholder="Your message"
+              className={inputClasses}
+              rows={5}
+              placeholder="How can we help you?"
               disabled={isSubmitting}
             />
           </div>
         </div>
 
         {error && (
-          <div className="text-red-500 text-sm text-center">{error}</div>
+          <div className="text-red-500 text-sm mt-2">
+            {error}
+          </div>
         )}
 
-        <div className="text-center">
-          <button
-            type="submit"
-            disabled={isSubmitting}
-            className="bg-accent hover:bg-accent-light disabled:opacity-50 disabled:cursor-not-allowed text-text-white px-8 py-3 rounded-custom transition-all shadow-custom hover:shadow-custom-hover"
-          >
-            {isSubmitting ? (
-              <motion.span
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                className="flex items-center justify-center"
-              >
-                <svg
-                  className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                >
-                  <circle
-                    className="opacity-25"
-                    cx="12"
-                    cy="12"
-                    r="10"
-                    stroke="currentColor"
-                    strokeWidth="4"
-                  ></circle>
-                  <path
-                    className="opacity-75"
-                    fill="currentColor"
-                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                  ></path>
-                </svg>
-                Sending...
-              </motion.span>
-            ) : (
-              'Send Message'
-            )}
-          </button>
-        </div>
+        <button
+          type="submit"
+          disabled={isSubmitting}
+          className="w-full bg-accent hover:bg-accent-light text-text-white px-8 py-4 rounded-custom transition-colors shadow-custom-dark hover:shadow-custom-dark-hover disabled:opacity-50 disabled:cursor-not-allowed text-lg font-medium"
+        >
+          {isSubmitting ? 'Sending...' : 'Send Message'}
+        </button>
       </form>
     </div>
   )
