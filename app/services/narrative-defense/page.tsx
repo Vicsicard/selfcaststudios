@@ -83,65 +83,41 @@ export default function NarrativeDefensePage() {
               </div>
             </section>
 
+            {/* Services Sections */}
             <section className="mb-24">
-              <h2 className="text-3xl font-bold text-primary mb-8">
-                What We Offer
-              </h2>
-              <div className="grid md:grid-cols-2 gap-8 mb-12">
-                <div className="card p-8">
-                  <ul className="space-y-3 text-text-light">
-                    <li>Strategic narrative assessment</li>
-                    <li>Reputation monitoring</li>
-                    <li>Crisis prevention planning</li>
-                    <li>Professional story alignment</li>
-                    <li>Digital presence optimization</li>
-                  </ul>
-                </div>
-
-                <div className="card p-8">
-                  <h3 className="text-xl font-semibold text-primary mb-4">
-                    Why Choose Us
-                  </h3>
-                  <ul className="space-y-3 text-text-light">
-                    <li>Experienced reputation specialists</li>
-                    <li>Proactive defense strategies</li>
-                    <li>Personalized approach</li>
-                    <li>Confidential service</li>
-                    <li>Long-term protection focus</li>
-                  </ul>
-                </div>
+              <h2 className="text-3xl font-bold text-primary mb-8">What We Offer</h2>
+              <div className="card p-8">
+                <ul className="space-y-3 text-text-light">
+                  <li>Strategic narrative assessment</li>
+                  <li>Reputation monitoring</li>
+                  <li>Crisis prevention planning</li>
+                  <li>Professional story alignment</li>
+                  <li>Digital presence optimization</li>
+                </ul>
               </div>
             </section>
 
             <section className="mb-24">
-              <h2 className="text-3xl font-bold text-primary mb-8">
-                Why Choose Us
-              </h2>
-              <div className="grid md:grid-cols-2 gap-8 mb-12">
-                <div className="card p-8">
-                  <h3 className="text-xl font-semibold text-primary mb-4">
-                    What We Offer
-                  </h3>
-                  <ul className="space-y-3 text-text-light">
-                    <li>Strategic narrative assessment</li>
-                    <li>Reputation monitoring</li>
-                    <li>Crisis prevention planning</li>
-                    <li>Professional story alignment</li>
-                    <li>Digital presence optimization</li>
-                  </ul>
-                </div>
-
-                <div className="card p-8">
-                  <ul className="space-y-3 text-text-light">
-                    <li>Experienced reputation specialists</li>
-                    <li>Proactive defense strategies</li>
-                    <li>Personalized approach</li>
-                    <li>Confidential service</li>
-                    <li>Long-term protection focus</li>
-                  </ul>
-                </div>
+              <h2 className="text-3xl font-bold text-primary mb-8">Why Choose Us</h2>
+              <div className="card p-8">
+                <ul className="space-y-3 text-text-light">
+                  <li>Experienced reputation specialists</li>
+                  <li>Proactive defense strategies</li>
+                  <li>Personalized approach</li>
+                  <li>Confidential service</li>
+                  <li>Long-term protection focus</li>
+                </ul>
               </div>
             </section>
+
+            {/* CTA Section */}
+            <div className="bg-surface-dark rounded-custom p-12 text-center">
+              <h2 className="text-3xl font-bold mb-4">Ready to Transform Your Narrative?</h2>
+              <p className="text-text-light mb-8">
+                Take the first step toward crafting your authentic story with intention.
+              </p>
+              <ConsultationCTA source="Service - Narrative Defense" />
+            </div>
 
             <div className="text-center">
               <button

@@ -58,9 +58,21 @@ export default function NarrativeElevationPage() {
   ]
 
   const advantages = [
-    'Personalized Approach: Every element tailored to reflect your unique story.',
-    'Integrated Solution: Combines narrative discovery, content creation, and messaging.',
-    'Sustainable Growth: Dynamic framework that evolves with you over time.'
+    {
+      title: 'Personalized Approach',
+      description: 'Every element tailored to reflect your unique story.',
+      icon: '→'
+    },
+    {
+      title: 'Integrated Solution',
+      description: 'Combines narrative discovery, content creation, and messaging.',
+      icon: '→'
+    },
+    {
+      title: 'Sustainable Growth',
+      description: 'Dynamic framework that evolves with you over time.',
+      icon: '→'
+    }
   ]
 
   return (
@@ -217,37 +229,27 @@ export default function NarrativeElevationPage() {
           </div>
 
           {/* The Self Cast Advantage */}
-          <div className="max-w-4xl mx-auto mb-20">
-            <h2 className="text-3xl md:text-4xl font-bold text-primary mb-8">The Self Cast Advantage</h2>
-            <div className="space-y-6">
-              {advantages.map((advantage, index) => (
-                <div key={index} className="flex items-start">
-                  <span className="text-accent mr-3">•</span>
-                  <span className="text-text-light text-lg">{advantage}</span>
-                </div>
-              ))}
+          <div className="bg-surface rounded-custom shadow-custom p-8 md:p-12 mb-20">
+            <div className="max-w-4xl mx-auto">
+              <h2 className="text-3xl md:text-4xl font-bold text-primary mb-8">The Self Cast Advantage</h2>
+              <div className="grid md:grid-cols-2 gap-8">
+                {advantages.map((advantage, index) => (
+                  <div key={index} className="flex items-start space-x-4">
+                    <div className="flex-shrink-0 w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center">
+                      {advantage.icon}
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-semibold text-primary mb-2">{advantage.title}</h3>
+                      <p className="text-text-light">{advantage.description}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
 
-          {/* Let's Talk */}
-          <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-3xl md:text-4xl font-bold text-primary mb-6">Ready to Own Your Narrative?</h2>
-            <p className="text-xl text-text-light mb-12">
-              Take the first step toward transforming your personal brand.
-            </p>
-            <button
-              onClick={() => showContactForm('Service - Narrative Elevation (Bottom)')}
-              className="inline-block bg-accent hover:bg-accent-light text-text-white px-12 py-4 rounded-custom transition-colors text-lg shadow-custom hover:shadow-custom-hover"
-            >
-              Book a Private Consultation
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <div className="bg-surface-dark">
-        <div className="container mx-auto px-4 py-section">
-          <div className="max-w-3xl mx-auto text-center">
+          {/* CTA Section */}
+          <div className="bg-surface-dark rounded-custom p-12 text-center">
             <h2 className="text-3xl font-bold mb-4">Ready to Transform Your Narrative?</h2>
             <p className="text-text-light mb-8">
               Take the first step toward crafting your authentic story with intention.
