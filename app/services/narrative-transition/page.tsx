@@ -7,6 +7,7 @@ import { useModal } from '@/hooks/useModal'
 import FaqJsonLd from '@/components/structured-data/FaqJsonLd'
 import RelatedContent from '@/components/RelatedContent'
 import type { RelatedItem } from '@/components/RelatedContent'
+import { getBlogPostsForRelatedContent } from '@/lib/blog'
 
 const VideoPlayer = dynamic(() => import('@/components/VideoPlayer'), {
   ssr: false,
@@ -38,31 +39,41 @@ const faqs = [
   }
 ]
 
-const relatedContent: RelatedItem[] = [
-  {
-    title: "Narrative Defense",
-    description: "Learn how to protect and maintain control of your professional narrative during times of change.",
-    href: "/services/narrative-defense",
-    imageUrl: "https://imagestopost.carrd.co/assets/images/image01.jpg?v=c0c3ab6a",
-    type: "service" as const
-  },
-  {
-    title: "Narrative Elevation",
-    description: "Ready to amplify your impact in your new role? Our Narrative Elevation service helps you establish thought leadership.",
-    href: "/services/narrative-elevation",
-    imageUrl: "https://imagestopost.carrd.co/assets/images/image02.jpg?v=c0c3ab6a",
-    type: "service" as const
-  },
-  {
-    title: "How to Take Control of Your Online Identity",
-    description: "Essential strategies for managing your professional identity during career transitions.",
-    href: "/blog/how-to-take-control-of-your-online-identity",
-    type: "blog" as const
-  }
-]
-
-export default function NarrativeTransitionPage() {
+export default async function NarrativeTransitionPage() {
   const { ModalComponent, showContactForm } = useModal()
+  const blogPosts = await getBlogPostsForRelatedContent()
+  const brandMattersPost = blogPosts.find(post => 
+    post.title.toLowerCase().includes('matters more than ever')
+  )
+
+  const relatedContent: RelatedItem[] = [
+    {
+      title: "Narrative Defense",
+      description: "Learn how to protect and maintain control of your professional narrative during times of change.",
+      href: "/services/narrative-defense",
+      imageUrl: "https://imagestopost.carrd.co/assets/images/image01.jpg?v=c0c3ab6a",
+      type: "service" as const
+    },
+    {
+      title: "Narrative Elevation",
+      description: "Ready to amplify your impact in your new role? Our Narrative Elevation service helps you establish thought leadership.",
+      href: "/services/narrative-elevation",
+      imageUrl: "https://imagestopost.carrd.co/assets/images/image02.jpg?v=c0c3ab6a",
+      type: "service" as const
+    },
+    brandMattersPost ? {
+      title: brandMattersPost.title,
+      description: "Discover why investing in your personal brand is crucial in today's digital landscape.",
+      href: `/blog/${brandMattersPost.slug}`,
+      imageUrl: brandMattersPost.imageUrl || undefined,
+      type: "blog" as const
+    } : {
+      title: "Why Your Personal Brand Matters More Than Ever",
+      description: "Discover why investing in your personal brand is crucial in today's digital landscape.",
+      href: "/blog/why-your-personal-brand-matters-more-than-ever",
+      type: "blog" as const
+    }
+  ].filter(Boolean) as RelatedItem[]
 
   const targetAudience = [
     {

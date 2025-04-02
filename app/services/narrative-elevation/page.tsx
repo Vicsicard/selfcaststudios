@@ -7,6 +7,7 @@ import { useModal } from '@/hooks/useModal'
 import FaqJsonLd from '@/components/structured-data/FaqJsonLd'
 import RelatedContent from '@/components/RelatedContent'
 import type { RelatedItem } from '@/components/RelatedContent'
+import { getBlogPostsForRelatedContent } from '@/lib/blog'
 
 const VideoPlayer = dynamic(() => import('@/components/VideoPlayer'), {
   ssr: false,
@@ -38,29 +39,6 @@ const faqs = [
   }
 ]
 
-const relatedContent: RelatedItem[] = [
-  {
-    title: "Narrative Defense",
-    description: "Learn how to protect and maintain control of your professional narrative with our Narrative Defense service.",
-    href: "/services/narrative-defense",
-    imageUrl: "https://imagestopost.carrd.co/assets/images/image01.jpg?v=c0c3ab6a",
-    type: "service" as const
-  },
-  {
-    title: "Narrative Transition",
-    description: "Going through a career change? Our Narrative Transition service helps you navigate professional changes with confidence.",
-    href: "/services/narrative-transition",
-    imageUrl: "https://imagestopost.carrd.co/assets/images/image03.jpg?v=c0c3ab6a",
-    type: "service" as const
-  },
-  {
-    title: "Why Your Personal Brand Matters More Than Ever",
-    description: "Discover why investing in your personal brand is crucial in today's digital landscape.",
-    href: "/blog/why-your-personal-brand-matters",
-    type: "blog" as const
-  }
-]
-
 const services = [
   {
     title: 'Discovery & Deep Dive',
@@ -84,8 +62,42 @@ const services = [
   }
 ]
 
-export default function NarrativeElevationPage() {
+export default async function NarrativeElevationPage() {
   const { ModalComponent, showContactForm } = useModal()
+  const blogPosts = await getBlogPostsForRelatedContent()
+  const personalBrandPost = blogPosts.find(post => 
+    post.title.toLowerCase().includes('personal brand') && 
+    post.title.toLowerCase().includes('feels like you')
+  )
+
+  const relatedContent: RelatedItem[] = [
+    {
+      title: "Narrative Defense",
+      description: "Learn how to protect and maintain control of your professional narrative with our Narrative Defense service.",
+      href: "/services/narrative-defense",
+      imageUrl: "https://imagestopost.carrd.co/assets/images/image01.jpg?v=c0c3ab6a",
+      type: "service" as const
+    },
+    {
+      title: "Narrative Transition",
+      description: "Going through a career change? Our Narrative Transition service helps you navigate professional changes with confidence.",
+      href: "/services/narrative-transition",
+      imageUrl: "https://imagestopost.carrd.co/assets/images/image03.jpg?v=c0c3ab6a",
+      type: "service" as const
+    },
+    personalBrandPost ? {
+      title: personalBrandPost.title,
+      description: "Discover how to build an authentic personal brand that truly represents who you are.",
+      href: `/blog/${personalBrandPost.slug}`,
+      imageUrl: personalBrandPost.imageUrl || undefined,
+      type: "blog" as const
+    } : {
+      title: "How Self Cast Studios Helps You Create a Personal Brand That Feels Like You",
+      description: "Discover how to build an authentic personal brand that truly represents who you are.",
+      href: "/blog/how-to-create-a-personal-brand-that-feels-like-you",
+      type: "blog" as const
+    }
+  ].filter(Boolean) as RelatedItem[]
 
   return (
     <main>

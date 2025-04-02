@@ -7,6 +7,7 @@ import { useModal } from '@/hooks/useModal'
 import FaqJsonLd from '@/components/structured-data/FaqJsonLd'
 import RelatedContent from '@/components/RelatedContent'
 import type { RelatedItem } from '@/components/RelatedContent'
+import { getBlogPostsForRelatedContent } from '@/lib/blog'
 
 const VideoPlayer = dynamic(() => import('@/components/VideoPlayer'), {
   ssr: false,
@@ -38,31 +39,62 @@ const faqs = [
   }
 ]
 
-const relatedContent: RelatedItem[] = [
+const services = [
   {
-    title: "Narrative Elevation",
-    description: "Ready to take your professional story to the next level? Our Narrative Elevation service helps you amplify your impact and establish thought leadership.",
-    href: "/services/narrative-elevation",
-    imageUrl: "https://imagestopost.carrd.co/assets/images/image02.jpg?v=c0c3ab6a",
-    type: "service" as const
+    title: 'Narrative Assessment & Analysis',
+    description: 'Comprehensive evaluation of your current narrative landscape, identifying potential vulnerabilities and opportunities to strengthen your professional story.',
+    icon: '→'
   },
   {
-    title: "Narrative Transition",
-    description: "Going through a career change? Learn how our Narrative Transition service can help you navigate professional changes with confidence.",
-    href: "/services/narrative-transition",
-    imageUrl: "https://imagestopost.carrd.co/assets/images/image03.jpg?v=c0c3ab6a",
-    type: "service" as const
+    title: 'Strategic Defense Framework',
+    description: 'Development of a robust defensive strategy that anticipates challenges, prepares responses, and positions you to maintain control of your professional narrative.',
+    icon: '→'
   },
   {
-    title: "What Is a Personal Brand—and How Self Cast Studios Helps You Shape Yours",
-    description: "Discover the fundamentals of personal branding and how it can protect and enhance your professional reputation.",
-    href: "/blog/what-is-a-personal-brand",
-    type: "blog" as const
+    title: 'Proactive Content Development',
+    description: 'Creation of strategic content that reinforces your authentic narrative, establishing a strong foundation that helps prevent and counter potential misrepresentations.',
+    icon: '→'
+  },
+  {
+    title: 'Reputation Monitoring & Management',
+    description: 'Implementation of ongoing monitoring systems and response protocols to protect and maintain the integrity of your professional narrative across all platforms.',
+    icon: '→'
   }
 ]
 
-export default function NarrativeDefensePage() {
+export default async function NarrativeDefensePage() {
   const { ModalComponent, showContactForm } = useModal()
+  const blogPosts = await getBlogPostsForRelatedContent()
+  const linkedInPost = blogPosts.find(post => post.title.toLowerCase().includes('linkedin'))
+
+  const relatedContent: RelatedItem[] = [
+    {
+      title: "Narrative Elevation",
+      description: "Ready to take your professional story to the next level? Our Narrative Elevation service helps you amplify your impact and establish thought leadership.",
+      href: "/services/narrative-elevation",
+      imageUrl: "https://imagestopost.carrd.co/assets/images/image02.jpg?v=c0c3ab6a",
+      type: "service" as const
+    },
+    {
+      title: "Narrative Transition",
+      description: "Going through a career change? Learn how our Narrative Transition service can help you navigate professional changes with confidence.",
+      href: "/services/narrative-transition",
+      imageUrl: "https://imagestopost.carrd.co/assets/images/image03.jpg?v=c0c3ab6a",
+      type: "service" as const
+    },
+    linkedInPost ? {
+      title: linkedInPost.title,
+      description: "Learn how to audit and optimize your professional presence on LinkedIn for maximum impact.",
+      href: `/blog/${linkedInPost.slug}`,
+      imageUrl: linkedInPost.imageUrl || undefined,
+      type: "blog" as const
+    } : {
+      title: "What Does Your LinkedIn Really Say About You?",
+      description: "Learn how to audit and optimize your professional presence on LinkedIn for maximum impact.",
+      href: "/blog/what-does-your-linkedin-really-say-about-you",
+      type: "blog" as const
+    }
+  ].filter(Boolean) as RelatedItem[]
   
   return (
     <main>
@@ -70,9 +102,9 @@ export default function NarrativeDefensePage() {
       <FaqJsonLd questions={faqs} />
       <PageHeader
         title="Narrative Defense"
-        description="Your Story. Your Voice. Cast with Intention."
-        backgroundImage="https://imagestopost.carrd.co/assets/images/image05.jpg?v=c0c3ab6a"
-        darkText={true}
+        description="Protect Your Story. Secure Your Legacy."
+        backgroundImage="https://imagestopost.carrd.co/assets/images/image01.jpg?v=c0c3ab6a"
+        darkText={false}
       />
 
       <div className="container mx-auto px-4 py-section">
@@ -80,71 +112,41 @@ export default function NarrativeDefensePage() {
           {/* Introduction Video */}
           <div className="mb-24">
             <VideoPlayer
-              src="https://imagestopost.carrd.co/assets/videos/video01.mp4?v=37a0fde8"
-              title="Understanding Narrative Defense"
-              description="Learn how our Narrative Defense service helps you take control of your story and protect your online reputation."
+              src="https://imagestopost.carrd.co/assets/videos/video04.mp4?v=37a0fde8"
+              title="Narrative Defense Overview"
+              description="Learn how our Narrative Defense service helps you protect and maintain control of your professional story."
               className="shadow-custom-dark"
             />
           </div>
 
-          {/* Testimonial Video */}
+          {/* Success Story Video */}
           <div className="mb-24">
             <VideoPlayer
-              src="https://imagestopost.carrd.co/assets/videos/video03.mp4?v=c0c3ab6a"
-              title="Client Testimonial - Narrative Defense"
-              description="Hear how our Narrative Defense service helped protect and preserve a client's professional reputation."
+              src="https://imagestopost.carrd.co/assets/videos/video07.mp4?v=c0c3ab6a"
+              title="Client Success Story - Narrative Defense"
+              description="See how our Narrative Defense service helped a client maintain control of their professional narrative."
               className="shadow-custom-dark"
-              isVertical={true}
             />
           </div>
 
           <div className="prose max-w-none">
             <h2 className="text-3xl font-bold text-primary mb-6">
-              Protect Your Professional Reputation
+              Take Control of Your Professional Narrative
             </h2>
             <p className="text-text-light text-lg mb-8">
-              In today's interconnected world, your professional reputation is one of your most valuable assets. Our Narrative Defense service helps you protect and preserve your reputation during challenging transitions, ensuring your story remains authentic and under your control.
+              In today's digital age, your professional story can be shaped by forces beyond your control. Our Narrative Defense service empowers you to protect and maintain authority over your narrative, ensuring your authentic voice remains at the forefront of your professional identity.
             </p>
 
-            {/* Client Testimonials */}
+            {/* Our Process Section */}
             <section className="mb-24">
-              <h3 className="text-2xl font-bold text-primary">Client Success Stories</h3>
-              
-              <div className="grid gap-6 md:grid-cols-2">
-                <div className="bg-surface rounded-custom shadow-custom-dark p-6">
-                  <blockquote className="text-lg text-text-light mb-4 italic">
-                    "Their expertise in narrative defense helped me navigate a complex situation while maintaining my company's credibility and stakeholder trust."
-                  </blockquote>
-                  <cite className="not-italic">
-                    <span className="block text-primary font-bold">David K.</span>
-                    <span className="text-text-light">Tech Entrepreneur</span>
-                  </cite>
-                </div>
-
-                <div className="bg-surface rounded-custom shadow-custom-dark p-6">
-                  <blockquote className="text-lg text-text-light mb-4 italic">
-                    "Self Cast Studios' approach to narrative defense is both strategic and empathetic. They helped me maintain my professional standing during a sensitive time."
-                  </blockquote>
-                  <cite className="not-italic">
-                    <span className="block text-primary font-bold">Sarah P.</span>
-                    <span className="text-text-light">Legal Professional</span>
-                  </cite>
-                </div>
-              </div>
-            </section>
-
-            {/* Services Sections */}
-            <section className="mb-24">
-              <h2 className="text-3xl font-bold text-primary mb-8">What We Offer</h2>
-              <div className="card p-8">
-                <ul className="space-y-3 text-text-light">
-                  <li>Strategic narrative assessment</li>
-                  <li>Reputation monitoring</li>
-                  <li>Crisis prevention planning</li>
-                  <li>Content strategy development</li>
-                  <li>Stakeholder communication planning</li>
-                  <li>Digital presence optimization</li>
-                </ul>
+              <h2 className="text-3xl font-bold text-primary mb-8">Our Process</h2>
+              <div className="grid gap-8 md:grid-cols-2">
+                {services.map((service, index) => (
+                  <div key={index} className="card p-8">
+                    <h3 className="text-xl font-bold text-primary mb-4">{service.title}</h3>
+                    <p className="text-text-light">{service.description}</p>
+                  </div>
+                ))}
               </div>
             </section>
 
@@ -165,8 +167,8 @@ export default function NarrativeDefensePage() {
 
         <ConsultationCTA
           source="Service - Narrative Defense"
-          title="Ready to Protect Your Professional Narrative?"
-          description="Schedule a consultation to learn how our Narrative Defense service can help you maintain control of your story."
+          title="Ready to Protect Your Professional Story?"
+          description="Schedule a consultation to learn how our Narrative Defense service can help you maintain control of your narrative."
           buttonText="Schedule Consultation"
         />
 

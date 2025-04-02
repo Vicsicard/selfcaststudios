@@ -1,7 +1,6 @@
 import { unified } from 'unified'
 import remarkParse from 'remark-parse'
 import remarkHtml from 'remark-html'
-import rehypeImgSize from 'rehype-img-size'
 import { supabase, BlogPost, BlogPostWithHtml } from './supabase'
 
 export async function getBlogPosts(): Promise<BlogPost[]> {
@@ -39,7 +38,6 @@ export async function convertMarkdownToHtml(markdown: string): Promise<string> {
   const result = await unified()
     .use(remarkParse)
     .use(remarkHtml)
-    .use(rehypeImgSize, { dir: 'public' })
     .process(markdown)
 
   return result.toString()
@@ -72,4 +70,39 @@ export async function processPostContent(post: BlogPost): Promise<BlogPostWithHt
     ...post,
     content_html: contentHtml
   }
+}
+
+export async function getBlogPostImageUrl(post: BlogPost): Promise<string | null> {
+  try {
+    if (Array.isArray(post.images) && post.images.length > 0) {
+      const firstImageStr = post.images[0];
+      if (typeof firstImageStr === 'string') {
+        const imageData = JSON.parse(firstImageStr);
+        if (imageData?.url) {
+          return imageData.url;
+        }
+      }
+    }
+  } catch (error) {
+    console.error('Error parsing blog post image:', error);
+  }
+  return null;
+}
+
+export async function getBlogPostsForRelatedContent(): Promise<Array<{
+  id: string;
+  title: string;
+  slug: string;
+  imageUrl: string | null;
+}>> {
+  const posts = await getBlogPosts();
+  const processedPosts = await Promise.all(
+    posts.map(async (post) => ({
+      id: post.id,
+      title: post.title,
+      slug: post.slug,
+      imageUrl: await getBlogPostImageUrl(post)
+    }))
+  );
+  return processedPosts;
 }
