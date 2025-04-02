@@ -1,7 +1,7 @@
 import { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
-import { getBlogPostBySlug, processPostContent, generateStructuredData } from '@/lib/blog'
+import { getBlogPostBySlug, getBlogPosts, processPostContent, generateStructuredData } from '@/lib/blog'
 import { notFound } from 'next/navigation'
 import { ArrowLeftIcon } from '@heroicons/react/24/outline'
 import { ShareButton } from '../components/ShareButton'
@@ -12,6 +12,13 @@ interface Props {
   params: {
     slug: string
   }
+}
+
+export async function generateStaticParams() {
+  const posts = await getBlogPosts()
+  return posts.map((post) => ({
+    slug: post.slug,
+  }))
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
