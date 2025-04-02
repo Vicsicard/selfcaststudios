@@ -112,7 +112,7 @@ export default async function NarrativeDefensePage() {
           {/* Introduction Video */}
           <div className="mb-24">
             <VideoPlayer
-              src="https://imagestopost.carrd.co/assets/videos/video04.mp4?v=37a0fde8"
+              src="https://imagestopost.carrd.co/assets/videos/video01.mp4?v=cf0efed9"
               title="Narrative Defense Overview"
               description="Learn how our Narrative Defense service helps you protect and maintain control of your professional story."
               className="shadow-custom-dark"
@@ -122,7 +122,7 @@ export default async function NarrativeDefensePage() {
           {/* Success Story Video */}
           <div className="mb-24">
             <VideoPlayer
-              src="https://imagestopost.carrd.co/assets/videos/video07.mp4?v=c0c3ab6a"
+              src="https://imagestopost.carrd.co/assets/videos/video03.mp4?v=cf0efed9"
               title="Client Success Story - Narrative Defense"
               description="See how our Narrative Defense service helped a client maintain control of their professional narrative."
               className="shadow-custom-dark"
