@@ -13,6 +13,10 @@ const playfair = Playfair_Display({
 export const metadata: Metadata = {
   title: 'Self Cast Studios | Personal Brand Elevation',
   description: 'Transform your personal brand with Self Cast Studios. We help you craft and elevate your narrative through strategic storytelling and content creation.',
+  metadataBase: new URL(process.env.SITE_URL || 'https://selfcaststudios.com'),
+  verification: {
+    google: '1wUP_GS1GyT2d3XTfudHwCWNYGEpO4GFp8n0m01Tue4',
+  },
 }
 
 export default function RootLayout({
