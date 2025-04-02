@@ -5,6 +5,7 @@ import Navigation from '@/components/Navigation'
 import Footer from '@/components/Footer'
 import DynamicTitle from '@/components/DynamicTitle'
 import OrganizationJsonLd from '@/components/structured-data/OrganizationJsonLd'
+import { viewport } from './viewport'
 
 const playfair = Playfair_Display({ 
   subsets: ['latin'],
@@ -34,7 +35,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://selfcaststudios.com',
+    url: process.env.SITE_URL || 'https://selfcaststudios.com',
     siteName: 'Self Cast Studios',
     title: 'Self Cast Studios | Personal Brand Elevation',
     description: 'Transform your personal brand with Self Cast Studios. We help you craft and elevate your narrative through strategic storytelling and content creation.',
@@ -73,12 +74,10 @@ export const metadata: Metadata = {
       { url: 'https://imagestopost.carrd.co/assets/images/image05.jpg' }
     ]
   },
-  viewport: {
-    width: 'device-width',
-    initialScale: 1,
-  },
   category: 'business'
 }
+
+export { viewport }
 
 export default function RootLayout({
   children,
@@ -86,11 +85,8 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className="overflow-x-hidden">
-      <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      </head>
-      <body className={`${playfair.variable} font-playfair overflow-x-hidden bg-surface text-text-light min-h-screen flex flex-col`}>
+    <html lang="en" className={playfair.variable}>
+      <body className="bg-surface text-text-light min-h-screen flex flex-col">
         <DynamicTitle />
         <OrganizationJsonLd />
         <Navigation />

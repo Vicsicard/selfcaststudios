@@ -4,6 +4,9 @@ import PageHeader from '@/components/PageHeader'
 import dynamic from 'next/dynamic'
 import ConsultationCTA from '@/components/ConsultationCTA'
 import { useModal } from '@/hooks/useModal'
+import FaqJsonLd from '@/components/structured-data/FaqJsonLd'
+import RelatedContent from '@/components/RelatedContent'
+import type { RelatedItem } from '@/components/RelatedContent'
 
 const VideoPlayer = dynamic(() => import('@/components/VideoPlayer'), {
   ssr: false,
@@ -12,251 +15,162 @@ const VideoPlayer = dynamic(() => import('@/components/VideoPlayer'), {
   ),
 })
 
+const faqs = [
+  {
+    question: "What is narrative elevation and how can it benefit me?",
+    answer: "Narrative elevation is a strategic process of enhancing and amplifying your professional story to increase your influence and impact. It helps you articulate your unique value proposition, establish thought leadership, and create meaningful connections with your audience. This service is particularly beneficial for professionals looking to advance their careers, build their personal brand, or position themselves as industry experts."
+  },
+  {
+    question: "How does the narrative elevation process work?",
+    answer: "Our narrative elevation process begins with a deep discovery phase where we uncover your unique story, values, and expertise. We then develop a strategic narrative framework, create compelling content, and implement a cohesive communication strategy across various platforms. Throughout the process, we ensure your message remains authentic while maximizing its impact."
+  },
+  {
+    question: "What makes Self Cast Studios' approach to narrative elevation unique?",
+    answer: "Our approach combines strategic storytelling with authentic personal branding. We focus on uncovering and amplifying your genuine narrative rather than creating an artificial persona. We use a combination of deep discovery sessions, strategic content development, and multi-platform storytelling to ensure your elevated narrative resonates with your target audience while staying true to your values."
+  },
+  {
+    question: "How long does the narrative elevation process take?",
+    answer: "The timeline varies based on your goals and starting point, but typically spans 3-6 months for the initial elevation phase. This includes discovery sessions, strategy development, content creation, and implementation. After the initial phase, we offer ongoing support to maintain and evolve your elevated narrative."
+  },
+  {
+    question: "What results can I expect from narrative elevation?",
+    answer: "You can expect increased visibility in your industry, stronger professional relationships, enhanced credibility, and more meaningful engagement with your target audience. Our clients often report improved career opportunities, speaking engagements, and business growth as a result of their elevated narrative."
+  }
+]
+
+const relatedContent: RelatedItem[] = [
+  {
+    title: "Narrative Defense",
+    description: "Learn how to protect and maintain control of your professional narrative with our Narrative Defense service.",
+    href: "/services/narrative-defense",
+    imageUrl: "https://imagestopost.carrd.co/assets/images/image01.jpg?v=c0c3ab6a",
+    type: "service" as const
+  },
+  {
+    title: "Narrative Transition",
+    description: "Going through a career change? Our Narrative Transition service helps you navigate professional changes with confidence.",
+    href: "/services/narrative-transition",
+    imageUrl: "https://imagestopost.carrd.co/assets/images/image03.jpg?v=c0c3ab6a",
+    type: "service" as const
+  },
+  {
+    title: "Why Your Personal Brand Matters More Than Ever",
+    description: "Discover why investing in your personal brand is crucial in today's digital landscape.",
+    href: "/blog/why-your-personal-brand-matters",
+    type: "blog" as const
+  }
+]
+
+const services = [
+  {
+    title: 'Discovery & Deep Dive',
+    description: 'Unearth your unique story, values, expertise, and vision through expert-guided sessions, resulting in a clear, authentic narrative foundation.',
+    icon: '→'
+  },
+  {
+    title: 'Strategic Narrative Development',
+    description: 'Craft a signature message through guided sessions, developing a cohesive framework that aligns your internal truth with your public persona.',
+    icon: '→'
+  },
+  {
+    title: 'Content Creation & Voice Casting',
+    description: 'Transform your narrative into engaging, multi-format content through collaborative development focused on effective storytelling and message consistency.',
+    icon: '→'
+  },
+  {
+    title: 'Platform Optimization',
+    description: 'Enhance your digital presence across key platforms, ensuring your elevated narrative reaches and resonates with your target audience.',
+    icon: '→'
+  }
+]
+
 export default function NarrativeElevationPage() {
   const { ModalComponent, showContactForm } = useModal()
-
-  const services = [
-    {
-      title: 'Discovery & Deep Dive',
-      description: 'Unearth your unique story, values, expertise, and vision through expert-guided sessions, resulting in a clear, authentic narrative foundation.',
-      icon: '→'
-    },
-    {
-      title: 'Strategic Narrative Development',
-      description: 'Craft a signature message through guided sessions, developing a cohesive framework that aligns your internal truth with your public persona.',
-      icon: '→'
-    },
-    {
-      title: 'Content Creation & Voice Casting',
-      description: 'Transform your narrative into engaging, multi-format content through collaborative development focused on effective storytelling and message consistency.',
-      icon: '→'
-    },
-    {
-      title: 'Distribution & Evolution',
-      description: 'Ensure your narrative reaches the right audience with a structured strategy for content distribution and periodic refinement.',
-      icon: '→'
-    }
-  ]
-
-  const deliverables = [
-    'Signature Messaging Blueprint: A detailed document articulating your core identity and narrative.',
-    'Content Assets: Engaging long-form articles, podcasts, audio/visual content, and strategic guides.',
-    'Strategic Framework: A tailored blueprint that integrates your narrative with content production.'
-  ]
-
-  const clients = [
-    'Visionaries & Thought Leaders: Industry leaders, keynote speakers, and consultants seeking authority.',
-    'Entrepreneurs & Creators: Startup founders, brand builders, and artists crafting authentic narratives.',
-    'Online Experts: Coaches and consultants developing distinctive digital presence.'
-  ]
-
-  const benefits = [
-    'Narrative Ownership: Uncover and refine your unique story through deep introspection.',
-    'Strategic Positioning: Align internal values with consistent external messaging.',
-    'Content Integration: Transform your narrative into engaging multi-format content.',
-    'Ongoing Relevance: Develop sustainable content strategy that evolves with you.'
-  ]
-
-  const advantages = [
-    {
-      title: 'Personalized Approach',
-      description: 'Every element tailored to reflect your unique story.',
-      icon: '→'
-    },
-    {
-      title: 'Integrated Solution',
-      description: 'Combines narrative discovery, content creation, and messaging.',
-      icon: '→'
-    },
-    {
-      title: 'Sustainable Growth',
-      description: 'Dynamic framework that evolves with you over time.',
-      icon: '→'
-    }
-  ]
 
   return (
     <main>
       <ModalComponent />
+      <FaqJsonLd questions={faqs} />
       <PageHeader
         title="Narrative Elevation"
-        description="Your Story. Your Voice. Cast with Intention."
-        backgroundImage="https://imagestopost.carrd.co/assets/images/image05.jpg?v=c0c3ab6a"
-        darkText={true}
+        description="Elevate Your Story. Amplify Your Impact."
+        backgroundImage="https://imagestopost.carrd.co/assets/images/image02.jpg?v=c0c3ab6a"
+        darkText={false}
       />
-      
+
       <div className="container mx-auto px-4 py-section">
         <div className="max-w-4xl mx-auto">
           {/* Introduction Video */}
-          <div className="mb-16">
+          <div className="mb-24">
             <VideoPlayer
-              src="https://imagestopost.carrd.co/assets/videos/video04.mp4?v=fa27f6da"
-              title="Understanding Narrative Elevation"
-              description="Learn how our Narrative Elevation service helps you amplify your voice and establish thought leadership."
+              src="https://imagestopost.carrd.co/assets/videos/video04.mp4?v=37a0fde8"
+              title="Narrative Elevation Overview"
+              description="Learn how our Narrative Elevation service helps you amplify your professional story and increase your impact."
               className="shadow-custom-dark"
             />
           </div>
 
-          {/* Testimonial Video */}
-          <div className="mb-16">
+          {/* Success Story Video */}
+          <div className="mb-24">
             <VideoPlayer
-              src="https://imagestopost.carrd.co/assets/videos/video07.mp4?v=9bffb209"
-              title="Client Testimonial - Narrative Elevation"
-              description="Listen to how our Narrative Elevation service helped transform a client's professional presence."
+              src="https://imagestopost.carrd.co/assets/videos/video07.mp4?v=c0c3ab6a"
+              title="Client Success Story - Narrative Elevation"
+              description="See how our Narrative Elevation service transformed a client's professional presence and impact."
               className="shadow-custom-dark"
-              isVertical={true}
             />
           </div>
 
-          {/* Hero Section */}
-          <div className="max-w-4xl mx-auto text-center mb-20">
-            <p className="text-xl md:text-2xl text-text-light mb-12">
-              Shape the Narrative Before It Shapes You.
-            </p>
-            <p className="text-2xl md:text-3xl font-semibold text-primary mb-12">
-              Your Story. Your Voice. Cast with Intention.
-            </p>
-            <button
-              onClick={() => showContactForm('Service - Narrative Elevation (Hero)')}
-              className="inline-block bg-accent hover:bg-accent-light text-text-white px-12 py-4 rounded-custom transition-colors text-lg shadow-custom hover:shadow-custom-hover"
-            >
-              Book a Private Consultation
-            </button>
-          </div>
-
-          {/* Service Overview */}
-          <div className="max-w-4xl mx-auto mb-20">
-            <h2 className="text-3xl md:text-4xl font-bold text-primary mb-8">Service Overview</h2>
-            <p className="text-xl text-text-light">
-              Narrative Elevation is a comprehensive personal branding solution designed to empower you to own your story. 
-              We blend deep discovery, strategic messaging, and creative content production so you can amplify your voice 
-              and stand out in your field.
-            </p>
+          <div className="prose max-w-none">
+            <h2 className="text-3xl font-bold text-primary mb-6">
+              Elevate Your Professional Story
+            </h2>
             <p className="text-text-light text-lg mb-8">
-              Elevate your professional presence and establish yourself as a thought leader in your industry. Our Narrative Elevation service helps you craft and communicate your unique value proposition, amplifying your voice and expanding your influence.
+              Your story is your most powerful asset. Through our Narrative Elevation service, we help you uncover, craft, and amplify your unique narrative to create lasting impact and meaningful connections in your professional sphere.
             </p>
 
-            {/* Client Testimonials */}
-            <div className="mt-12 space-y-8">
-              <h3 className="text-2xl font-bold text-primary">Client Success Stories</h3>
-              
-              <div className="grid gap-6 md:grid-cols-2">
-                <div className="bg-surface rounded-custom shadow-custom-dark p-6">
-                  <blockquote className="text-lg text-text-light mb-4 italic">
-                    "Their comprehensive approach to personal branding helped me establish a distinctive voice in a crowded market."
-                  </blockquote>
-                  <cite className="not-italic">
-                    <span className="block text-primary font-bold">Robert T.</span>
-                    <span className="text-text-light">Financial Advisor</span>
-                  </cite>
-                </div>
-
-                <div className="bg-surface rounded-custom shadow-custom-dark p-6">
-                  <blockquote className="text-lg text-text-light mb-4 italic">
-                    "The impact on my business has been transformative. They helped me articulate my value proposition in a way that truly resonates with my target audience."
-                  </blockquote>
-                  <cite className="not-italic">
-                    <span className="block text-primary font-bold">Lisa H.</span>
-                    <span className="text-text-light">Executive Coach</span>
-                  </cite>
-                </div>
-              </div>
-            </div>
-
-          </div>
-
-          {/* Who It's For */}
-          <div className="bg-surface rounded-custom shadow-custom p-8 md:p-12 mb-20">
-            <div className="max-w-4xl mx-auto">
-              <h2 className="text-3xl md:text-4xl font-bold text-primary mb-8">Who It&apos;s For</h2>
-              <ul className="space-y-4">
-                {clients.map((client, index) => (
-                  <li key={index} className="flex items-start">
-                    <span className="text-accent mr-3">•</span>
-                    <span className="text-text-light text-lg">{client}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-
-          {/* How It Helps */}
-          <div className="mb-20">
-            <h2 className="text-3xl md:text-4xl font-bold text-primary mb-12 text-center">How It Helps</h2>
-            <div className="grid gap-8">
-              {benefits.map((benefit, index) => (
-                <div key={index} className="bg-surface rounded-custom shadow-custom p-8">
-                  <div className="flex gap-4">
-                    <span className="text-accent text-xl">→</span>
-                    <div>
-                      <p className="text-text-light text-lg">{benefit}</p>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Core Service Elements */}
-          <div className="mb-20">
-            <h2 className="text-3xl md:text-4xl font-bold text-primary mb-12 text-center">Core Service Elements</h2>
-            <div className="grid gap-8">
-              {services.map((service, index) => (
-                <div key={index} className="bg-surface rounded-custom shadow-custom p-8">
-                  <div className="flex gap-4">
-                    <span className="text-accent text-xl">{service.icon}</span>
-                    <div>
-                      <h3 className="text-xl font-semibold text-primary mb-3">{service.title}</h3>
-                      <p className="text-text-light">{service.description}</p>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Deliverables */}
-          <div className="bg-surface rounded-custom shadow-custom p-8 md:p-12 mb-20">
-            <div className="max-w-4xl mx-auto">
-              <h2 className="text-3xl md:text-4xl font-bold text-primary mb-8">Deliverables</h2>
-              <ul className="space-y-3 text-text-light">
-                <li>Align messaging across platforms, including LinkedIn and other social media</li>
-                <li>Content calendar and posting strategy</li>
-                <li>Personal brand guidelines</li>
-                <li>Engagement tactics and best practices</li>
-              </ul>
-            </div>
-          </div>
-
-          {/* The Self Cast Advantage */}
-          <div className="bg-surface rounded-custom shadow-custom p-8 md:p-12 mb-20">
-            <div className="max-w-4xl mx-auto">
-              <h2 className="text-3xl md:text-4xl font-bold text-primary mb-8">The Self Cast Advantage</h2>
-              <div className="grid md:grid-cols-2 gap-8">
-                {advantages.map((advantage, index) => (
-                  <div key={index} className="flex items-start space-x-4">
-                    <div className="flex-shrink-0 w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center">
-                      {advantage.icon}
-                    </div>
-                    <div>
-                      <h3 className="text-xl font-semibold text-primary mb-2">{advantage.title}</h3>
-                      <p className="text-text-light">{advantage.description}</p>
-                    </div>
+            {/* Services Grid */}
+            <section className="mb-24">
+              <h2 className="text-3xl font-bold text-primary mb-8">Our Process</h2>
+              <div className="grid gap-8 md:grid-cols-2">
+                {services.map((service, index) => (
+                  <div key={index} className="card p-8">
+                    <h3 className="text-xl font-bold text-primary mb-4 flex items-center gap-4">
+                      <span className="text-2xl">{service.icon}</span>
+                      {service.title}
+                    </h3>
+                    <p className="text-text-light">{service.description}</p>
                   </div>
                 ))}
               </div>
-            </div>
-          </div>
+            </section>
 
-          {/* CTA Section */}
-          <div className="bg-surface-dark rounded-custom p-12 text-center">
-            <h2 className="text-3xl font-bold mb-4">Ready to Transform Your Narrative?</h2>
-            <p className="text-text-light mb-8">
-              Take the first step toward crafting your authentic story with intention.
-            </p>
-            <ConsultationCTA source="Service - Narrative Elevation" />
+            {/* FAQ Section */}
+            <section className="mb-24">
+              <h2 className="text-3xl font-bold text-primary mb-8">Frequently Asked Questions</h2>
+              <div className="space-y-8">
+                {faqs.map((faq, index) => (
+                  <div key={index} className="card p-8">
+                    <h3 className="text-xl font-bold text-primary mb-4">{faq.question}</h3>
+                    <p className="text-text-light">{faq.answer}</p>
+                  </div>
+                ))}
+              </div>
+            </section>
           </div>
         </div>
+
+        <ConsultationCTA
+          source="Service - Narrative Elevation"
+          title="Ready to Elevate Your Professional Story?"
+          description="Schedule a consultation to discover how our Narrative Elevation service can amplify your impact."
+          buttonText="Schedule Consultation"
+        />
+
+        <RelatedContent
+          title="Explore Related Services & Insights"
+          items={relatedContent}
+          className="mt-24"
+        />
       </div>
     </main>
   )

@@ -4,6 +4,9 @@ import PageHeader from '@/components/PageHeader'
 import dynamic from 'next/dynamic'
 import ConsultationCTA from '@/components/ConsultationCTA'
 import { useModal } from '@/hooks/useModal'
+import FaqJsonLd from '@/components/structured-data/FaqJsonLd'
+import RelatedContent from '@/components/RelatedContent'
+import type { RelatedItem } from '@/components/RelatedContent'
 
 const VideoPlayer = dynamic(() => import('@/components/VideoPlayer'), {
   ssr: false,
@@ -11,6 +14,52 @@ const VideoPlayer = dynamic(() => import('@/components/VideoPlayer'), {
     <div className="aspect-video bg-surface-dark animate-pulse rounded-custom" />
   ),
 })
+
+const faqs = [
+  {
+    question: "What is narrative transition and who is it for?",
+    answer: "Narrative transition is a specialized service designed for professionals going through significant career changes, whether that's switching industries, retiring, or stepping into new leadership roles. It helps you reshape your professional story to align with your new direction while maintaining the value of your past experiences."
+  },
+  {
+    question: "How does the narrative transition process work?",
+    answer: "Our process begins with a deep assessment of your current narrative and future goals. We then develop a strategic transition plan that includes reframing your experience, identifying transferable skills, and creating content that bridges your past achievements with your future aspirations. Throughout the process, we ensure your story remains authentic while effectively communicating your value in your new context."
+  },
+  {
+    question: "How long does a narrative transition typically take?",
+    answer: "The timeline varies based on your specific situation and goals, but most transitions are structured over 2-4 months. This includes initial assessment, strategy development, content creation, and implementation. We also provide ongoing support to help you navigate the transition period effectively."
+  },
+  {
+    question: "What makes Self Cast Studios' approach to narrative transition unique?",
+    answer: "Our approach combines strategic storytelling with deep understanding of career transitions. We focus on maintaining authenticity while effectively repositioning your narrative for new audiences. Our process ensures that your past experiences are meaningfully connected to your future goals, creating a cohesive and compelling professional story."
+  },
+  {
+    question: "What results can I expect from narrative transition?",
+    answer: "You can expect a clear, compelling narrative that effectively positions you for your next chapter, stronger professional relationships in your new field, and increased confidence in communicating your value. Our clients often report smoother transitions, better stakeholder buy-in, and more opportunities in their new direction."
+  }
+]
+
+const relatedContent: RelatedItem[] = [
+  {
+    title: "Narrative Defense",
+    description: "Learn how to protect and maintain control of your professional narrative during times of change.",
+    href: "/services/narrative-defense",
+    imageUrl: "https://imagestopost.carrd.co/assets/images/image01.jpg?v=c0c3ab6a",
+    type: "service" as const
+  },
+  {
+    title: "Narrative Elevation",
+    description: "Ready to amplify your impact in your new role? Our Narrative Elevation service helps you establish thought leadership.",
+    href: "/services/narrative-elevation",
+    imageUrl: "https://imagestopost.carrd.co/assets/images/image02.jpg?v=c0c3ab6a",
+    type: "service" as const
+  },
+  {
+    title: "How to Take Control of Your Online Identity",
+    description: "Essential strategies for managing your professional identity during career transitions.",
+    href: "/blog/how-to-take-control-of-your-online-identity",
+    type: "blog" as const
+  }
+]
 
 export default function NarrativeTransitionPage() {
   const { ModalComponent, showContactForm } = useModal()
@@ -30,226 +79,87 @@ export default function NarrativeTransitionPage() {
     }
   ]
 
-  const benefits = [
-    {
-      title: 'Narrative Reinvention',
-      description: 'Transform your past into a bold, authentic identity with deep introspection and expert guidance.'
-    },
-    {
-      title: 'Strategic Repositioning',
-      description: 'Align your core values with a consistent, evolved message that sets you apart.'
-    },
-    {
-      title: 'Integrated Storytelling',
-      description: 'Seamlessly combine content and design to articulate your transformation across channels.'
-    },
-    {
-      title: 'Enduring Impact',
-      description: 'Cultivate a dynamic narrative that evolves with your professional journey, keeping your brand authentic and impactful.'
-    }
-  ]
-
-  const services = [
-    {
-      title: 'Reinvention & Repositioning',
-      description: 'Honor your past while setting the stage for a bold new future.',
-      icon: '→'
-    },
-    {
-      title: 'Making Meaning of the Past',
-      description: 'Transform your experiences into a compelling narrative that guides your next chapter.',
-      icon: '→'
-    },
-    {
-      title: 'Values-Based Storytelling',
-      description: 'Craft a narrative that is reflective, intentional, and rooted in your core values.',
-      icon: '→'
-    }
-  ]
-
-  const deliverables = [
-    {
-      title: 'Narrative & Voice Content',
-      description: 'Authentic, values-based storytelling through articles, interviews, and short-form media.'
-    },
-    {
-      title: 'Visual Identity Refresh',
-      description: 'A minimalist, forward-thinking design.'
-    },
-    {
-      title: 'Memoir & Bio',
-      description: 'A concise narrative capturing your journey and evolved identity.'
-    },
-    {
-      title: 'Public Statement Video',
-      description: 'A genuine video that communicates your transition.'
-    },
-    {
-      title: 'Brand Tone Guidance',
-      description: 'Strategic insights to ensure your messaging aligns with your renewed vision.'
-    }
-  ]
-
   return (
     <main>
       <ModalComponent />
+      <FaqJsonLd questions={faqs} />
       <PageHeader
         title="Narrative Transition"
-        description="Your Story. Your Voice. Cast with Intention."
-        backgroundImage="https://imagestopost.carrd.co/assets/images/image05.jpg?v=c0c3ab6a"
-        darkText={true}
+        description="Navigate Change. Shape Your Legacy."
+        backgroundImage="https://imagestopost.carrd.co/assets/images/image03.jpg?v=c0c3ab6a"
+        darkText={false}
       />
-      
+
       <div className="container mx-auto px-4 py-section">
         <div className="max-w-4xl mx-auto">
           {/* Introduction Video */}
-          <div className="mb-16">
+          <div className="mb-24">
             <VideoPlayer
-              src="https://imagestopost.carrd.co/assets/videos/video04.mp4?v=fa27f6da"
-              title="Understanding Narrative Transition"
-              description="Learn how our Narrative Transition service helps you navigate and communicate your professional evolution."
-              className="shadow-custom"
+              src="https://imagestopost.carrd.co/assets/videos/video05.mp4?v=37a0fde8"
+              title="Narrative Transition Overview"
+              description="Learn how our Narrative Transition service helps you navigate professional changes with confidence."
+              className="shadow-custom-dark"
             />
           </div>
 
-          {/* Hero Section */}
-          <div className="max-w-4xl mx-auto text-center mb-20">
-            <p className="text-xl md:text-2xl text-text-light mb-12">
-              A Source of Truth for Transformational Moments
-            </p>
-            <button
-              onClick={() => showContactForm('Service - Narrative Transition (Hero)')}
-              className="inline-block bg-accent hover:bg-accent-light text-text-white px-12 py-4 rounded-custom transition-colors text-lg shadow-custom hover:shadow-custom-hover"
-            >
-              Book a Private Consultation
-            </button>
+          {/* Success Story Video */}
+          <div className="mb-24">
+            <VideoPlayer
+              src="https://imagestopost.carrd.co/assets/videos/video08.mp4?v=c0c3ab6a"
+              title="Client Success Story - Narrative Transition"
+              description="See how our Narrative Transition service helped a client successfully pivot their career."
+              className="shadow-custom-dark"
+            />
           </div>
 
-          {/* Overview */}
-          <div className="max-w-4xl mx-auto mb-20">
-            <h2 className="text-3xl md:text-4xl font-bold text-primary mb-8">Overview</h2>
-            <p className="text-xl text-text-light">
-              Narrative Transition is a personal branding service that helps professionals navigate pivotal career 
-              or life changes with clarity, authenticity, and purpose.
-            </p>
-          </div>
-
-          {/* Top 3 People */}
-          <div className="mb-20">
-            <h2 className="text-3xl md:text-4xl font-bold text-primary mb-12 text-center">
-              Top 3 People Narrative Transition Is For
+          <div className="prose max-w-none">
+            <h2 className="text-3xl font-bold text-primary mb-6">
+              Navigate Professional Transitions with Confidence
             </h2>
-            <div className="grid md:grid-cols-3 gap-8">
-              {targetAudience.map((audience, index) => (
-                <div key={index} className="bg-surface rounded-custom shadow-custom p-8">
-                  <h3 className="text-xl font-semibold text-primary mb-4">{audience.title}</h3>
-                  <p className="text-text-light">{audience.description}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* How It Helps */}
-          <div className="mb-20">
-            <h2 className="text-3xl md:text-4xl font-bold text-primary mb-12 text-center">How It Helps</h2>
-            <div className="grid md:grid-cols-2 gap-8">
-              {benefits.map((benefit, index) => (
-                <div key={index} className="bg-surface rounded-custom shadow-custom p-8">
-                  <h3 className="text-xl font-semibold text-primary mb-4">{benefit.title}</h3>
-                  <p className="text-text-light">{benefit.description}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Core Belief */}
-          <div className="max-w-4xl mx-auto mb-20">
-            <h2 className="text-3xl md:text-4xl font-bold text-primary mb-8">Core Belief</h2>
-            <p className="text-xl text-text-light">
-              Your personal brand is the wellspring of your true value. Regardless of career changes or life stages, 
-              you have the power to write—or rewrite—your own narrative. Investing in your brand means taking control 
-              of your story so that you, not outside sources, define your identity and legacy.
+            <p className="text-text-light text-lg mb-8">
+              Whether you're changing careers, stepping into a new role, or redefining your professional legacy, our Narrative Transition service helps you craft a compelling story that bridges your past achievements with your future aspirations.
             </p>
-          </div>
 
-          {/* What It Does */}
-          <div className="mb-20">
-            <h2 className="text-3xl md:text-4xl font-bold text-primary mb-12 text-center">What It Does</h2>
-            <div className="grid gap-8">
-              {services.map((service, index) => (
-                <div key={index} className="bg-surface rounded-custom shadow-custom p-8">
-                  <div className="flex gap-4">
-                    <span className="text-accent text-xl">{service.icon}</span>
-                    <div>
-                      <h3 className="text-xl font-semibold text-primary mb-3">{service.title}</h3>
-                      <p className="text-text-light">{service.description}</p>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Deliverables */}
-          <div className="bg-surface rounded-custom shadow-custom p-8 md:p-12 mb-20">
-            <div className="max-w-4xl mx-auto">
-              <h2 className="text-3xl md:text-4xl font-bold text-primary mb-8">Deliverables</h2>
-              <div className="grid md:grid-cols-2 gap-8">
-                {deliverables.map((deliverable, index) => (
-                  <div key={index} className="space-y-2">
-                    <h3 className="text-xl font-semibold text-primary">{deliverable.title}</h3>
-                    <p className="text-text-light">{deliverable.description}</p>
+            {/* Target Audience */}
+            <section className="mb-24">
+              <h2 className="text-3xl font-bold text-primary mb-8">Who We Help</h2>
+              <div className="grid gap-8 md:grid-cols-2">
+                {targetAudience.map((audience, index) => (
+                  <div key={index} className="card p-8">
+                    <h3 className="text-xl font-bold text-primary mb-4">{audience.title}</h3>
+                    <p className="text-text-light">{audience.description}</p>
                   </div>
                 ))}
               </div>
-            </div>
-          </div>
+            </section>
 
-          {/* Empowerment Statement */}
-          <div className="max-w-4xl mx-auto mb-20">
-            <h2 className="text-3xl md:text-4xl font-bold text-primary mb-8">Empowerment Statement</h2>
-            <p className="text-xl text-text-light">
-              This service empowers you to articulate your transformation with confidence, ensuring your narrative 
-              reflects your past and propels you boldly into the future.
-            </p>
-          </div>
-
-          {/* Testimonials */}
-          <div className="max-w-4xl mx-auto mb-20">
-            <p className="text-text-light text-lg mb-8">
-              Navigate your professional evolution with confidence. Our Narrative Transition service helps you bridge your past experience with your future aspirations, creating a compelling story that resonates with your new audience.
-            </p>
-
-            <div className="mt-12 space-y-8">
-              <h3 className="text-2xl font-bold text-primary">Client Success Stories</h3>
-              
-              <div className="grid gap-6 md:grid-cols-2">
-                <div className="bg-surface rounded-custom shadow-custom-dark p-6">
-                  <blockquote className="text-lg text-text-light mb-4 italic">
-                    "The team helped me effectively communicate my journey from corporate executive to startup founder. Their insights were invaluable."
-                  </blockquote>
-                  <cite className="not-italic">
-                    <span className="block text-primary font-bold">Thomas N.</span>
-                    <span className="text-text-light">Entrepreneur</span>
-                  </cite>
-                </div>
-
-                <div className="bg-surface rounded-custom shadow-custom-dark p-6">
-                  <blockquote className="text-lg text-text-light mb-4 italic">
-                    "They helped me articulate my professional evolution in a way that maintained credibility while embracing my new direction."
-                  </blockquote>
-                  <cite className="not-italic">
-                    <span className="block text-primary font-bold">Rachel S.</span>
-                    <span className="text-text-light">Business Owner</span>
-                  </cite>
-                </div>
+            {/* FAQ Section */}
+            <section className="mb-24">
+              <h2 className="text-3xl font-bold text-primary mb-8">Frequently Asked Questions</h2>
+              <div className="space-y-8">
+                {faqs.map((faq, index) => (
+                  <div key={index} className="card p-8">
+                    <h3 className="text-xl font-bold text-primary mb-4">{faq.question}</h3>
+                    <p className="text-text-light">{faq.answer}</p>
+                  </div>
+                ))}
               </div>
-            </div>
+            </section>
           </div>
-
-          {/* Consultation CTA */}
-          <ConsultationCTA source="Service - Narrative Transition" />
         </div>
+
+        <ConsultationCTA
+          source="Service - Narrative Transition"
+          title="Ready to Transform Your Professional Story?"
+          description="Schedule a consultation to learn how our Narrative Transition service can help you navigate change with confidence."
+          buttonText="Schedule Consultation"
+        />
+
+        <RelatedContent
+          title="Explore Related Services & Insights"
+          items={relatedContent}
+          className="mt-24"
+        />
       </div>
     </main>
   )
