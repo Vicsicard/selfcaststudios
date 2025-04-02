@@ -1,61 +1,77 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
-import Plyr from 'plyr-react'
-import 'plyr-react/plyr.css'
+import { useRef, useEffect } from 'react'
+import Plyr from 'plyr'
+import 'plyr/dist/plyr.css'
+import VideoJsonLd from './structured-data/VideoJsonLd'
 
 interface VideoPlayerProps {
-  src: string;
-  title?: string;
-  description?: string;
-  poster?: string;
-  className?: string;
-  isVertical?: boolean;
+  src: string
+  title?: string
+  description?: string
+  poster?: string
+  className?: string
+  isVertical?: boolean
+  uploadDate?: string
+  duration?: string
 }
 
-export default function VideoPlayer({ src, title, description, poster, className = '', isVertical = false }: VideoPlayerProps) {
+export default function VideoPlayer({ 
+  src, 
+  title, 
+  description, 
+  poster, 
+  className = '', 
+  isVertical = false,
+  uploadDate = new Date().toISOString(),
+  duration
+}: VideoPlayerProps) {
   const videoRef = useRef<any>(null);
 
   useEffect(() => {
     if (videoRef.current) {
       const player = videoRef.current;
-      // Any player initialization can go here
+      new Plyr(player);
     }
   }, []);
 
+  // Generate thumbnail URL from video if no poster provided
+  const thumbnailUrl = poster || src.replace(/\.(mp4|webm)/, '.jpg')
+
   return (
-    <div className="video-container">
-      {(title || description) && (
-        <div className="mt-4 text-center">
-          {title && <h3 className="text-xl font-bold mb-2">{title}</h3>}
-          {description && <p className="text-text-light">{description}</p>}
-        </div>
-      )}
-      <div className={`relative ${isVertical ? 'max-w-sm mx-auto' : 'w-full'} ${className}`}>
-        <Plyr
-          ref={videoRef}
-          source={{
-            type: 'video',
-            sources: [
-              {
-                src: src,
-                type: 'video/mp4',
-              },
-            ],
-          }}
-          options={{
-            controls: [
-              'play-large',
-              'play',
-              'progress',
-              'current-time',
-              'mute',
-              'volume',
-              'fullscreen',
-            ],
-          }}
+    <>
+      {title && description && (
+        <VideoJsonLd
+          name={title}
+          description={description}
+          thumbnailUrl={thumbnailUrl}
+          uploadDate={uploadDate}
+          contentUrl={src}
+          duration={duration}
         />
+      )}
+      <div className="video-container">
+        {(title || description) && (
+          <div className="mt-4 text-center">
+            {title && <h2 className="text-xl font-bold mb-2">{title}</h2>}
+            {description && <p className="text-text-light">{description}</p>}
+          </div>
+        )}
+        <div className={`relative ${className} ${isVertical ? 'aspect-[9/16]' : 'aspect-video'}`}>
+          <video
+            ref={videoRef}
+            data-plyr-provider="html5"
+            data-plyr-embed-id={src}
+            poster={poster}
+            className="w-full h-full object-cover rounded-custom"
+          >
+            <source
+              src={src}
+              type="video/mp4"
+            />
+          </video>
+        </div>
       </div>
-    </div>
-  );
+    </>
+  )
 }

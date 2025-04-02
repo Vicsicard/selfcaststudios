@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
+  <url>
+    <loc>https://selfcaststudios.com/</loc>
+    <video:video>
+      <video:thumbnail_loc>https://imagestopost.carrd.co/assets/videos/video08.jpg</video:thumbnail_loc>
+      <video:title>Welcome to Self Cast Studios</video:title>
+      <video:description>Transform your personal brand with strategic storytelling.</video:description>
+      <video:content_loc>https://imagestopost.carrd.co/assets/videos/video08.mp4</video:content_loc>
+      <video:player_loc>https://selfcaststudios.com/</video:player_loc>
+      <video:duration>PT2M30S</video:duration>
+      <video:publication_date>2025-04-02T14:00:00+00:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+      <video:live>no</video:live>
+    </video:video>
+  </url>
+  <url>
+    <loc>https://selfcaststudios.com/services/narrative-defense</loc>
+    <video:video>
+      <video:thumbnail_loc>https://imagestopost.carrd.co/assets/videos/video01.jpg</video:thumbnail_loc>
+      <video:title>Narrative Defense Introduction</video:title>
+      <video:description>Protect and preserve your professional reputation.</video:description>
+      <video:content_loc>https://imagestopost.carrd.co/assets/videos/video01.mp4</video:content_loc>
+      <video:player_loc>https://selfcaststudios.com/services/narrative-defense</video:player_loc>
+      <video:duration>PT3M15S</video:duration>
+      <video:publication_date>2025-04-02T14:00:00+00:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+      <video:live>no</video:live>
+    </video:video>
+  </url>
+  <url>
+    <loc>https://selfcaststudios.com/testimonials</loc>
+    <video:video>
+      <video:thumbnail_loc>https://imagestopost.carrd.co/assets/videos/video03.jpg</video:thumbnail_loc>
+      <video:title>Client Success Story - Narrative Defense</video:title>
+      <video:description>See how our clients transformed their narrative.</video:description>
+      <video:content_loc>https://imagestopost.carrd.co/assets/videos/video03.mp4</video:content_loc>
+      <video:player_loc>https://selfcaststudios.com/testimonials</video:player_loc>
+      <video:duration>PT2M45S</video:duration>
+      <video:publication_date>2025-04-02T14:00:00+00:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+      <video:live>no</video:live>
+    </video:video>
+  </url>
+  <url>
+    <loc>https://selfcaststudios.com/services/narrative-elevation</loc>
+    <video:video>
+      <video:thumbnail_loc>https://imagestopost.carrd.co/assets/videos/video04.jpg</video:thumbnail_loc>
+      <video:title>Narrative Elevation Overview</video:title>
+      <video:description>Transform your personal brand into a powerful platform.</video:description>
+      <video:content_loc>https://imagestopost.carrd.co/assets/videos/video04.mp4</video:content_loc>
+      <video:player_loc>https://selfcaststudios.com/services/narrative-elevation</video:player_loc>
+      <video:duration>PT2M15S</video:duration>
+      <video:publication_date>2025-04-02T14:00:00+00:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+      <video:live>no</video:live>
+    </video:video>
+  </url>
+  <url>
+    <loc>https://selfcaststudios.com/services/narrative-elevation</loc>
+    <video:video>
+      <video:thumbnail_loc>https://imagestopost.carrd.co/assets/videos/video07.jpg</video:thumbnail_loc>
+      <video:title>Client Success Story - Narrative Elevation</video:title>
+      <video:description>Real results from our narrative elevation service.</video:description>
+      <video:content_loc>https://imagestopost.carrd.co/assets/videos/video07.mp4</video:content_loc>
+      <video:player_loc>https://selfcaststudios.com/services/narrative-elevation</video:player_loc>
+      <video:duration>PT3M00S</video:duration>
+      <video:publication_date>2025-04-02T14:00:00+00:00</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+      <video:live>no</video:live>
+    </video:video>
+  </url>
+</urlset>

@@ -62,6 +62,9 @@ export default function Navigation() {
           <button
             className="md:hidden p-2 rounded-custom hover:bg-surface-dark transition-colors"
             onClick={() => setIsOpen(!isOpen)}
+            aria-label={isOpen ? "Close menu" : "Open menu"}
+            aria-expanded={isOpen}
+            aria-controls="mobile-menu"
           >
             <svg
               className="w-6 h-6 text-primary"
@@ -83,7 +86,7 @@ export default function Navigation() {
 
         {/* Mobile Menu */}
         {isOpen && (
-          <div className="md:hidden fixed top-[64px] left-0 right-0 bg-surface-dark shadow-custom-lg max-h-[calc(100vh-64px)] overflow-y-auto">
+          <div id="mobile-menu" className="md:hidden fixed top-[64px] left-0 right-0 bg-surface-dark shadow-custom-lg max-h-[calc(100vh-64px)] overflow-y-auto">
             <div className="flex flex-col space-y-2 p-4">
               {links.map((link) => (
                 <Link

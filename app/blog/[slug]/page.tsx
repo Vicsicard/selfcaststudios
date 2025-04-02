@@ -38,13 +38,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   return {
     title: `${post.title} | Self Cast Studios Blog`,
-    description: post.content.slice(0, 160) + '...',
+    description: post.excerpt || post.content.slice(0, 160).replace(/[#*`]/g, '').trim() + '...',
     openGraph: {
       title: post.title,
-      description: post.content.slice(0, 160) + '...',
+      description: post.excerpt || post.content.slice(0, 160).replace(/[#*`]/g, '').trim() + '...',
       type: 'article',
       publishedTime: post.created_at || undefined,
-      modifiedTime: post.created_at || undefined,
+      modifiedTime: post.updated_at || post.created_at || undefined,
       images: firstImageUrl ? [
         {
           url: firstImageUrl,
@@ -53,11 +53,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
           alt: post.title,
         }
       ] : [],
+      url: `https://selfcaststudios.com/blog/${post.slug}`,
     },
     twitter: {
       card: 'summary_large_image',
       title: post.title,
-      description: post.content.slice(0, 160) + '...',
+      description: post.excerpt || post.content.slice(0, 160).replace(/[#*`]/g, '').trim() + '...',
       images: firstImageUrl ? [firstImageUrl] : [],
     }
   }

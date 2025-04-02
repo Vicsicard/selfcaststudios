@@ -18,6 +18,66 @@ export const metadata: Metadata = {
   verification: {
     google: '1wUP_GS1GyT2d3XTfudHwCWNYGEpO4GFp8n0m01Tue4',
   },
+  keywords: [
+    'personal brand',
+    'brand elevation',
+    'professional narrative',
+    'content creation',
+    'storytelling',
+    'personal branding',
+    'brand strategy',
+    'digital presence',
+    'professional development',
+    'career growth'
+  ],
+  authors: [{ name: 'Self Cast Studios' }],
+  openGraph: {
+    type: 'website',
+    locale: 'en_US',
+    url: 'https://selfcaststudios.com',
+    siteName: 'Self Cast Studios',
+    title: 'Self Cast Studios | Personal Brand Elevation',
+    description: 'Transform your personal brand with Self Cast Studios. We help you craft and elevate your narrative through strategic storytelling and content creation.',
+    images: [
+      {
+        url: 'https://imagestopost.carrd.co/assets/images/image05.jpg',
+        width: 1920,
+        height: 1080,
+        alt: 'Self Cast Studios - Personal Brand Elevation',
+      }
+    ]
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Self Cast Studios | Personal Brand Elevation',
+    description: 'Transform your personal brand with Self Cast Studios. We help you craft and elevate your narrative through strategic storytelling and content creation.',
+    images: ['https://imagestopost.carrd.co/assets/images/image05.jpg'],
+    creator: '@selfcaststudios'
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+  alternates: {
+    canonical: 'https://selfcaststudios.com'
+  },
+  icons: {
+    icon: [
+      { url: 'https://imagestopost.carrd.co/assets/images/image05.jpg' }
+    ]
+  },
+  viewport: {
+    width: 'device-width',
+    initialScale: 1,
+  },
+  category: 'business'
 }
 
 export default function RootLayout({
@@ -28,7 +88,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="overflow-x-hidden">
       <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </head>
       <body className={`${playfair.variable} font-playfair overflow-x-hidden bg-surface text-text-light min-h-screen flex flex-col`}>
         <DynamicTitle />
