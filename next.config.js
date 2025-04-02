@@ -2,7 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ['selfcaststudios.com', 'imagestopost.carrd.co'],
+    domains: ['selfcaststudios.com', 'imagestopost.carrd.co', 'im.runware.ai'],
   },
 }
 
