@@ -4,6 +4,7 @@ import './globals.css'
 import Navigation from '@/components/Navigation'
 import Footer from '@/components/Footer'
 import DynamicTitle from '@/components/DynamicTitle'
+import OrganizationJsonLd from '@/components/structured-data/OrganizationJsonLd'
 
 const playfair = Playfair_Display({ 
   subsets: ['latin'],
@@ -31,6 +32,7 @@ export default function RootLayout({
       </head>
       <body className={`${playfair.variable} font-playfair overflow-x-hidden bg-surface text-text-light min-h-screen flex flex-col`}>
         <DynamicTitle />
+        <OrganizationJsonLd />
         <Navigation />
         <div className="flex-grow">
           <main className="min-h-screen w-full overflow-x-hidden">

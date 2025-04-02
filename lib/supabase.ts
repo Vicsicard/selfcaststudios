@@ -7,8 +7,10 @@ export interface BlogPost {
   id: string
   title: string
   content: string
+  excerpt?: string
   tags: string | null
   created_at: string | null
+  updated_at?: string | null
   images: string[] | null
   slug: string
 }
