@@ -3,9 +3,11 @@ module.exports = {
   siteUrl: process.env.SITE_URL || 'https://selfcaststudios.com',
   generateRobotsTxt: true,
   robotsTxtOptions: {
-    additionalSitemaps: [
-      'https://selfcaststudios.com/server-sitemap.xml',
+    policies: [
+      {
+        userAgent: '*',
+        allow: '/',
+      },
     ],
   },
-  exclude: ['/server-sitemap.xml'],
 }
