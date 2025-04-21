@@ -207,25 +207,32 @@
 }
 
 .successMessage {
-  background-color: white;
-  border-radius: 1rem;
+  background-color: #f8f9fa;
+  border-radius: 10px;
   padding: 2rem;
-  margin-bottom: 2rem;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.16);
+  margin: 2rem auto;
+  max-width: 800px;
   text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .successMessage h2 {
-  color: #1a1a1a;
-  margin-bottom: 1rem;
-  font-size: 2rem;
-  font-weight: 600;
+  color: #28a745;
+  margin-bottom: 1.5rem;
 }
 
-.successMessage p {
-  color: #666666;
-  font-size: 1.1rem;
-  margin-bottom: 1rem;
+.projectIdContainer {
+  background-color: #e9f7ef;
+  border: 1px solid #28a745;
+  border-radius: 8px;
+  padding: 1rem;
+  margin: 1.5rem 0;
+}
+
+.projectIdNote {
+  font-size: 0.9rem;
+  color: #666;
+  margin-top: 0.5rem;
 }
 
 .successMessage a {

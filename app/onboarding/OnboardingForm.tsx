@@ -7,20 +7,61 @@ import styles from './styles.module.css'
 export default function OnboardingForm() {
   const [selectedColor, setSelectedColor] = useState<string | null>(null);
   const [formSubmitted, setFormSubmitted] = useState(false);
+  const [projectId, setProjectId] = useState<string | null>(null);
   
   const handleColorSelect = (color: string) => {
     setSelectedColor(color);
   };
   
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    // In a real implementation, you would send the form data to your backend
-    // For now, we'll just show a success message
-    setFormSubmitted(true);
+    // Get form data
+    const formElement = e.target as HTMLFormElement;
+    const formData = new FormData(formElement);
     
-    // Scroll to top to show success message
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    // Convert FormData to a regular object
+    const formDataObject: Record<string, any> = {};
+    formData.forEach((value, key) => {
+      formDataObject[key] = value;
+    });
+    
+    // Add the selected color if it exists
+    if (selectedColor) {
+      formDataObject.colorPreference = selectedColor;
+    }
+    
+    try {
+      // Send data to our API endpoint
+      const response = await fetch('/api/onboarding', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formDataObject),
+      });
+      
+      const result = await response.json();
+      
+      if (!response.ok) {
+        throw new Error(result.error || 'Failed to submit form');
+      }
+      
+      // Store the project ID in localStorage for potential future use
+      if (result.projectId) {
+        localStorage.setItem('selfcastProjectId', result.projectId);
+        setProjectId(result.projectId);
+      }
+      
+      // Show success message
+      setFormSubmitted(true);
+      
+      // Scroll to top to show success message
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      alert('There was an error submitting your information. Please try again or contact support.');
+    }
   };
   
   if (formSubmitted) {
@@ -28,7 +69,16 @@ export default function OnboardingForm() {
       <div className={styles.successMessage}>
         <h2>Thank You!</h2>
         <p>Your information has been submitted successfully. We're excited to start working on your personal brand!</p>
+        
+        {projectId && (
+          <div className={styles.projectIdContainer}>
+            <p><strong>Your Project ID:</strong> {projectId}</p>
+            <p className={styles.projectIdNote}>Please save this ID for your records. It will be used to identify your project in our system.</p>
+          </div>
+        )}
+        
         <p>You should receive a confirmation email shortly with details about your scheduled workshop and next steps.</p>
+        <p>Your personal brand website is being set up and will be available soon. We'll notify you when it's ready for your review.</p>
         <p>If you have any questions in the meantime, please contact us at <a href="mailto:hello@selfcaststudios.com">hello@selfcaststudios.com</a>.</p>
       </div>
     );
