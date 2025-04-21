@@ -2,80 +2,89 @@
   max-width: 1080px;
   margin: 0 auto;
   padding: 2rem 1rem;
-  padding-top: 6rem;
 }
 
-.page section,
-.page header,
-.highlight {
-  background-color: var(--surface);
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
+.section, 
+.header, 
+.highlight,
+.pricingSection,
+.footerCard {
+  background-color: white;
   border-radius: 1rem;
   padding: 2rem;
   margin: 2rem 0;
-  color: var(--text-dark);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.16);
   transition: box-shadow 0.3s;
 }
 
-.page section:hover,
-.page header:hover,
-.highlight:hover {
+.section:hover, 
+.header:hover, 
+.highlight:hover,
+.pricingSection:hover,
+.footerCard:hover {
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.24);
 }
 
-.page header {
+.header {
   text-align: center;
   background: linear-gradient(to bottom right, #ffffff, #f5f5f5);
   padding: 3rem 2rem;
 }
 
-.page h1 {
+.title {
   font-size: 3rem;
   margin-bottom: 0.5rem;
   font-weight: 700;
   line-height: 1.2;
+  color: #1a1a1a;
 }
 
-.page h2 {
+.sectionTitle {
   font-size: 2rem;
   margin-bottom: 1rem;
   font-weight: 600;
   color: #1a1a1a;
 }
 
-.page h3 {
+.cardTitle {
   font-size: 1.5rem;
   font-weight: 600;
   color: #1a1a1a;
 }
 
-.page p {
+.text {
   font-size: 1.125rem;
   color: #666666;
+  margin-bottom: 1rem;
 }
 
-.gradient-text {
+.tagline {
   background-image: linear-gradient(to right, #007AFF, #3395FF);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
   display: inline-block;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
 }
 
-.page ul {
+.bold {
+  font-weight: 700;
+}
+
+.list {
   list-style: none;
   padding-left: 0;
+  margin-bottom: 1.5rem;
 }
 
-.page li {
+.listItem {
   margin-bottom: 1rem;
   position: relative;
   padding-left: 2rem;
 }
 
-.page li::before {
+.listItem::before {
   content: "";
   position: absolute;
   left: 0;
@@ -92,12 +101,11 @@
   border-left: 4px solid #007AFF;
   font-style: italic;
   font-weight: 500;
+  padding: 1.5rem 2rem;
 }
 
-.pricing-card {
-  background-color: #ffffff;
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
+.pricingCard {
+  background-color: white;
   border-radius: 1rem;
   padding: 2.5rem;
   margin: 2rem 0;
@@ -106,45 +114,61 @@
   transition: transform 0.3s, box-shadow 0.3s;
 }
 
-.pricing-card:hover {
+.pricingCard:hover {
   transform: translateY(-5px);
   box-shadow: 0 12px 40px -8px rgba(0, 0, 0, 0.32), 0 0 0 1px rgba(0, 0, 0, 0.08);
 }
 
-.pricing-card .price {
+.price {
   font-size: 2.5rem;
   font-weight: 700;
   color: #1a1a1a;
   margin: 1rem 0;
 }
 
-.pricing-card .price span {
+.pricePeriod {
   font-size: 1.25rem;
   color: #666666;
+  margin-left: 0.25rem;
 }
 
-.pricing-card .features {
+.featuresList {
   text-align: left;
   margin: 2rem 0;
+  list-style: none;
+  padding-left: 0;
 }
 
-.pricing-card .secure-label {
+.featuresItem {
+  margin-bottom: 1rem;
+  position: relative;
+  padding-left: 2rem;
+}
+
+.featuresItem::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: #007AFF;
+  font-weight: bold;
+}
+
+.secureLabel {
   font-size: 0.9rem;
   color: #666666;
   margin-bottom: 1.5rem;
 }
 
-.pricing-card .note {
+.note {
   font-size: 0.9rem;
   color: #666666;
   margin-top: 1.5rem;
   font-style: italic;
 }
 
-.footer-card {
-  background-color: #ffffff;
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
+.footerCard {
+  background-color: white;
   border-radius: 1rem;
   padding: 2rem;
   margin: 4rem auto 2rem auto;
@@ -155,14 +179,14 @@
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.16);
 }
 
-.footer-card a {
+.link {
   color: #007AFF;
   text-decoration: none;
   font-weight: 500;
   position: relative;
 }
 
-.footer-card a::after {
+.link::after {
   content: '';
   position: absolute;
   bottom: -2px;
@@ -173,15 +197,20 @@
   transition: width 0.3s;
 }
 
-.footer-card a:hover::after {
+.link:hover::after {
   width: 100%;
 }
 
-.footer-card .tagline {
+.footerTagline {
   margin-bottom: 1rem;
   font-style: italic;
   font-size: 1.25rem;
   color: #1a1a1a;
+}
+
+.copyright {
+  font-size: 0.9rem;
+  margin-top: 1rem;
 }
 
 .subheadline {
@@ -192,21 +221,22 @@
   font-style: italic;
 }
 
-.subscribe-btn {
+.subscribeBtn {
   background-color: #007AFF;
-  color: #ffffff;
-  padding: 1.25rem 3rem;
-  font-size: 1.15rem;
+  color: white;
+  padding: 1.5rem 4rem;
+  font-size: 1.25rem;
   font-weight: bold;
-  border-radius: 1rem;
+  border-radius: 50px;
   text-decoration: none;
   transition: all 0.3s ease;
   display: inline-block;
-  margin-top: 1rem;
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
   box-shadow: 0 6px 30px -6px rgba(0, 0, 0, 0.24), 0 0 0 1px rgba(0, 0, 0, 0.05);
 }
 
-.subscribe-btn:hover {
+.subscribeBtn:hover {
   background-color: #3395FF;
   transform: translateY(-2px);
   box-shadow: 0 12px 40px -8px rgba(0, 0, 0, 0.32), 0 0 0 1px rgba(0, 0, 0, 0.08);
@@ -215,39 +245,39 @@
 @media (max-width: 768px) {
   .page {
     padding: 1rem;
-    padding-top: 5rem;
   }
 
-  .page section,
-  .page header,
+  .section,
+  .header,
   .highlight,
-  .footer-card,
-  .pricing-card {
+  .footerCard,
+  .pricingCard,
+  .pricingSection {
     padding: 1.5rem 1rem;
     margin: 1.5rem 0;
     border-radius: 0.75rem;
   }
 
-  .page h1 {
+  .title {
     font-size: 2.25rem;
   }
 
-  .page h2 {
+  .sectionTitle {
     font-size: 1.75rem;
   }
 
-  .subscribe-btn {
+  .subscribeBtn {
     font-size: 1rem;
     padding: 1rem 2rem;
     width: 100%;
     box-sizing: border-box;
   }
 
-  .pricing-card .price {
+  .price {
     font-size: 2rem;
   }
 
-  .footer-card .tagline {
+  .footerTagline {
     font-size: 1.1rem;
   }
 }
