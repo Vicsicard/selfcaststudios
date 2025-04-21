@@ -1,0 +1,94 @@
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 10;
+}
+
+.successCard {
+  background-color: white;
+  border-radius: 1rem;
+  padding: 3rem 2rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.16);
+  text-align: center;
+  width: 100%;
+  max-width: 500px;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+.checkmark {
+  margin: 0 auto 2rem;
+  animation: scaleIn 0.5s ease-in-out 0.2s both;
+}
+
+.successCard h1 {
+  color: #1a1a1a;
+  margin-bottom: 1.5rem;
+  font-size: 2.5rem;
+  font-weight: 700;
+}
+
+.successCard p {
+  color: #666666;
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  line-height: 1.6;
+}
+
+.successCard p:last-child {
+  color: #007AFF;
+  font-weight: 500;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem;
+  }
+  
+  .successCard {
+    padding: 2rem 1.5rem;
+  }
+  
+  .successCard h1 {
+    font-size: 2rem;
+  }
+  
+  .successCard p {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .successCard {
+    padding: 1.5rem 1rem;
+  }
+  
+  .successCard h1 {
+    font-size: 1.75rem;
+  }
+}

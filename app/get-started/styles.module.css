@@ -244,6 +244,48 @@
   box-shadow: 0 12px 40px -8px rgba(0, 0, 0, 0.32), 0 0 0 1px rgba(0, 0, 0, 0.08);
 }
 
+.testModeNote {
+  margin-top: 1.5rem;
+  padding: 1rem;
+  background-color: #fff8e1;
+  border-radius: 0.5rem;
+  border: 1px dashed #ffc107;
+  text-align: center;
+}
+
+.testModeNote p {
+  margin-bottom: 0.75rem;
+  font-size: 0.9rem;
+  color: #b28704;
+}
+
+.testBtn {
+  background-color: #6c757d;
+  margin: 0.5rem auto;
+  display: block;
+  max-width: 200px;
+}
+
+.testBtn:hover {
+  background-color: #5a6268;
+}
+
+.bypassBtn {
+  background-color: #28a745;
+  margin-top: 0.5rem;
+}
+
+.bypassBtn:hover {
+  background-color: #218838;
+}
+
+.testCardInfo {
+  font-size: 0.8rem !important;
+  color: #6c757d !important;
+  margin: 0.25rem 0 0.5rem !important;
+  font-family: monospace;
+}
+
 @media (max-width: 768px) {
   .page {
     padding: 1rem;

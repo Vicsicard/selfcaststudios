@@ -113,14 +113,13 @@ export default function GetStartedPage() {
               <a href="https://buy.stripe.com/eVa7u55rN4xybe06oD" target="_blank" className={styles.subscribeBtn}>
                 Subscribe Now
               </a>
-
               <p className={styles.note}>We onboard a limited number of clients each month to ensure creative quality and attention.</p>
             </div>
           </div>
 
           <div className={styles.footerCard}>
             <p className={styles.footerTagline}>We'll handle everything—from interview to visibility. You just show up with your story.</p>
-            <p className={styles.copyright}>© 2025 <a href="https://www.selfcaststudios.com/" target="_blank" className={styles.link}>Self Cast Studios</a>. All rights reserved.</p>
+            <p className={styles.copyright}> 2025 <a href="https://www.selfcaststudios.com/" target="_blank" className={styles.link}>Self Cast Studios</a>. All rights reserved.</p>
           </div>
         </div>
       </div>
