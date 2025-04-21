@@ -2,6 +2,12 @@
 
 import React from 'react'
 import styles from './styles.module.css'
+import { Playfair_Display } from 'next/font/google'
+
+const playfair = Playfair_Display({ 
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+})
 
 export default function GetStartedPage() {
   return (
@@ -18,7 +24,7 @@ export default function GetStartedPage() {
       
       {/* Content */}
       <div className="relative z-10 min-h-screen py-20">
-        <div className={styles.page}>
+        <div className={`${styles.page} ${playfair.className}`}>
           <div className={styles.header}>
             <h1 className={styles.title}>The Core Visibility Package</h1>
             <p className={styles.tagline}>Your Story. Your Voice. <span className={styles.bold}>Cast with Intention.</span></p>
