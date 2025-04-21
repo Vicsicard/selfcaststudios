@@ -7,8 +7,8 @@ const videos = [
     description: 'Transform your personal brand with strategic storytelling.',
     thumbnail: 'https://imagestopost.carrd.co/assets/videos/video08.jpg',
     content: 'https://imagestopost.carrd.co/assets/videos/video08.mp4',
-    player: 'https://selfcaststudios.com/',
-    duration: 'PT2M30S',
+    loc: 'https://selfcaststudios.com/',
+    duration: 150, // 2m30s in seconds
     publication_date: '2025-04-02T14:00:00+00:00',
   },
   {
@@ -16,8 +16,8 @@ const videos = [
     description: 'Protect and preserve your professional reputation.',
     thumbnail: 'https://imagestopost.carrd.co/assets/videos/video01.jpg',
     content: 'https://imagestopost.carrd.co/assets/videos/video01.mp4',
-    player: 'https://selfcaststudios.com/services/narrative-defense',
-    duration: 'PT3M15S',
+    loc: 'https://selfcaststudios.com/services/narrative-defense',
+    duration: 195, // 3m15s in seconds
     publication_date: '2025-04-02T14:00:00+00:00',
   },
   {
@@ -25,8 +25,8 @@ const videos = [
     description: 'See how our clients transformed their narrative.',
     thumbnail: 'https://imagestopost.carrd.co/assets/videos/video03.jpg',
     content: 'https://imagestopost.carrd.co/assets/videos/video03.mp4',
-    player: 'https://selfcaststudios.com/testimonials',
-    duration: 'PT2M45S',
+    loc: 'https://selfcaststudios.com/testimonials',
+    duration: 165, // 2m45s in seconds
     publication_date: '2025-04-02T14:00:00+00:00',
   },
   {
@@ -34,8 +34,8 @@ const videos = [
     description: 'Transform your personal brand into a powerful platform.',
     thumbnail: 'https://imagestopost.carrd.co/assets/videos/video04.jpg',
     content: 'https://imagestopost.carrd.co/assets/videos/video04.mp4',
-    player: 'https://selfcaststudios.com/services/narrative-elevation',
-    duration: 'PT2M15S',
+    loc: 'https://selfcaststudios.com/services/narrative-elevation',
+    duration: 135, // 2m15s in seconds
     publication_date: '2025-04-02T14:00:00+00:00',
   },
   {
@@ -43,8 +43,8 @@ const videos = [
     description: 'Real results from our narrative elevation service.',
     thumbnail: 'https://imagestopost.carrd.co/assets/videos/video07.jpg',
     content: 'https://imagestopost.carrd.co/assets/videos/video07.mp4',
-    player: 'https://selfcaststudios.com/services/narrative-elevation',
-    duration: 'PT3M00S',
+    loc: 'https://selfcaststudios.com/services/narrative-elevation',
+    duration: 180, // 3m00s in seconds
     publication_date: '2025-04-02T14:00:00+00:00',
   },
 ];
@@ -56,13 +56,12 @@ const generateVideoSitemap = () => {
 
   videos.forEach(video => {
     xml += '  <url>\n';
-    xml += `    <loc>${video.player}</loc>\n`;
+    xml += `    <loc>${video.loc}</loc>\n`;
     xml += '    <video:video>\n';
     xml += `      <video:thumbnail_loc>${video.thumbnail}</video:thumbnail_loc>\n`;
     xml += `      <video:title>${video.title}</video:title>\n`;
     xml += `      <video:description>${video.description}</video:description>\n`;
     xml += `      <video:content_loc>${video.content}</video:content_loc>\n`;
-    xml += `      <video:player_loc>${video.player}</video:player_loc>\n`;
     xml += `      <video:duration>${video.duration}</video:duration>\n`;
     xml += `      <video:publication_date>${video.publication_date}</video:publication_date>\n`;
     xml += '      <video:family_friendly>yes</video:family_friendly>\n';

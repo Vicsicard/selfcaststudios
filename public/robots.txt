@@ -1,6 +1,8 @@
 # *
 User-agent: *
 Allow: /
+Disallow: /api/*
+Disallow: /test-*
 
 # Host
 Host: https://selfcaststudios.com
