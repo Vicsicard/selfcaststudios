@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Core Visibility Package | Self Cast Studios</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #1a1a1a;
+      --primary-light: #2a2a2a;
+      --accent: #007AFF;
+      --accent-light: #3395FF;
+      --surface: #ffffff;
+      --surface-dark: #f5f5f5;
+      --surface-darker: #e0e0e0;
+      --text-white: #ffffff;
+      --text-light: #666666;
+      --text-dark: #1a1a1a;
+      --border-radius: 1rem;
+      --shadow-custom: 0 4px 20px rgba(0, 0, 0, 0.16);
+      --shadow-custom-hover: 0 8px 30px rgba(0, 0, 0, 0.24);
+      --shadow-custom-elevated: 0 10px 20px rgba(0, 0, 0, 0.15), 0 6px 6px rgba(0, 0, 0, 0.09);
+      --shadow-custom-dark: 0 6px 30px -6px rgba(0, 0, 0, 0.24), 0 0 0 1px rgba(0, 0, 0, 0.05);
+      --shadow-custom-dark-hover: 0 12px 40px -8px rgba(0, 0, 0, 0.32), 0 0 0 1px rgba(0, 0, 0, 0.08);
+      --spacing: 1rem;
+    }
+
+    * {
+      transition: all 0.2s;
+    }
+
+    body {
+      background: linear-gradient(to bottom right, var(--surface), var(--surface-dark));
+      margin: 0;
+      font-family: 'Playfair Display', serif;
+      line-height: 1.6;
+      color: var(--text-dark);
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 1280px;
+      padding: 0 var(--spacing);
+      margin: 0 auto;
+    }
+
+    .page {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 2rem var(--spacing);
+    }
+
+    section,
+    header,
+    .highlight {
+      background-color: var(--surface);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      border-radius: var(--border-radius);
+      padding: 2rem;
+      margin: 2rem 0;
+      color: var(--text-dark);
+      box-shadow: var(--shadow-custom);
+      transition: box-shadow 0.3s;
+    }
+
+    section:hover,
+    header:hover,
+    .highlight:hover {
+      box-shadow: var(--shadow-custom-hover);
+    }
+
+    header {
+      text-align: center;
+      background: linear-gradient(to bottom right, var(--surface), var(--surface-dark));
+      padding: 3rem 2rem;
+    }
+
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 0.5rem;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+
+    h2 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+    h3 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+    p {
+      font-size: 1.125rem;
+      color: var(--text-light);
+    }
+
+    .gradient-text {
+      background-image: linear-gradient(to right, var(--accent), var(--accent-light));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      display: inline-block;
+    }
+
+    ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    li {
+      margin-bottom: 1rem;
+      position: relative;
+      padding-left: 2rem;
+    }
+
+    li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.5rem;
+      width: 1rem;
+      height: 1rem;
+      background-color: var(--accent);
+      border-radius: 50%;
+      opacity: 0.2;
+    }
+
+    .cta {
+      text-align: center;
+      margin: 3rem 0;
+    }
+
+    .btn {
+      display: inline-block;
+      background-color: var(--accent);
+      color: var(--text-white);
+      padding: 1rem 2rem;
+      text-decoration: none;
+      font-weight: bold;
+      border-radius: var(--border-radius);
+      transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+      box-shadow: var(--shadow-custom-dark);
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background-color: var(--accent-light);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-custom-dark-hover);
+    }
+
+    .subscribe-btn {
+      background-color: var(--accent);
+      color: var(--text-white);
+      padding: 1.25rem 3rem;
+      font-size: 1.15rem;
+      font-weight: bold;
+      border-radius: var(--border-radius);
+      text-decoration: none;
+      transition: all 0.3s ease;
+      display: inline-block;
+      margin-top: 1rem;
+      box-shadow: var(--shadow-custom-dark);
+    }
+
+    .subscribe-btn:hover {
+      background-color: var(--accent-light);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-custom-dark-hover);
+    }
+
+    .highlight {
+      background: linear-gradient(to bottom right, var(--surface), var(--surface-dark));
+      border-left: 4px solid var(--accent);
+      font-style: italic;
+      font-weight: 500;
+    }
+
+    .pricing-card {
+      background-color: var(--surface);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      border-radius: var(--border-radius);
+      padding: 2.5rem;
+      margin: 2rem 0;
+      text-align: center;
+      box-shadow: var(--shadow-custom-elevated);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .pricing-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-custom-dark-hover);
+    }
+
+    .pricing-card .price {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin: 1rem 0;
+    }
+
+    .pricing-card .price span {
+      font-size: 1.25rem;
+      color: var(--text-light);
+    }
+
+    .pricing-card .features {
+      text-align: left;
+      margin: 2rem 0;
+    }
+
+    .pricing-card .secure-label {
+      font-size: 0.9rem;
+      color: var(--text-light);
+      margin-bottom: 1.5rem;
+    }
+
+    .pricing-card .note {
+      font-size: 0.9rem;
+      color: var(--text-light);
+      margin-top: 1.5rem;
+      font-style: italic;
+    }
+
+    .footer-card {
+      background-color: var(--surface);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      border-radius: var(--border-radius);
+      padding: 2rem;
+      margin: 4rem auto 2rem auto;
+      text-align: center;
+      max-width: 900px;
+      color: var(--text-light);
+      font-size: 0.95rem;
+      box-shadow: var(--shadow-custom);
+    }
+
+    .footer-card a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 500;
+      position: relative;
+    }
+
+    .footer-card a::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background-color: var(--accent);
+      transition: width 0.3s;
+    }
+
+    .footer-card a:hover::after {
+      width: 100%;
+    }
+
+    .footer-card .tagline {
+      margin-bottom: 1rem;
+      font-style: italic;
+      font-size: 1.25rem;
+      color: var(--text-dark);
+    }
+
+    .subheadline {
+      text-align: center;
+      font-size: 1.25rem;
+      color: var(--text-light);
+      margin-bottom: 2rem;
+      font-style: italic;
+    }
+
+    @media (max-width: 768px) {
+      .page {
+        padding: 1rem;
+      }
+
+      section,
+      header,
+      .highlight,
+      .footer-card,
+      .pricing-card {
+        padding: 1.5rem 1rem;
+        margin: 1.5rem 0;
+        border-radius: calc(var(--border-radius) * 0.75);
+      }
+
+      h1 {
+        font-size: 2.25rem;
+      }
+
+      h2 {
+        font-size: 1.75rem;
+      }
+
+      .subscribe-btn {
+        font-size: 1rem;
+        padding: 1rem 2rem;
+        width: 100%;
+        box-sizing: border-box;
+      }
+
+      .pricing-card .price {
+        font-size: 2rem;
+      }
+
+      .footer-card .tagline {
+        font-size: 1.1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="page">
+  <header>
+    <h1>The Core Visibility Package</h1>
+    <p class="gradient-text">Your Story. Your Voice. <span style="font-weight: 700;">Cast with Intention.</span></p>
+  </header>
+
+  <section>
+    <h2>Why Self Cast?</h2>
+    <p>We believe your story deserves to be seen, heard, and trusted. Most people build their personal brand from the outside in. At Self Cast, we build from the inside out—starting with your truth.</p>
+    <ul>
+      <li>Real human interviews</li>
+      <li>Custom content based on your lived experience</li>
+      <li>High-trust visibility, not just empty exposure</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>What You Get</h2>
+    <ul>
+      <li>4 Blog Posts</li>
+      <li>4 Social Media Posts (Instagram, Facebook, X, LinkedIn)</li>
+      <li>1 Custom Bio/About Page</li>
+      <li>3 Branded Quote Graphics</li>
+      <li>A Fully Built Personal Brand Website</li>
+    </ul>
+    <p>All content is crafted directly from your 60-minute recorded workshop interview.</p>
+  </section>
+
+  <section>
+    <h2>The Self Cast Workshop Interview</h2>
+    <p><strong>Where your story begins.</strong></p>
+    <p>At Self Cast, we don't start with forms or formulas—we start with you. The Workshop Interview is a 60-minute, human-first conversation where we listen deeply to your story, your values, and your lived experience. We don't just gather facts—we uncover the voice behind them.</p>
+    <p>From this one conversation, we build your entire visibility system: your bio, your blogs, your social presence, your site's tone and rhythm.</p>
+    <div class="highlight">
+      <p>It's not content pulled from a template. It's content shaped from your truth.</p>
+    </div>
+    <p>This is the heartbeat of Self Cast—and the reason our work resonates.</p>
+  </section>
+
+  <section>
+    <h2>Platform-Specific Social Media</h2>
+    <p>We don't copy-paste across platforms. You get 1 tailored post per platform every month—each crafted to perform and resonate where it lands:</p>
+    <ul>
+      <li>Instagram (visual + quote-based)</li>
+      <li>LinkedIn (professional insights)</li>
+      <li>Twitter/X (punchy, direct thoughts)</li>
+      <li>Facebook (connection-driven storytelling)</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Your Personal Brand Website</h2>
+    <p>Your own digital home—built to express your essence:</p>
+    <ul>
+      <li>Mobile-friendly and SEO-optimized</li>
+      <li>Blog and social post integration</li>
+      <li>Editable backend</li>
+      <li>Fully branded layout with your colors, fonts, and tone</li>
+      <li>Hosting and domain setup support included</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Why It Works</h2>
+    <p>We don't guess. We listen. Every word, image, and design element comes from your story—not a stock template.</p>
+    <div class="highlight">
+      <p>You're not just getting content. You're building a high-trust narrative system that works across platforms.</p>
+    </div>
+  </section>
+
+  <section class="pricing-cta">
+    <h2>Start Your Visibility Journey</h2>
+    <p class="subheadline">One story. One system. Endless resonance.</p>
+
+    <div class="pricing-card">
+      <h3>Core Visibility Package</h3>
+      <p class="price">$2,000<span>/month</span></p>
+      <ul class="features">
+        <li>60-min storytelling workshop</li>
+        <li>4 blog posts (SEO-optimized)</li>
+        <li>4 platform-specific social posts</li>
+        <li>Custom bio & 3 branded quotes</li>
+        <li>Fully built personal brand website</li>
+      </ul>
+
+      <p class="secure-label">🔒 Payment secured via Stripe</p>
+      <a href="https://buy.stripe.com/eVa7u55rN4xybe06oD" target="_blank" class="subscribe-btn">
+        Book a Private Consultation
+      </a>
+
+      <p class="note">We onboard a limited number of clients each month to ensure creative quality and attention.</p>
+    </div>
+  </section>
+
+  <section class="footer-card">
+    <p class="tagline">We'll handle everything—from interview to visibility. You just show up with your story.</p>
+    <p class="copyright">© 2025 <a href="https://www.selfcaststudios.com/" target="_blank">Self Cast Studios</a>. All rights reserved.</p>
+  </section>
+</div>
+
+</body>
+</html>

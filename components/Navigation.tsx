@@ -52,9 +52,18 @@ export default function Navigation() {
             ))}
             <Link
               href="/contact"
-              className="bg-accent hover:bg-accent-light text-text-white px-6 py-2 rounded-custom transition-colors shadow-custom hover:shadow-custom-hover"
+              className="text-text-light hover:text-accent transition-colors relative group"
             >
               Contact
+              <span className={`absolute -bottom-1 left-0 w-0 h-0.5 bg-accent transition-all duration-300 group-hover:w-full ${
+                isActive('/contact') ? 'w-full' : ''
+              }`} />
+            </Link>
+            <Link
+              href="/get-started"
+              className="bg-accent hover:bg-accent-light text-text-white px-6 py-2 rounded-custom transition-colors shadow-custom hover:shadow-custom-hover"
+            >
+              Get Started
             </Link>
           </div>
 
@@ -104,10 +113,21 @@ export default function Navigation() {
               ))}
               <Link
                 href="/contact"
-                className="bg-accent hover:bg-accent-light text-text-white px-6 py-3 rounded-custom transition-colors shadow-custom hover:shadow-custom-hover text-center text-lg mt-4"
+                className={`${
+                  isActive('/contact')
+                    ? 'text-accent font-semibold'
+                    : 'text-text-light hover:text-accent'
+                } transition-colors px-4 py-3 rounded-custom hover:bg-surface text-lg`}
                 onClick={() => setIsOpen(false)}
               >
                 Contact
+              </Link>
+              <Link
+                href="/get-started"
+                className="bg-accent hover:bg-accent-light text-text-white px-6 py-3 rounded-custom transition-colors shadow-custom hover:shadow-custom-hover text-center text-lg mt-4"
+                onClick={() => setIsOpen(false)}
+              >
+                Get Started
               </Link>
             </div>
           </div>

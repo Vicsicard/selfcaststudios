@@ -1,0 +1,253 @@
+.page {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+  padding-top: 6rem;
+}
+
+.page section,
+.page header,
+.highlight {
+  background-color: var(--surface);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border-radius: 1rem;
+  padding: 2rem;
+  margin: 2rem 0;
+  color: var(--text-dark);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.16);
+  transition: box-shadow 0.3s;
+}
+
+.page section:hover,
+.page header:hover,
+.highlight:hover {
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.24);
+}
+
+.page header {
+  text-align: center;
+  background: linear-gradient(to bottom right, #ffffff, #f5f5f5);
+  padding: 3rem 2rem;
+}
+
+.page h1 {
+  font-size: 3rem;
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.page h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
+.page h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
+.page p {
+  font-size: 1.125rem;
+  color: #666666;
+}
+
+.gradient-text {
+  background-image: linear-gradient(to right, #007AFF, #3395FF);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  display: inline-block;
+}
+
+.page ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.page li {
+  margin-bottom: 1rem;
+  position: relative;
+  padding-left: 2rem;
+}
+
+.page li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.5rem;
+  width: 1rem;
+  height: 1rem;
+  background-color: #007AFF;
+  border-radius: 50%;
+  opacity: 0.2;
+}
+
+.highlight {
+  background: linear-gradient(to bottom right, #ffffff, #f5f5f5);
+  border-left: 4px solid #007AFF;
+  font-style: italic;
+  font-weight: 500;
+}
+
+.pricing-card {
+  background-color: #ffffff;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border-radius: 1rem;
+  padding: 2.5rem;
+  margin: 2rem 0;
+  text-align: center;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15), 0 6px 6px rgba(0, 0, 0, 0.09);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.pricing-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 40px -8px rgba(0, 0, 0, 0.32), 0 0 0 1px rgba(0, 0, 0, 0.08);
+}
+
+.pricing-card .price {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 1rem 0;
+}
+
+.pricing-card .price span {
+  font-size: 1.25rem;
+  color: #666666;
+}
+
+.pricing-card .features {
+  text-align: left;
+  margin: 2rem 0;
+}
+
+.pricing-card .secure-label {
+  font-size: 0.9rem;
+  color: #666666;
+  margin-bottom: 1.5rem;
+}
+
+.pricing-card .note {
+  font-size: 0.9rem;
+  color: #666666;
+  margin-top: 1.5rem;
+  font-style: italic;
+}
+
+.footer-card {
+  background-color: #ffffff;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border-radius: 1rem;
+  padding: 2rem;
+  margin: 4rem auto 2rem auto;
+  text-align: center;
+  max-width: 900px;
+  color: #666666;
+  font-size: 0.95rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.16);
+}
+
+.footer-card a {
+  color: #007AFF;
+  text-decoration: none;
+  font-weight: 500;
+  position: relative;
+}
+
+.footer-card a::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: #007AFF;
+  transition: width 0.3s;
+}
+
+.footer-card a:hover::after {
+  width: 100%;
+}
+
+.footer-card .tagline {
+  margin-bottom: 1rem;
+  font-style: italic;
+  font-size: 1.25rem;
+  color: #1a1a1a;
+}
+
+.subheadline {
+  text-align: center;
+  font-size: 1.25rem;
+  color: #666666;
+  margin-bottom: 2rem;
+  font-style: italic;
+}
+
+.subscribe-btn {
+  background-color: #007AFF;
+  color: #ffffff;
+  padding: 1.25rem 3rem;
+  font-size: 1.15rem;
+  font-weight: bold;
+  border-radius: 1rem;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  display: inline-block;
+  margin-top: 1rem;
+  box-shadow: 0 6px 30px -6px rgba(0, 0, 0, 0.24), 0 0 0 1px rgba(0, 0, 0, 0.05);
+}
+
+.subscribe-btn:hover {
+  background-color: #3395FF;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 40px -8px rgba(0, 0, 0, 0.32), 0 0 0 1px rgba(0, 0, 0, 0.08);
+}
+
+@media (max-width: 768px) {
+  .page {
+    padding: 1rem;
+    padding-top: 5rem;
+  }
+
+  .page section,
+  .page header,
+  .highlight,
+  .footer-card,
+  .pricing-card {
+    padding: 1.5rem 1rem;
+    margin: 1.5rem 0;
+    border-radius: 0.75rem;
+  }
+
+  .page h1 {
+    font-size: 2.25rem;
+  }
+
+  .page h2 {
+    font-size: 1.75rem;
+  }
+
+  .subscribe-btn {
+    font-size: 1rem;
+    padding: 1rem 2rem;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .pricing-card .price {
+    font-size: 2rem;
+  }
+
+  .footer-card .tagline {
+    font-size: 1.1rem;
+  }
+}
