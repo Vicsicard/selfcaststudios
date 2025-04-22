@@ -410,30 +410,72 @@
     <script>
         // DOM Elements
         const form = document.getElementById('onboarding-form');
-        const submitButton = document.getElementById('submit-button');
-        const statusElement = document.getElementById('status');
-        const thankYouOverlay = document.getElementById('thank-you-overlay');
-        const projectIdElement = document.getElementById('project-id');
+        const submitButton = document.querySelector('.submit-btn');
         const colorOptions = document.querySelectorAll('.color-option');
-        const colorPreferenceInput = document.getElementById('colorPreference');
-        const stylePackageInput = document.getElementById('stylePackage');
-        
-        // Debug Elements
+        const statusElement = document.getElementById('status-message');
         const debugPanel = document.getElementById('debug-panel');
         const debugLog = document.getElementById('debug-log');
         const testConnectionButton = document.getElementById('test-connection');
+        let thankYouOverlay = document.getElementById('thank-you-overlay');
+        let projectIdElement = document.getElementById('project-id');
+        let selectedColor = '#4a6fa5';
+        let supabase = null;
         
-        // Show debug panel in development mode
+        // Show debug panel in development
         if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
             debugPanel.style.display = 'block';
         }
         
+        // Initialize elements on DOM load
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('DOM fully loaded');
+            thankYouOverlay = document.getElementById('thank-you-overlay');
+            projectIdElement = document.getElementById('project-id');
+            console.log('Thank you overlay loaded:', thankYouOverlay);
+            console.log('Project ID element loaded:', projectIdElement);
+            
+            // Add close button functionality
+            const closeButton = document.querySelector('.close-button');
+            if (closeButton) {
+                closeButton.addEventListener('click', () => {
+                    console.log('Close button clicked');
+                    if (thankYouOverlay) {
+                        thankYouOverlay.classList.remove('active');
+                    }
+                });
+            }
+            
+            // Add click outside to close
+            thankYouOverlay?.addEventListener('click', (e) => {
+                if (e.target === thankYouOverlay) {
+                    console.log('Clicked outside popup');
+                    thankYouOverlay.classList.remove('active');
+                }
+            });
+            
+            // Test popup functionality
+            window.testPopup = function() {
+                console.log('Testing popup');
+                showThankYouPopup('test-project-id');
+            };
+        });
+        
         // Supabase Configuration
-        const SUPABASE_URL = 'https://aqicztygjpmunfljjuto.supabase.co';
+        const SUPABASE_URL = 'https://aqicztygjpmunfljjjuto.supabase.co';
         const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFxaWN6dHlnanBtdW5mbGpqdXRvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDM3MDU1ODIsImV4cCI6MjA1OTI4MTU4Mn0.5e2hvTckSSbTFLBjQiccrvjoBd6QQDX0X4tccFOc1rs';
         
         // Initialize Supabase
-        let supabase;
+        function initializeSupabase() {
+            try {
+                log('Creating Supabase client...');
+                supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+                log('Supabase client initialized successfully', 'success');
+                return supabase;
+            } catch (error) {
+                log(`Error initializing Supabase: ${error.message}`, 'error');
+                return null;
+            }
+        }
         
         // Debug Logging
         function log(message, type = 'info') {
@@ -459,7 +501,7 @@
         }
         
         // Initialize Supabase client
-        function initializeSupabase() {
+        function initializeSupabaseClient() {
             try {
                 log('Initializing Supabase client...');
                 
@@ -480,7 +522,7 @@
         // Test connection to Supabase
         async function testConnection() {
             try {
-                if (!supabase && !initializeSupabase()) return;
+                if (!supabase && !initializeSupabaseClient()) return;
                 
                 log('Testing connection to Supabase...');
                 
@@ -644,7 +686,7 @@
             records.push({
                 project_id: projectId,
                 key: 'rendered_footer_slogan',
-                value: `© ${currentYear} ${formData.fullName || 'Client'} | All Rights Reserved`
+                value: `  ${currentYear} ${formData.fullName || 'Client'} | All Rights Reserved`
             });
             
             // Add default quotes (these appear in many templates)
@@ -697,11 +739,84 @@
         
         // Show thank you popup
         function showThankYouPopup(projectId) {
+            console.log("Showing thank you popup for project ID:", projectId);
+            
+            // Check if elements exist
+            if (!projectIdElement) {
+                console.error("Project ID element not found");
+                projectIdElement = document.getElementById('project-id');
+                if (!projectIdElement) {
+                    console.error("Project ID element still not found after retry");
+                    return;
+                }
+            }
+            
+            if (!thankYouOverlay) {
+                console.error("Thank you overlay element not found");
+                thankYouOverlay = document.getElementById('thank-you-overlay');
+                if (!thankYouOverlay) {
+                    console.error("Thank you overlay still not found after retry");
+                    return;
+                }
+            }
+            
+            // Set project ID and show popup
             projectIdElement.textContent = projectId;
             thankYouOverlay.classList.add('active');
+            console.log("Added 'active' class to thank you overlay");
+            
+            // Force repaint to ensure CSS is applied
+            void thankYouOverlay.offsetWidth;
             
             // Store the project ID in localStorage for potential future use
             localStorage.setItem('selfcastProjectId', projectId);
+            
+            // Create a CSV download
+            createAndDownloadCSV(projectId);
+        }
+        
+        // Create and download CSV
+        function createAndDownloadCSV(projectId) {
+            try {
+                // Get form data
+                const formData = new FormData(form);
+                const formValues = Object.fromEntries(formData.entries());
+                
+                // Add project ID
+                formValues.projectId = projectId;
+                
+                // Create CSV header and content
+                const headers = Object.keys(formValues);
+                const csvContent = [
+                    headers.join(','),
+                    Object.values(formValues).map(value => `"${value || ''}"`).join(',')
+                ].join('\n');
+                
+                // Create a Blob with the CSV content
+                const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+                
+                // Create a URL for the Blob
+                const url = URL.createObjectURL(blob);
+                
+                // Create a temporary link element
+                const link = document.createElement('a');
+                link.href = url;
+                link.setAttribute('download', `onboarding-data-${projectId}.csv`);
+                
+                // Append the link to the document
+                document.body.appendChild(link);
+                
+                // Click the link to trigger the download
+                link.click();
+                
+                // Clean up
+                document.body.removeChild(link);
+                URL.revokeObjectURL(url);
+                
+                console.log("CSV download initiated");
+            } catch (error) {
+                console.error("Error creating CSV:", error);
+            }
         }
         
         // Handle color selection
@@ -734,7 +849,7 @@
             
             try {
                 // Initialize Supabase if not already initialized
-                if (!supabase && !initializeSupabase()) {
+                if (!supabase && !initializeSupabaseClient()) {
                     throw new Error('Failed to initialize Supabase client');
                 }
                 
@@ -794,7 +909,31 @@
                 showStatus(`Form submitted successfully! ${successCount} records saved.`, 'success');
                 
                 // Show thank you popup
+                console.log("About to show popup", thankYouOverlay, projectId);
                 showThankYouPopup(projectId);
+                
+                // Create a backup button for CSV download
+                const downloadButton = document.createElement('button');
+                downloadButton.textContent = 'Download Form Data (CSV)';
+                downloadButton.className = 'submit-btn';
+                downloadButton.style.marginTop = '20px';
+                downloadButton.onclick = function() {
+                    createAndDownloadCSV(projectId);
+                };
+                
+                // Add the button to the form
+                form.innerHTML = '';
+                form.appendChild(document.createElement('h2')).textContent = 'Submission Complete';
+                const successMessage = document.createElement('p');
+                successMessage.textContent = `Thank you for completing the onboarding process. Your project ID is: ${projectId}`;
+                form.appendChild(successMessage);
+                form.appendChild(downloadButton);
+                
+                // Try to show popup again after a short delay
+                setTimeout(() => {
+                    console.log("Retrying popup display after timeout");
+                    showThankYouPopup(projectId);
+                }, 500);
                 
             } catch (error) {
                 log(`Error submitting form: ${error.message}`, 'error');
