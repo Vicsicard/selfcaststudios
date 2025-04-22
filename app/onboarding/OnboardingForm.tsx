@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Script from 'next/script'
 import styles from './styles.module.css'
 
@@ -10,6 +10,289 @@ export default function OnboardingForm() {
   const [projectId, setProjectId] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
+  const [supabase, setSupabase] = useState<any>(null);
+
+  // Initialize Supabase client when component mounts
+  useEffect(() => {
+    // Only run in browser environment
+    if (typeof window !== 'undefined') {
+      const SUPABASE_URL = 'https://aqicztygjpmunfljjuto.supabase.co';
+      const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFxaWN6dHlnanBtdW5mbGpqdXRvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDM3MDU1ODIsImV4cCI6MjA1OTI4MTU4Mn0.5e2hvTckSSbTFLBjQiccrvjoBd6QQDX0X4tccFOc1rs';
+      
+      console.log('Initializing Supabase client...');
+      console.log('Window object available:', typeof window !== 'undefined');
+      console.log('Supabase in window:', typeof window.supabase);
+      
+      try {
+        // Check if window.supabase exists (script loaded)
+        if (window.supabase) {
+          console.log('Creating Supabase client with URL:', SUPABASE_URL);
+          const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+          console.log('Supabase client created:', supabaseClient);
+          setSupabase(supabaseClient);
+          console.log('Supabase client initialized and set in state');
+          
+          // Test connection
+          testSupabaseConnection(supabaseClient);
+        } else {
+          console.error('Supabase script not loaded yet. Make sure the script is properly loaded before initialization.');
+        }
+      } catch (error) {
+        console.error('Error initializing Supabase client:', error);
+      }
+    }
+  }, []);
+
+  // Test Supabase connection
+  const testSupabaseConnection = async (client: any) => {
+    try {
+      console.log('Testing Supabase connection...');
+      const { data, error } = await client
+        .from('dynamic_content')
+        .select('project_id')
+        .limit(1);
+      
+      if (error) {
+        console.error('Supabase connection test failed:', error);
+      } else {
+        console.log('Supabase connection test successful:', data);
+        
+        // Try inserting a test record with a simple project ID
+        const testProjectId = 'test-project-' + Date.now();
+        console.log('Attempting to insert test record with ID:', testProjectId);
+        
+        const { data: insertData, error: insertError } = await client
+          .from('dynamic_content')
+          .insert({
+            project_id: testProjectId,
+            key: 'test_key',
+            value: 'Test value from onboarding form at ' + new Date().toISOString()
+          });
+        
+        if (insertError) {
+          console.error('Test insert failed:', insertError);
+        } else {
+          console.log('Test insert successful:', insertData);
+        }
+      }
+    } catch (error) {
+      console.error('Error testing Supabase connection:', error);
+    }
+  };
+
+  // Generate a unique project ID based on the client's name and current timestamp
+  const generateProjectId = (fullName: string): string => {
+    const nameParts = fullName.toLowerCase().trim().split(' ');
+    const firstName = nameParts[0];
+    const lastName = nameParts.length > 1 ? nameParts[nameParts.length - 1] : 'unknown';
+    
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = String(now.getMonth() + 1).padStart(2, '0');
+    const day = String(now.getDate()).padStart(2, '0');
+    const hour = String(now.getHours()).padStart(2, '0');
+    const minute = String(now.getMinutes()).padStart(2, '0');
+    
+    return `${lastName}-${firstName}-${year}${month}${day}-${hour}${minute}`;
+  };
+
+  // Map form fields to content editor fields
+  const mapFormFieldsToContentEditor = (formData: any, projectId: string) => {
+    // Create an array to hold all the records
+    const records = [];
+    
+    // Current year for footer and other date-related fields
+    const currentYear = new Date().getFullYear();
+    
+    // Personal Information - these match content editor fields
+    if (formData.fullName) {
+      records.push({
+        project_id: projectId,
+        key: 'rendered_title',
+        value: formData.fullName
+      });
+      
+      // Also store in client_name which is used in some templates
+      records.push({
+        project_id: projectId,
+        key: 'client_name',
+        value: formData.fullName
+      });
+    }
+    
+    if (formData.email) {
+      records.push({
+        project_id: projectId,
+        key: 'email_address',
+        value: formData.email
+      });
+    }
+    
+    if (formData.profession) {
+      records.push({
+        project_id: projectId,
+        key: 'rendered_subtitle',
+        value: formData.profession
+      });
+    }
+    
+    // Social Media - these match content editor fields
+    if (formData.instagram) {
+      records.push({
+        project_id: projectId,
+        key: 'instagram_url',
+        value: formData.instagram
+      });
+    }
+    
+    if (formData.facebook) {
+      records.push({
+        project_id: projectId,
+        key: 'facebook_url',
+        value: formData.facebook
+      });
+    }
+    
+    if (formData.twitter) {
+      records.push({
+        project_id: projectId,
+        key: 'twitter_url',
+        value: formData.twitter
+      });
+    }
+    
+    if (formData.linkedin) {
+      records.push({
+        project_id: projectId,
+        key: 'linkedin_url',
+        value: formData.linkedin
+      });
+    }
+    
+    // Content Preferences
+    if (formData.comfortableTopics) {
+      records.push({
+        project_id: projectId,
+        key: 'rendered_bio_html',
+        value: formData.comfortableTopics
+      });
+    }
+    
+    if (formData.writingStyle) {
+      records.push({
+        project_id: projectId,
+        key: 'style_package',
+        value: formData.writingStyle
+      });
+    }
+    
+    // Visual Branding - these match content editor fields
+    if (formData.colorPreference) {
+      records.push({
+        project_id: projectId,
+        key: 'primary_color',
+        value: formData.colorPreference
+      });
+      
+      // Also set a secondary color that's a lighter shade
+      records.push({
+        project_id: projectId,
+        key: 'secondary_color',
+        value: formData.colorPreference
+      });
+      
+      // Add accent color as well
+      records.push({
+        project_id: projectId,
+        key: 'accent_color',
+        value: formData.colorPreference
+      });
+    }
+    
+    // Additional content editor fields
+    if (formData.successDefinition) {
+      records.push({
+        project_id: projectId,
+        key: 'rendered_bio_html_card_1',
+        value: formData.successDefinition
+      });
+    }
+    
+    if (formData.contentGoals) {
+      records.push({
+        project_id: projectId,
+        key: 'rendered_bio_html_card_2',
+        value: formData.contentGoals
+      });
+    }
+    
+    if (formData.challenges) {
+      records.push({
+        project_id: projectId,
+        key: 'rendered_bio_html_card_3',
+        value: formData.challenges
+      });
+    }
+    
+    // Add standard fields that the content editor expects
+    records.push({
+      project_id: projectId,
+      key: 'current_year',
+      value: currentYear.toString()
+    });
+    
+    // Add a default footer slogan
+    records.push({
+      project_id: projectId,
+      key: 'rendered_footer_slogan',
+      value: ` ${currentYear} ${formData.fullName || 'Client'} | All Rights Reserved`
+    });
+    
+    // Add default quotes (these appear in many templates)
+    records.push({
+      project_id: projectId,
+      key: 'quote_1',
+      value: '"Success is not final, failure is not fatal: It is the courage to continue that counts."'
+    });
+    
+    records.push({
+      project_id: projectId,
+      key: 'quote_2',
+      value: '"The future belongs to those who believe in the beauty of their dreams."'
+    });
+    
+    records.push({
+      project_id: projectId,
+      key: 'quote_3',
+      value: '"The best way to predict the future is to create it."'
+    });
+    
+    // Custom onboarding fields
+    if (formData.phone) {
+      records.push({
+        project_id: projectId,
+        key: 'onboarding_phone',
+        value: formData.phone
+      });
+    }
+    
+    if (formData.title) {
+      records.push({
+        project_id: projectId,
+        key: 'onboarding_title',
+        value: formData.title
+      });
+    }
+    
+    // Add metadata about when this project was created via onboarding
+    records.push({
+      project_id: projectId,
+      key: 'onboarding_created_at',
+      value: new Date().toISOString()
+    });
+    
+    return records;
+  };
 
   const handleColorSelect = (color: string) => {
     setSelectedColor(color);
@@ -42,39 +325,59 @@ export default function OnboardingForm() {
     }
     
     try {
-      console.log('Submitting form data to API...', formDataObject);
+      console.log('Processing form data...', formDataObject);
       
       // Ensure we have the required fields
       if (!formDataObject.fullName) {
         throw new Error('Full name is required');
       }
       
-      // Send data to our API endpoint with the absolute URL
-      const apiUrl = window.location.origin + '/api/onboarding';
-      console.log('Submitting to API URL:', apiUrl);
+      // Check if Supabase client is initialized
+      if (!supabase) {
+        throw new Error('Database connection not initialized. Please refresh the page and try again.');
+      }
       
-      const response = await fetch(apiUrl, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formDataObject),
-      });
+      // Generate a unique project ID
+      const newProjectId = generateProjectId(formDataObject.fullName);
+      console.log('Generated project ID:', newProjectId);
       
-      console.log('API response status:', response.status);
-      const result = await response.json();
-      console.log('API response data:', result);
+      // Map form fields to content editor fields
+      const contentRecords = mapFormFieldsToContentEditor(formDataObject, newProjectId);
+      console.log('Mapped content records:', contentRecords);
       
-      if (!response.ok) {
-        throw new Error(result.error || 'Failed to submit form');
+      // Insert data into Supabase directly
+      console.log('Inserting data into Supabase...');
+      
+      // Insert each record individually for better error tracking
+      let successCount = 0;
+      let errorCount = 0;
+      
+      for (const record of contentRecords) {
+        console.log(`Inserting record: ${record.key} for project ${newProjectId}`);
+        
+        const { data, error } = await supabase
+          .from('dynamic_content')
+          .insert(record);
+        
+        if (error) {
+          console.error(`Error inserting record ${record.key}:`, error);
+          errorCount++;
+        } else {
+          console.log(`Successfully inserted record ${record.key}`);
+          successCount++;
+        }
+      }
+      
+      console.log(`Insertion complete. Success: ${successCount}, Errors: ${errorCount}`);
+      
+      if (errorCount > 0 && successCount === 0) {
+        throw new Error(`Failed to save any data. Please try again.`);
       }
       
       // Store the project ID in localStorage for potential future use
-      if (result.projectId) {
-        localStorage.setItem('selfcastProjectId', result.projectId);
-        setProjectId(result.projectId);
-        console.log('Project ID saved:', result.projectId);
-      }
+      localStorage.setItem('selfcastProjectId', newProjectId);
+      setProjectId(newProjectId);
+      console.log('Project ID saved:', newProjectId);
       
       // Show success message
       setFormSubmitted(true);
@@ -112,9 +415,72 @@ export default function OnboardingForm() {
 
   return (
     <>
+      {/* Supabase Script */}
+      <Script 
+        src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" 
+        strategy="afterInteractive"
+        onLoad={() => {
+          console.log('Supabase script loaded successfully');
+          // Initialize Supabase immediately after script loads
+          if (typeof window !== 'undefined' && window.supabase) {
+            const SUPABASE_URL = 'https://aqicztygjpmunfljjuto.supabase.co';
+            const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFxaWN6dHlnanBtdW5mbGpqdXRvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDM3MDU1ODIsImV4cCI6MjA1OTI4MTU4Mn0.5e2hvTckSSbTFLBjQiccrvjoBd6QQDX0X4tccFOc1rs';
+            const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+            setSupabase(supabaseClient);
+            console.log('Supabase client initialized in onLoad callback');
+          }
+        }}
+        onError={() => console.error('Failed to load Supabase script')}
+      />
+      
       <div className={styles.welcomeCard}>
         <h1>Welcome to Self Cast Studios!</h1>
         <p>Thank you for subscribing to our Core Visibility Package. You're in the right place to transform your personal brand with authentic storytelling.</p>
+        
+        {/* Debug Button - Only visible in development */}
+        {process.env.NODE_ENV === 'development' && (
+          <div style={{ marginTop: '20px', padding: '10px', backgroundColor: '#f0f0f0', borderRadius: '5px' }}>
+            <h3>Debug Tools</h3>
+            <button 
+              onClick={() => {
+                if (supabase) {
+                  const testProjectId = 'manual-test-' + Date.now();
+                  console.log('Manual test: inserting record with ID:', testProjectId);
+                  
+                  supabase
+                    .from('dynamic_content')
+                    .insert({
+                      project_id: testProjectId,
+                      key: 'manual_test_key',
+                      value: 'Manual test value at ' + new Date().toISOString()
+                    })
+                    .then(({ data, error }) => {
+                      if (error) {
+                        console.error('Manual test insert failed:', error);
+                        alert('Test failed: ' + error.message);
+                      } else {
+                        console.log('Manual test insert successful:', data);
+                        alert('Test successful! Project ID: ' + testProjectId);
+                      }
+                    });
+                } else {
+                  console.error('Supabase client not initialized');
+                  alert('Supabase client not initialized. Check console for details.');
+                }
+              }}
+              style={{ 
+                padding: '8px 16px', 
+                backgroundColor: '#4a90e2', 
+                color: 'white', 
+                border: 'none', 
+                borderRadius: '4px',
+                cursor: 'pointer'
+              }}
+            >
+              Test Supabase Connection
+            </button>
+          </div>
+        )}
       </div>
 
       <div className={styles.packageDetails}>

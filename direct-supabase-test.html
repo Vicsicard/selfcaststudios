@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Direct Supabase Test</title>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+            background: #f5f5f5;
+        }
+        .card {
+            background: white;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #4a90e2;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-right: 10px;
+        }
+        .log {
+            background: #1e1e1e;
+            color: #ddd;
+            padding: 1rem;
+            border-radius: 4px;
+            font-family: monospace;
+            max-height: 300px;
+            overflow-y: auto;
+            margin-top: 1rem;
+        }
+        .success { color: #7f7; }
+        .error { color: #f77; }
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>Direct Supabase Test</h1>
+        <p>This page tests direct connection to Supabase from the browser.</p>
+        
+        <div>
+            <button id="test-connection">Test Connection</button>
+            <button id="test-insert">Test Insert</button>
+            <button id="clear-log">Clear Log</button>
+        </div>
+        
+        <div id="log" class="log">Initializing...</div>
+    </div>
+    
+    <div class="card">
+        <h2>Simple Onboarding Form</h2>
+        <form id="simple-form">
+            <div class="form-group">
+                <label for="fullName">Full Name:</label>
+                <input type="text" id="fullName" name="fullName" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="bio">Bio:</label>
+                <textarea id="bio" name="bio" rows="4"></textarea>
+            </div>
+            
+            <button type="submit">Submit Form</button>
+        </form>
+    </div>
+    
+    <!-- Load Supabase from CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    
+    <script>
+        // DOM Elements
+        const logElement = document.getElementById('log');
+        const testConnectionBtn = document.getElementById('test-connection');
+        const testInsertBtn = document.getElementById('test-insert');
+        const clearLogBtn = document.getElementById('clear-log');
+        const simpleForm = document.getElementById('simple-form');
+        
+        // Supabase Configuration
+        const SUPABASE_URL = 'https://aqicztygjpmunfljjuto.supabase.co';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFxaWN6dHlnanBtdW5mbGpqdXRvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDM3MDU1ODIsImV4cCI6MjA1OTI4MTU4Mn0.5e2hvTckSSbTFLBjQiccrvjoBd6QQDX0X4tccFOc1rs';
+        
+        // Initialize Supabase
+        let supabase;
+        
+        // Logging function
+        function log(message, type = 'info') {
+            const entry = document.createElement('div');
+            entry.textContent = `[${new Date().toLocaleTimeString()}] ${message}`;
+            if (type === 'error') entry.className = 'error';
+            if (type === 'success') entry.className = 'success';
+            logElement.appendChild(entry);
+            logElement.scrollTop = logElement.scrollHeight;
+        }
+        
+        // Initialize Supabase client
+        function initSupabase() {
+            try {
+                log('Initializing Supabase client...');
+                
+                if (window.supabase) {
+                    supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+                    log('Supabase client initialized successfully', 'success');
+                    return true;
+                } else {
+                    log('Supabase library not loaded or not available', 'error');
+                    return false;
+                }
+            } catch (error) {
+                log(`Error initializing Supabase: ${error.message}`, 'error');
+                return false;
+            }
+        }
+        
+        // Generate a project ID
+        function generateProjectId(fullName) {
+            const nameParts = fullName.toLowerCase().trim().split(' ');
+            const firstName = nameParts[0];
+            const lastName = nameParts.length > 1 ? nameParts[nameParts.length - 1] : 'unknown';
+            
+            const now = new Date();
+            const year = now.getFullYear();
+            const month = String(now.getMonth() + 1).padStart(2, '0');
+            const day = String(now.getDate()).padStart(2, '0');
+            const hour = String(now.getHours()).padStart(2, '0');
+            const minute = String(now.getMinutes()).padStart(2, '0');
+            
+            return `${lastName}-${firstName}-${year}${month}${day}-${hour}${minute}`;
+        }
+        
+        // Test connection to Supabase
+        async function testConnection() {
+            try {
+                if (!supabase && !initSupabase()) return;
+                
+                log('Testing connection to Supabase...');
+                
+                const { data, error } = await supabase
+                    .from('dynamic_content')
+                    .select('project_id')
+                    .limit(5);
+                
+                if (error) throw error;
+                
+                log(`Connection successful! Found ${data.length} records:`, 'success');
+                data.forEach(item => {
+                    log(`- Project ID: ${item.project_id}`);
+                });
+            } catch (error) {
+                log(`Connection test failed: ${error.message}`, 'error');
+            }
+        }
+        
+        // Test inserting a record
+        async function testInsert() {
+            try {
+                if (!supabase && !initSupabase()) return;
+                
+                log('Testing record insertion...');
+                
+                const testProjectId = 'direct-test-' + Date.now();
+                
+                const { data, error } = await supabase
+                    .from('dynamic_content')
+                    .insert({
+                        project_id: testProjectId,
+                        key: 'test_key',
+                        value: 'Test value from direct test at ' + new Date().toISOString()
+                    });
+                
+                if (error) throw error;
+                
+                log(`Record inserted successfully with project ID: ${testProjectId}`, 'success');
+                
+                // Verify the record was inserted
+                const { data: verifyData, error: verifyError } = await supabase
+                    .from('dynamic_content')
+                    .select('*')
+                    .eq('project_id', testProjectId)
+                    .eq('key', 'test_key');
+                
+                if (verifyError) throw verifyError;
+                
+                if (verifyData && verifyData.length > 0) {
+                    log(`Verified record exists: ${JSON.stringify(verifyData[0])}`, 'success');
+                } else {
+                    log('Record was inserted but could not be verified', 'error');
+                }
+            } catch (error) {
+                log(`Insert test failed: ${error.message}`, 'error');
+            }
+        }
+        
+        // Handle form submission
+        async function handleFormSubmit(event) {
+            event.preventDefault();
+            
+            try {
+                if (!supabase && !initSupabase()) return;
+                
+                log('Processing form submission...');
+                
+                // Get form data
+                const formData = new FormData(simpleForm);
+                const formValues = Object.fromEntries(formData.entries());
+                
+                log(`Form data: ${JSON.stringify(formValues)}`);
+                
+                // Validate
+                if (!formValues.fullName) {
+                    throw new Error('Full name is required');
+                }
+                
+                // Generate project ID
+                const projectId = generateProjectId(formValues.fullName);
+                log(`Generated project ID: ${projectId}`);
+                
+                // Create records
+                const records = [
+                    {
+                        project_id: projectId,
+                        key: 'rendered_title',
+                        value: formValues.fullName
+                    },
+                    {
+                        project_id: projectId,
+                        key: 'email_address',
+                        value: formValues.email
+                    },
+                    {
+                        project_id: projectId,
+                        key: 'rendered_bio_html',
+                        value: formValues.bio || 'No bio provided'
+                    },
+                    {
+                        project_id: projectId,
+                        key: 'onboarding_created_at',
+                        value: new Date().toISOString()
+                    }
+                ];
+                
+                // Insert records
+                log(`Inserting ${records.length} records...`);
+                
+                let successCount = 0;
+                
+                for (const record of records) {
+                    log(`Inserting: ${record.key}`);
+                    
+                    const { data, error } = await supabase
+                        .from('dynamic_content')
+                        .insert(record);
+                    
+                    if (error) {
+                        log(`Error inserting ${record.key}: ${error.message}`, 'error');
+                    } else {
+                        log(`Successfully inserted ${record.key}`, 'success');
+                        successCount++;
+                    }
+                }
+                
+                log(`Form submission complete. Inserted ${successCount} of ${records.length} records.`, 'success');
+                
+                // Reset form on success
+                if (successCount > 0) {
+                    simpleForm.reset();
+                }
+            } catch (error) {
+                log(`Form submission failed: ${error.message}`, 'error');
+            }
+        }
+        
+        // Event Listeners
+        document.addEventListener('DOMContentLoaded', initSupabase);
+        testConnectionBtn.addEventListener('click', testConnection);
+        testInsertBtn.addEventListener('click', testInsert);
+        clearLogBtn.addEventListener('click', () => {
+            logElement.innerHTML = 'Log cleared.';
+        });
+        simpleForm.addEventListener('submit', handleFormSubmit);
+    </script>
+</body>
+</html>

@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Supabase Form</title>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+            background: #f5f5f5;
+        }
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+            color: #333;
+        }
+        input[type="text"],
+        input[type="email"],
+        textarea {
+            width: 100%;
+            padding: 0.5rem;
+            margin-bottom: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+        textarea {
+            min-height: 100px;
+            font-family: inherit;
+        }
+        .section {
+            background: white;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .section h2 {
+            margin-top: 0;
+            color: #333;
+            border-bottom: 2px solid #f0f0f0;
+            padding-bottom: 0.5rem;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #4a90e2;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #3a7bc8;
+        }
+        .color-option {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            margin-right: 10px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+        .color-option.selected {
+            border-color: #333;
+        }
+        .status {
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border-radius: 4px;
+        }
+        .status.success {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        .status.error {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+        .log-container {
+            background: #1e1e1e;
+            color: #ddd;
+            padding: 1rem;
+            border-radius: 4px;
+            font-family: monospace;
+            max-height: 200px;
+            overflow-y: auto;
+            margin-bottom: 1rem;
+        }
+        .log-entry {
+            margin-bottom: 0.5rem;
+            line-height: 1.4;
+        }
+        .log-entry.error {
+            color: #f77;
+        }
+        .log-entry.success {
+            color: #7f7;
+        }
+    </style>
+</head>
+<body>
+    <div class="section">
+        <h1>Test Supabase Form</h1>
+        <p>This form will test the connection to Supabase and insert data into the dynamic_content table.</p>
+        
+        <div id="status" class="status" style="display: none;"></div>
+        
+        <div class="log-container" id="log-container">
+            <div class="log-entry">Initializing...</div>
+        </div>
+    </div>
+    
+    <div class="section">
+        <h2>Test Connection</h2>
+        <p>Click the button below to test the connection to Supabase.</p>
+        <button id="test-connection-btn">Test Connection</button>
+    </div>
+    
+    <div class="section">
+        <h2>Test Insert</h2>
+        <p>Click the button below to insert a test record into the dynamic_content table.</p>
+        <button id="test-insert-btn">Insert Test Record</button>
+    </div>
+    
+    <div class="section">
+        <h2>Simple Onboarding Form</h2>
+        <form id="onboarding-form">
+            <div class="form-group">
+                <label for="fullName">Full Name</label>
+                <input type="text" id="fullName" name="fullName" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="profession">Profession</label>
+                <input type="text" id="profession" name="profession" required>
+            </div>
+            
+            <div class="form-group">
+                <label>Color Preference</label>
+                <div id="color-options">
+                    <div class="color-option" style="background-color: #4a6fa5;" data-color="#4a6fa5"></div>
+                    <div class="color-option" style="background-color: #6c8eb4;" data-color="#6c8eb4"></div>
+                    <div class="color-option" style="background-color: #17a2b8;" data-color="#17a2b8"></div>
+                    <div class="color-option" style="background-color: #28a745;" data-color="#28a745"></div>
+                    <div class="color-option" style="background-color: #dc3545;" data-color="#dc3545"></div>
+                </div>
+                <input type="hidden" id="colorPreference" name="colorPreference">
+            </div>
+            
+            <div class="form-group">
+                <label for="bio">Bio</label>
+                <textarea id="bio" name="bio"></textarea>
+            </div>
+            
+            <button type="submit">Submit Form</button>
+        </form>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script>
+        // Supabase Configuration
+        const SUPABASE_URL = 'https://aqicztygjpmunfljjuto.supabase.co';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFxaWN6dHlnanBtdW5mbGpqdXRvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDM3MDU1ODIsImV4cCI6MjA1OTI4MTU4Mn0.5e2hvTckSSbTFLBjQiccrvjoBd6QQDX0X4tccFOc1rs';
+        
+        // DOM Elements
+        const statusElement = document.getElementById('status');
+        const logContainer = document.getElementById('log-container');
+        const testConnectionBtn = document.getElementById('test-connection-btn');
+        const testInsertBtn = document.getElementById('test-insert-btn');
+        const onboardingForm = document.getElementById('onboarding-form');
+        const colorOptions = document.querySelectorAll('.color-option');
+        const colorPreferenceInput = document.getElementById('colorPreference');
+        
+        // Initialize Supabase client
+        let supabase;
+        
+        function log(message, type = 'info') {
+            const logEntry = document.createElement('div');
+            logEntry.className = `log-entry ${type}`;
+            logEntry.textContent = message;
+            logContainer.appendChild(logEntry);
+            logContainer.scrollTop = logContainer.scrollHeight;
+        }
+        
+        function showStatus(message, type) {
+            statusElement.textContent = message;
+            statusElement.className = `status ${type}`;
+            statusElement.style.display = 'block';
+        }
+        
+        function hideStatus() {
+            statusElement.style.display = 'none';
+        }
+        
+        // Generate a unique project ID based on the client's name and current timestamp
+        function generateProjectId(fullName) {
+            const nameParts = fullName.toLowerCase().trim().split(' ');
+            const firstName = nameParts[0];
+            const lastName = nameParts.length > 1 ? nameParts[nameParts.length - 1] : 'unknown';
+            
+            const now = new Date();
+            const year = now.getFullYear();
+            const month = String(now.getMonth() + 1).padStart(2, '0');
+            const day = String(now.getDate()).padStart(2, '0');
+            const hour = String(now.getHours()).padStart(2, '0');
+            const minute = String(now.getMinutes()).padStart(2, '0');
+            
+            return `${lastName}-${firstName}-${year}${month}${day}-${hour}${minute}`;
+        }
+        
+        // Map form fields to content editor fields
+        function mapFormFieldsToContentEditor(formData, projectId) {
+            // Create an array to hold all the records
+            const records = [];
+            
+            // Current year for footer and other date-related fields
+            const currentYear = new Date().getFullYear();
+            
+            // Personal Information
+            if (formData.fullName) {
+                records.push({
+                    project_id: projectId,
+                    key: 'rendered_title',
+                    value: formData.fullName
+                });
+                
+                records.push({
+                    project_id: projectId,
+                    key: 'client_name',
+                    value: formData.fullName
+                });
+            }
+            
+            if (formData.email) {
+                records.push({
+                    project_id: projectId,
+                    key: 'email_address',
+                    value: formData.email
+                });
+            }
+            
+            if (formData.profession) {
+                records.push({
+                    project_id: projectId,
+                    key: 'rendered_subtitle',
+                    value: formData.profession
+                });
+            }
+            
+            // Bio
+            if (formData.bio) {
+                records.push({
+                    project_id: projectId,
+                    key: 'rendered_bio_html',
+                    value: formData.bio
+                });
+            }
+            
+            // Visual Branding
+            if (formData.colorPreference) {
+                records.push({
+                    project_id: projectId,
+                    key: 'primary_color',
+                    value: formData.colorPreference
+                });
+                
+                records.push({
+                    project_id: projectId,
+                    key: 'secondary_color',
+                    value: formData.colorPreference
+                });
+                
+                records.push({
+                    project_id: projectId,
+                    key: 'accent_color',
+                    value: formData.colorPreference
+                });
+            }
+            
+            // Standard fields
+            records.push({
+                project_id: projectId,
+                key: 'current_year',
+                value: currentYear.toString()
+            });
+            
+            records.push({
+                project_id: projectId,
+                key: 'rendered_footer_slogan',
+                value: ` ${currentYear} ${formData.fullName || 'Client'} | All Rights Reserved`
+            });
+            
+            // Add metadata about when this project was created via onboarding
+            records.push({
+                project_id: projectId,
+                key: 'onboarding_created_at',
+                value: new Date().toISOString()
+            });
+            
+            return records;
+        }
+        
+        // Initialize Supabase when the page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            try {
+                log('Initializing Supabase client...');
+                
+                if (typeof supabase === 'undefined') {
+                    if (window.supabase) {
+                        supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+                        log('Supabase client initialized successfully', 'success');
+                    } else {
+                        log('Supabase library not loaded', 'error');
+                    }
+                }
+            } catch (error) {
+                log(`Error initializing Supabase: ${error.message}`, 'error');
+            }
+        });
+        
+        // Test connection to Supabase
+        testConnectionBtn.addEventListener('click', async () => {
+            try {
+                hideStatus();
+                log('Testing connection to Supabase...');
+                
+                const { data, error } = await supabase
+                    .from('dynamic_content')
+                    .select('project_id')
+                    .limit(1);
+                
+                if (error) {
+                    throw error;
+                }
+                
+                log(`Connection successful! Found ${data.length} records.`, 'success');
+                showStatus('Connection to Supabase successful!', 'success');
+            } catch (error) {
+                log(`Connection test failed: ${error.message}`, 'error');
+                showStatus(`Connection failed: ${error.message}`, 'error');
+            }
+        });
+        
+        // Test inserting a record into Supabase
+        testInsertBtn.addEventListener('click', async () => {
+            try {
+                hideStatus();
+                log('Inserting test record into Supabase...');
+                
+                const testProjectId = 'test-' + Date.now();
+                
+                const { data, error } = await supabase
+                    .from('dynamic_content')
+                    .insert({
+                        project_id: testProjectId,
+                        key: 'test_key',
+                        value: 'Test value from form at ' + new Date().toISOString()
+                    });
+                
+                if (error) {
+                    throw error;
+                }
+                
+                log(`Test record inserted successfully with project ID: ${testProjectId}`, 'success');
+                showStatus('Test record inserted successfully!', 'success');
+            } catch (error) {
+                log(`Insert test failed: ${error.message}`, 'error');
+                showStatus(`Insert failed: ${error.message}`, 'error');
+            }
+        });
+        
+        // Handle color selection
+        colorOptions.forEach(option => {
+            option.addEventListener('click', () => {
+                // Remove selected class from all options
+                colorOptions.forEach(opt => opt.classList.remove('selected'));
+                
+                // Add selected class to clicked option
+                option.classList.add('selected');
+                
+                // Set the color value in the hidden input
+                const color = option.getAttribute('data-color');
+                colorPreferenceInput.value = color;
+                
+                log(`Selected color: ${color}`);
+            });
+        });
+        
+        // Handle form submission
+        onboardingForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            try {
+                hideStatus();
+                log('Processing form submission...');
+                
+                // Get form data
+                const formData = new FormData(onboardingForm);
+                const formDataObject = {};
+                
+                formData.forEach((value, key) => {
+                    formDataObject[key] = value;
+                    log(`Form field: ${key} = ${value}`);
+                });
+                
+                // Validate required fields
+                if (!formDataObject.fullName) {
+                    throw new Error('Full name is required');
+                }
+                
+                // Generate project ID
+                const projectId = generateProjectId(formDataObject.fullName);
+                log(`Generated project ID: ${projectId}`);
+                
+                // Map form fields to content editor fields
+                const contentRecords = mapFormFieldsToContentEditor(formDataObject, projectId);
+                log(`Mapped ${contentRecords.length} content records`);
+                
+                // Insert data into Supabase
+                log('Inserting records into Supabase...');
+                
+                let successCount = 0;
+                let errorCount = 0;
+                
+                for (const record of contentRecords) {
+                    log(`Inserting record: ${record.key} for project ${projectId}`);
+                    
+                    const { data, error } = await supabase
+                        .from('dynamic_content')
+                        .insert(record);
+                    
+                    if (error) {
+                        log(`Error inserting record ${record.key}: ${error.message}`, 'error');
+                        errorCount++;
+                    } else {
+                        log(`Successfully inserted record ${record.key}`, 'success');
+                        successCount++;
+                    }
+                }
+                
+                log(`Insertion complete. Success: ${successCount}, Errors: ${errorCount}`);
+                
+                if (errorCount > 0 && successCount === 0) {
+                    throw new Error(`Failed to save any data. Please try again.`);
+                }
+                
+                // Show success message
+                showStatus(`Form submitted successfully! Your project ID is: ${projectId}`, 'success');
+                
+                // Reset form
+                onboardingForm.reset();
+                colorOptions.forEach(opt => opt.classList.remove('selected'));
+                
+            } catch (error) {
+                log(`Error submitting form: ${error.message}`, 'error');
+                showStatus(`Error: ${error.message}`, 'error');
+            }
+        });
+    </script>
+</body>
+</html>
