@@ -27,50 +27,58 @@ export default function OnboardingForm() {
     // Get form data
     const formElement = e.target as HTMLFormElement;
     const formData = new FormData(formElement);
-
+    
     // Convert FormData to a regular object
     const formDataObject: Record<string, any> = {};
     formData.forEach((value, key) => {
       formDataObject[key] = value;
       console.log(`Form field: ${key} = ${value}`); // Log each form field
     });
-
+    
     // Add the selected color if it exists
     if (selectedColor) {
       formDataObject.colorPreference = selectedColor;
       console.log(`Selected color: ${selectedColor}`);
     }
-
+    
     try {
       console.log('Submitting form data to API...', formDataObject);
-
-      // Send data to our API endpoint
-      const response = await fetch('/api/onboarding', {
+      
+      // Ensure we have the required fields
+      if (!formDataObject.fullName) {
+        throw new Error('Full name is required');
+      }
+      
+      // Send data to our API endpoint with the absolute URL
+      const apiUrl = window.location.origin + '/api/onboarding';
+      console.log('Submitting to API URL:', apiUrl);
+      
+      const response = await fetch(apiUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(formDataObject),
       });
-
+      
       console.log('API response status:', response.status);
       const result = await response.json();
       console.log('API response data:', result);
-
+      
       if (!response.ok) {
         throw new Error(result.error || 'Failed to submit form');
       }
-
+      
       // Store the project ID in localStorage for potential future use
       if (result.projectId) {
         localStorage.setItem('selfcastProjectId', result.projectId);
         setProjectId(result.projectId);
         console.log('Project ID saved:', result.projectId);
       }
-
+      
       // Show success message
       setFormSubmitted(true);
-
+      
       // Scroll to top to show success message
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } catch (error) {
