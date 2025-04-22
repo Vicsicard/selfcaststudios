@@ -552,3 +552,32 @@
 .successMessageStatic a:hover {
   text-decoration: underline;
 }
+
+/* Submit button styling */
+.submitButton {
+  background-color: #FF8C00;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 12px 24px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 2rem auto;
+  min-width: 250px;
+}
+
+.submitButton:hover {
+  background-color: #E07800;
+  transform: translateY(-2px);
+}
+
+.submitButton:disabled {
+  background-color: #6c757d;
+  cursor: not-allowed;
+  transform: none;
+}
