@@ -4,7 +4,7 @@ import React from 'react'
 import Script from 'next/script'
 import { Playfair_Display } from 'next/font/google'
 import styles from './styles.module.css'
-import ReliableOnboardingForm from './ReliableOnboardingForm'
+import DirectSupabaseForm from './DirectSupabaseForm'
 
 const playfair = Playfair_Display({ 
   subsets: ['latin'],
@@ -27,7 +27,7 @@ export default function OnboardingPage() {
         <div className="container mx-auto px-4 py-8">
           <h1 className="text-3xl font-bold text-center mb-8">Client Onboarding</h1>
           <div className="max-w-4xl mx-auto bg-white p-6 rounded-lg shadow-md">
-            <ReliableOnboardingForm />
+            <DirectSupabaseForm />
           </div>
         </div>
       </div>
