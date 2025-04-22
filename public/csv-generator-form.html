@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SelfCast Studios - Onboarding Form</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #4a6fa5;
+            --secondary-color: #1E293B;
+            --accent-color: #C8A456;
+            --text-color: #333;
+            --bg-color: #f5f5f5;
+            --card-bg: #fff;
+            --success-color: #34D399;
+            --error-color: #EF4444;
+        }
+        
+        body {
+            font-family: 'Raleway', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+        
+        .card {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+            color: var(--secondary-color);
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        h2 {
+            font-size: 1.8rem;
+            margin-top: 0;
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 0.5rem;
+        }
+        
+        h3 {
+            font-size: 1.4rem;
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        input, select, textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-family: inherit;
+            font-size: 1rem;
+        }
+        
+        textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+        
+        button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 0.75rem 1.5rem;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        
+        button:hover {
+            background-color: #3a5a8c;
+        }
+        
+        button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+        
+        .color-options {
+            display: flex;
+            gap: 1rem;
+            margin-top: 0.5rem;
+        }
+        
+        .color-option {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+            border: 3px solid transparent;
+        }
+        
+        .color-option:hover {
+            transform: scale(1.1);
+        }
+        
+        .color-option.selected {
+            border-color: #333;
+            transform: scale(1.1);
+        }
+        
+        .blue { background-color: #4a6fa5; }
+        .navy { background-color: #1E293B; }
+        .gold { background-color: #C8A456; }
+        .green { background-color: #34D399; }
+        .red { background-color: #EF4444; }
+        
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        
+        .overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .thank-you-popup {
+            background-color: white;
+            border-radius: 8px;
+            padding: 2rem;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            transform: translateY(-20px);
+            transition: transform 0.3s ease;
+        }
+        
+        .overlay.active .thank-you-popup {
+            transform: translateY(0);
+        }
+        
+        .thank-you-popup h2 {
+            color: var(--primary-color);
+            margin-top: 0;
+            border-bottom: none;
+        }
+        
+        .project-id-container {
+            background-color: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 4px;
+            padding: 1rem;
+            margin: 1.5rem 0;
+        }
+        
+        .project-id-note {
+            font-size: 0.9rem;
+            color: #6c757d;
+            margin-top: 0.5rem;
+        }
+        
+        .download-button {
+            background-color: var(--success-color);
+            margin-top: 1rem;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .card {
+                padding: 1.5rem;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .color-options {
+                flex-wrap: wrap;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to Self Cast Studios!</h1>
+        
+        <div class="card">
+            <p>Thank you for subscribing to our Core Visibility Package. You're in the right place to transform your personal brand with authentic storytelling.</p>
+            
+            <form id="onboarding-form">
+                <div class="form-section">
+                    <h2>Schedule Your Storytelling Workshop</h2>
+                    <p>Select a date and time that works for you. The workshop will last 60 minutes.</p>
+                    
+                    <div class="calendly-inline-widget" data-url="https://calendly.com/vicsicard/30min" style="min-width: 320px; height: 700px;"></div>
+                    <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+                    
+                    <div class="form-group" style="margin-top: 1rem; padding: 1rem; background-color: #f0f8ff; border-radius: 4px;">
+                        <p><strong>Note:</strong> Below you'll find our workshop questionnaire. This is just a preview of the types of questions we'll explore during our conversation. There's no need to fill these out in detail now—this is not a test! These questions are meant to help you start thinking about your personal brand story so our workshop can be relaxed, enjoyable, and productive.</p>
+                    </div>
+                </div>
+                
+                <div class="form-section">
+                    <h2>Personal Information</h2>
+                    
+                    <div class="form-group">
+                        <label for="fullName">Full Name</label>
+                        <input type="text" id="fullName" name="fullName" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" name="phone" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="title">Professional Title</label>
+                        <input type="text" id="title" name="title" placeholder="e.g., Executive Coach, Marketing Consultant">
+                    </div>
+                </div>
+                
+                <div class="form-section">
+                    <h2>Social Media Profiles</h2>
+                    <p>Please share your social media profiles (optional):</p>
+                    
+                    <div class="form-group">
+                        <label for="linkedin">LinkedIn Profile</label>
+                        <input type="url" id="linkedin" name="linkedin" placeholder="https://linkedin.com/in/yourprofile">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="instagram">Instagram Profile</label>
+                        <input type="url" id="instagram" name="instagram" placeholder="https://instagram.com/yourusername">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="facebook">Facebook Profile</label>
+                        <input type="url" id="facebook" name="facebook" placeholder="https://facebook.com/yourusername">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="twitter">Twitter/X Profile</label>
+                        <input type="url" id="twitter" name="twitter" placeholder="https://twitter.com/yourusername">
+                    </div>
+                </div>
+                
+                <div class="form-section">
+                    <h2>Brand Colors</h2>
+                    <p>Select a primary color for your personal brand:</p>
+                    
+                    <div class="color-options">
+                        <div class="color-option blue selected" data-color="#4a6fa5" data-style="standard-professional"></div>
+                        <div class="color-option navy" data-color="#1E293B" data-style="dark-professional"></div>
+                        <div class="color-option gold" data-color="#C8A456" data-style="light-professional"></div>
+                        <div class="color-option green" data-color="#34D399" data-style="green-professional"></div>
+                        <div class="color-option red" data-color="#EF4444" data-style="red-professional"></div>
+                    </div>
+                    <input type="hidden" id="colorPreference" name="colorPreference" value="#4a6fa5">
+                    <input type="hidden" id="stylePackage" name="stylePackage" value="standard-professional">
+                </div>
+                
+                <div class="form-section">
+                    <h2>Workshop Questions</h2>
+                    <p>These questions will help guide our workshop conversation:</p>
+                    
+                    <div class="form-group">
+                        <label for="successDefinition">How do you define success in your work?</label>
+                        <textarea id="successDefinition" name="successDefinition"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="contentGoals">What are your goals for your content and personal brand?</label>
+                        <textarea id="contentGoals" name="contentGoals"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="challenges">What challenges are you facing in your professional life?</label>
+                        <textarea id="challenges" name="challenges"></textarea>
+                    </div>
+                </div>
+                
+                <div style="text-align: center; margin-top: 2rem;">
+                    <button type="submit" id="submit-button">Submit & Confirm Workshop</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <!-- Thank You Popup -->
+    <div id="thank-you-overlay" class="overlay">
+        <div class="thank-you-popup">
+            <h2>Thank You!</h2>
+            <p>Your information has been submitted successfully. We're excited to start working on your personal brand!</p>
+            
+            <div id="project-id-container" class="project-id-container">
+                <p><strong>Your Project ID:</strong> <span id="project-id"></span></p>
+                <p class="project-id-note">Please save this ID for your records. It will be used to identify your project in our system.</p>
+            </div>
+            
+            <p>You should receive a confirmation email shortly with details about your scheduled workshop and next steps.</p>
+            <p>Your personal brand website is being set up and will be available soon. We'll notify you when it's ready for your review.</p>
+            
+            <button id="download-csv" class="download-button">Download CSV File</button>
+            
+            <p style="margin-top: 1rem;">If you have any questions in the meantime, please contact us at <a href="mailto:hello@selfcaststudios.com">hello@selfcaststudios.com</a>.</p>
+        </div>
+    </div>
+    
+    <script>
+        // DOM Elements
+        const form = document.getElementById('onboarding-form');
+        const submitButton = document.getElementById('submit-button');
+        const thankYouOverlay = document.getElementById('thank-you-overlay');
+        const projectIdElement = document.getElementById('project-id');
+        const colorOptions = document.querySelectorAll('.color-option');
+        const colorPreferenceInput = document.getElementById('colorPreference');
+        const stylePackageInput = document.getElementById('stylePackage');
+        const downloadCsvButton = document.getElementById('download-csv');
+        
+        // Store form data and project ID
+        let formData = {};
+        let projectId = '';
+        
+        // Generate a project ID based on name and timestamp
+        function generateProjectId(fullName) {
+            const nameParts = fullName.toLowerCase().trim().split(' ');
+            const firstName = nameParts[0];
+            const lastName = nameParts.length > 1 ? nameParts[nameParts.length - 1] : 'unknown';
+            
+            const now = new Date();
+            const year = now.getFullYear();
+            const month = String(now.getMonth() + 1).padStart(2, '0');
+            const day = String(now.getDate()).padStart(2, '0');
+            const hour = String(now.getHours()).padStart(2, '0');
+            const minute = String(now.getMinutes()).padStart(2, '0');
+            
+            return `${lastName}-${firstName}-${year}${month}${day}-${hour}${minute}`;
+        }
+        
+        // Map form fields to content editor fields
+        function mapFormFieldsToContentEditor(formData, projectId) {
+            const records = [];
+            const currentYear = new Date().getFullYear();
+            
+            // Basic information
+            if (formData.fullName) {
+                records.push({
+                    project_id: projectId,
+                    key: 'rendered_title',
+                    value: formData.fullName
+                });
+            }
+            
+            if (formData.title) {
+                records.push({
+                    project_id: projectId,
+                    key: 'rendered_subtitle',
+                    value: formData.title
+                });
+            }
+            
+            if (formData.email) {
+                records.push({
+                    project_id: projectId,
+                    key: 'email_address',
+                    value: formData.email
+                });
+            }
+            
+            // Social media
+            if (formData.linkedin) {
+                records.push({
+                    project_id: projectId,
+                    key: 'linkedin_url',
+                    value: formData.linkedin
+                });
+            }
+            
+            if (formData.instagram) {
+                records.push({
+                    project_id: projectId,
+                    key: 'instagram_url',
+                    value: formData.instagram
+                });
+            }
+            
+            if (formData.facebook) {
+                records.push({
+                    project_id: projectId,
+                    key: 'facebook_url',
+                    value: formData.facebook
+                });
+            }
+            
+            if (formData.twitter) {
+                records.push({
+                    project_id: projectId,
+                    key: 'twitter_url',
+                    value: formData.twitter
+                });
+            }
+            
+            // Style package
+            if (formData.stylePackage) {
+                records.push({
+                    project_id: projectId,
+                    key: 'style_package',
+                    value: formData.stylePackage
+                });
+            }
+            
+            // Color preference
+            if (formData.colorPreference) {
+                records.push({
+                    project_id: projectId,
+                    key: 'primary_color',
+                    value: formData.colorPreference
+                });
+                
+                // Add accent color as well
+                records.push({
+                    project_id: projectId,
+                    key: 'accent_color',
+                    value: formData.colorPreference
+                });
+            }
+            
+            // Additional content editor fields
+            if (formData.successDefinition) {
+                records.push({
+                    project_id: projectId,
+                    key: 'rendered_bio_html_card_1',
+                    value: formData.successDefinition
+                });
+            }
+            
+            if (formData.contentGoals) {
+                records.push({
+                    project_id: projectId,
+                    key: 'rendered_bio_html_card_2',
+                    value: formData.contentGoals
+                });
+            }
+            
+            if (formData.challenges) {
+                records.push({
+                    project_id: projectId,
+                    key: 'rendered_bio_html_card_3',
+                    value: formData.challenges
+                });
+            }
+            
+            // Add standard fields that the content editor expects
+            records.push({
+                project_id: projectId,
+                key: 'current_year',
+                value: currentYear.toString()
+            });
+            
+            // Add a default footer slogan
+            records.push({
+                project_id: projectId,
+                key: 'rendered_footer_slogan',
+                value: `© ${currentYear} ${formData.fullName || 'Client'} | All Rights Reserved`
+            });
+            
+            // Add default quotes (these appear in many templates)
+            records.push({
+                project_id: projectId,
+                key: 'quote_1',
+                value: '"Success is not final, failure is not fatal: It is the courage to continue that counts."'
+            });
+            
+            records.push({
+                project_id: projectId,
+                key: 'quote_2',
+                value: '"The future belongs to those who believe in the beauty of their dreams."'
+            });
+            
+            records.push({
+                project_id: projectId,
+                key: 'quote_3',
+                value: '"The best way to predict the future is to create it."'
+            });
+            
+            // Custom onboarding fields
+            if (formData.phone) {
+                records.push({
+                    project_id: projectId,
+                    key: 'onboarding_phone',
+                    value: formData.phone
+                });
+            }
+            
+            // Add metadata about when this project was created via onboarding
+            records.push({
+                project_id: projectId,
+                key: 'onboarding_created_at',
+                value: new Date().toISOString()
+            });
+            
+            return records;
+        }
+        
+        // Convert records to CSV
+        function convertToCSV(records) {
+            // CSV header
+            let csv = 'project_id,key,value\n';
+            
+            // Add each record as a row
+            records.forEach(record => {
+                // Escape values that contain commas by wrapping in quotes
+                const value = record.value.includes(',') ? `"${record.value}"` : record.value;
+                csv += `${record.project_id},${record.key},${value}\n`;
+            });
+            
+            return csv;
+        }
+        
+        // Download CSV file
+        function downloadCSV(csv, filename) {
+            const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+            const link = document.createElement('a');
+            const url = URL.createObjectURL(blob);
+            
+            link.setAttribute('href', url);
+            link.setAttribute('download', filename);
+            link.style.visibility = 'hidden';
+            
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+        
+        // Show thank you popup
+        function showThankYouPopup(projectId) {
+            projectIdElement.textContent = projectId;
+            thankYouOverlay.classList.add('active');
+        }
+        
+        // Handle color selection
+        colorOptions.forEach(option => {
+            option.addEventListener('click', () => {
+                // Remove selected class from all options
+                colorOptions.forEach(opt => opt.classList.remove('selected'));
+                
+                // Add selected class to clicked option
+                option.classList.add('selected');
+                
+                // Update hidden input values
+                colorPreferenceInput.value = option.dataset.color;
+                stylePackageInput.value = option.dataset.style;
+            });
+        });
+        
+        // Handle form submission
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Disable submit button
+            submitButton.disabled = true;
+            submitButton.textContent = 'Submitting...';
+            
+            try {
+                // Get form data
+                const formElement = e.target;
+                const formDataObj = new FormData(formElement);
+                
+                // Convert FormData to a regular object
+                formData = {};
+                formDataObj.forEach((value, key) => {
+                    formData[key] = value;
+                });
+                
+                // Generate a unique project ID
+                projectId = generateProjectId(formData.fullName);
+                console.log('Generated project ID:', projectId);
+                
+                // Map form fields to content editor fields
+                const contentRecords = mapFormFieldsToContentEditor(formData, projectId);
+                console.log('Mapped content records:', contentRecords);
+                
+                // Show thank you popup
+                showThankYouPopup(projectId);
+                
+                // Store the records for CSV download
+                window.contentRecords = contentRecords;
+                
+                // Scroll to top to show thank you message
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            } catch (error) {
+                console.error('Error processing form:', error);
+                alert('There was an error processing your form. Please try again.');
+            } finally {
+                // Re-enable submit button
+                submitButton.disabled = false;
+                submitButton.textContent = 'Submit & Confirm Workshop';
+            }
+        });
+        
+        // Handle CSV download
+        downloadCsvButton.addEventListener('click', () => {
+            if (window.contentRecords) {
+                const csv = convertToCSV(window.contentRecords);
+                downloadCSV(csv, `selfcast-${projectId}.csv`);
+            }
+        });
+    </script>
+</body>
+</html>
