@@ -1,7 +1,6 @@
 'use client'
 
 import React, { useState, useEffect } from 'react'
-import Script from 'next/script'
 import styles from './styles.module.css'
 
 export default function ReliableOnboardingForm() {
@@ -19,6 +18,26 @@ export default function ReliableOnboardingForm() {
     setLogs(prev => [...prev, { message, type }]);
     console.log(`[${type.toUpperCase()}] ${message}`);
   };
+  
+  // Initialize Supabase client when the component mounts
+  useEffect(() => {
+    // Load Supabase script directly
+    const loadSupabase = () => {
+      const script = document.createElement('script');
+      script.src = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2';
+      script.async = true;
+      script.onload = () => {
+        addLog('Supabase script loaded successfully', 'success');
+        initializeSupabase();
+      };
+      script.onerror = () => {
+        addLog('Failed to load Supabase script', 'error');
+      };
+      document.body.appendChild(script);
+    };
+    
+    loadSupabase();
+  }, []);
   
   // Initialize Supabase client when the script loads
   const initializeSupabase = () => {
@@ -251,7 +270,7 @@ export default function ReliableOnboardingForm() {
     records.push({
       project_id: projectId,
       key: 'rendered_footer_slogan',
-      value: `© ${currentYear} ${formData.fullName || 'Client'} | All Rights Reserved`
+      value: ` ${currentYear} ${formData.fullName || 'Client'} | All Rights Reserved`
     });
     
     // Add default quotes (these appear in many templates)
@@ -419,17 +438,6 @@ export default function ReliableOnboardingForm() {
   
   return (
     <>
-      {/* Supabase Script */}
-      <Script 
-        src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
-        strategy="afterInteractive"
-        onLoad={() => {
-          addLog('Supabase script loaded successfully', 'success');
-          initializeSupabase();
-        }}
-        onError={() => addLog('Failed to load Supabase script', 'error')}
-      />
-      
       {/* Debug Panel (only in development) */}
       {process.env.NODE_ENV === 'development' && (
         <div style={{ 
@@ -537,7 +545,7 @@ export default function ReliableOnboardingForm() {
           <div className={styles.calendarContainer}>
             {/* Calendly Embed */}
             <div className="calendly-inline-widget" data-url="https://calendly.com/vicsicard/30min" style={{minWidth: '320px', height: '700px'}}></div>
-            <Script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async />
+            <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
           </div>
 
           <div className={styles.questionnaireNote}>
