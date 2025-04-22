@@ -160,21 +160,36 @@
 }
 
 .colorOption {
-  width: 40px;
-  height: 40px;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
+  margin-right: 15px;
   cursor: pointer;
-  border: 2px solid transparent;
-  transition: transform 0.2s, border-color 0.2s;
+  transition: all 0.2s ease;
+  position: relative;
+  border: 3px solid transparent;
 }
 
 .colorOption:hover {
   transform: scale(1.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .colorOption.selected {
-  border-color: #1a1a1a;
+  border: 3px solid #333;
   transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.colorOption.selected::after {
+  content: '✓';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 20px;
+  text-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
 }
 
 .blue { background-color: #007AFF; }
@@ -246,23 +261,63 @@
 }
 
 .submitBtn {
-  background-color: #007AFF;
+  background-color: #007bff;
   color: white;
   border: none;
-  border-radius: 50px;
-  padding: 1rem 3rem;
+  border-radius: 5px;
+  padding: 12px 24px;
   font-size: 1.1rem;
-  font-weight: bold;
+  font-weight: 600;
   cursor: pointer;
-  transition: background-color 0.3s, transform 0.3s;
-  display: block;
-  margin: 2rem auto 0;
-  font-family: inherit;
+  transition: background-color 0.3s, transform 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 2rem auto;
+  min-width: 250px;
 }
 
 .submitBtn:hover {
-  background-color: #3395FF;
+  background-color: #0069d9;
   transform: translateY(-2px);
+}
+
+.submitBtn:disabled {
+  background-color: #6c757d;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.submitting {
+  background-color: #6c757d;
+  position: relative;
+}
+
+.spinner {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: white;
+  animation: spin 1s ease-in-out infinite;
+  margin-right: 10px;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.errorMessage {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+  border-radius: 5px;
+  padding: 15px;
+  margin: 20px 0;
+  text-align: center;
 }
 
 @media (max-width: 768px) {
