@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Onboarding API</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px 0;
+        }
+        pre {
+            background-color: #f5f5f5;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        .success {
+            color: green;
+            font-weight: bold;
+        }
+        .error {
+            color: red;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Test Onboarding API</h1>
+    <p>This page will test the onboarding API endpoint.</p>
+    
+    <button id="testButton">Test Onboarding API</button>
+    <div id="result"></div>
+    
+    <script>
+        // Test data for onboarding
+        const testData = {
+            fullName: "Test User " + new Date().toISOString(),
+            email: "test@example.com",
+            phone: "555-123-4567",
+            profession: "Software Developer",
+            title: "Senior Engineer",
+            instagram: "https://instagram.com/testuser",
+            facebook: "https://facebook.com/testuser",
+            twitter: "https://twitter.com/testuser",
+            linkedin: "https://linkedin.com/in/testuser",
+            comfortableTopics: "Technology, Software Development, AI",
+            contentGoals: "Share knowledge about software development",
+            successDefinition: "Helping others learn and grow",
+            challenges: "Keeping up with rapidly changing technology",
+            writingStyle: "professional-his",
+            colorPreference: "#4a6fa5"
+        };
+        
+        // Function to test the API
+        async function testApi() {
+            try {
+                const resultDiv = document.getElementById('result');
+                resultDiv.innerHTML = '<p>Testing onboarding API...</p>';
+                
+                // Call the API
+                const response = await fetch('/api/onboarding', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(testData),
+                });
+                
+                const result = await response.json();
+                
+                if (!response.ok) {
+                    throw new Error(result.error || 'Failed to submit form');
+                }
+                
+                console.log('API response:', result);
+                resultDiv.innerHTML += `<p class="success">API call successful!</p>`;
+                resultDiv.innerHTML += `<p>Project ID: ${result.projectId}</p>`;
+                resultDiv.innerHTML += `<pre>${JSON.stringify(result, null, 2)}</pre>`;
+                
+                // Now check if the project appears in the database
+                resultDiv.innerHTML += `<p>Checking if project appears in database...</p>`;
+                
+                setTimeout(async () => {
+                    try {
+                        const checkResponse = await fetch(`/api/test-check-project?projectId=${result.projectId}`);
+                        const checkResult = await checkResponse.json();
+                        
+                        if (!checkResponse.ok) {
+                            throw new Error(checkResult.error || 'Failed to check project');
+                        }
+                        
+                        console.log('Check result:', checkResult);
+                        resultDiv.innerHTML += `<p class="success">Project check successful!</p>`;
+                        resultDiv.innerHTML += `<p>Records found: ${checkResult.recordCount}</p>`;
+                        resultDiv.innerHTML += `<pre>${JSON.stringify(checkResult.records, null, 2)}</pre>`;
+                    } catch (checkError) {
+                        console.error('Error checking project:', checkError);
+                        resultDiv.innerHTML += `<p class="error">Error checking project: ${checkError.message}</p>`;
+                    }
+                }, 2000);
+                
+            } catch (error) {
+                console.error('API error:', error);
+                document.getElementById('result').innerHTML += `<p class="error">Error: ${error.message}</p>`;
+            }
+        }
+        
+        // Add event listener to button
+        document.getElementById('testButton').addEventListener('click', testApi);
+    </script>
+</body>
+</html>
