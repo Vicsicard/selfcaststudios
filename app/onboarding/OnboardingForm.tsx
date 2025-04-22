@@ -454,7 +454,7 @@ export default function OnboardingForm() {
                       key: 'manual_test_key',
                       value: 'Manual test value at ' + new Date().toISOString()
                     })
-                    .then(({ data, error }) => {
+                    .then(({ data, error }: { data: any; error: any }) => {
                       if (error) {
                         console.error('Manual test insert failed:', error);
                         alert('Test failed: ' + error.message);
