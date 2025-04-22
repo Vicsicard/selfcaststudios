@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Playfair_Display } from 'next/font/google'
 import Script from 'next/script'
 import styles from './styles.module.css'
@@ -18,6 +18,43 @@ export default function SimpleOnboardingForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState<Record<string, any>>({});
   const [showThankYouPopup, setShowThankYouPopup] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [debugLogs, setDebugLogs] = useState<string[]>([]);
+
+  // Add debug log
+  const addDebugLog = (message: string) => {
+    console.log(`[DEBUG] ${message}`);
+    setDebugLogs(prev => [...prev, `${new Date().toLocaleTimeString()}: ${message}`]);
+  };
+
+  // Log initial component mount
+  useEffect(() => {
+    addDebugLog('SimpleOnboardingForm component mounted');
+    
+    // Add window error listener
+    const handleWindowError = (event: ErrorEvent) => {
+      addDebugLog(`WINDOW ERROR: ${event.message} at ${event.filename}:${event.lineno}`);
+    };
+    
+    window.addEventListener('error', handleWindowError);
+    
+    return () => {
+      window.removeEventListener('error', handleWindowError);
+    };
+  }, []);
+
+  // Monitor state changes
+  useEffect(() => {
+    if (formSubmitted) {
+      addDebugLog(`Form submitted state changed to: ${formSubmitted}`);
+    }
+  }, [formSubmitted]);
+
+  useEffect(() => {
+    if (showThankYouPopup) {
+      addDebugLog(`Show thank you popup state changed to: ${showThankYouPopup}`);
+    }
+  }, [showThankYouPopup]);
 
   // Generate a project ID based on name and timestamp
   const generateProjectId = (fullName: string): string => {
@@ -44,6 +81,7 @@ export default function SimpleOnboardingForm() {
   // Handle form submission
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    addDebugLog('Form submission started');
     
     // Set loading state
     setIsSubmitting(true);
@@ -52,37 +90,63 @@ export default function SimpleOnboardingForm() {
       // Get form data
       const formElement = e.target as HTMLFormElement;
       const formData = new FormData(formElement);
+      addDebugLog('Form data captured successfully');
       
       // Convert FormData to a regular object
       const formDataObject: Record<string, any> = {};
       formData.forEach((value, key) => {
         formDataObject[key] = value;
+        addDebugLog(`Form field: ${key} = ${value}`);
       });
       
       // Add the selected color and style
       formDataObject.colorPreference = selectedColor;
       formDataObject.stylePackage = selectedStyle;
+      addDebugLog(`Added color preference: ${selectedColor} and style package: ${selectedStyle}`);
       
       // Store form data for CSV export
       setFormData(formDataObject);
+      addDebugLog('Form data stored in state for CSV export');
       
       // Generate a unique project ID
       const newProjectId = generateProjectId(formDataObject.fullName);
-      console.log(`Generated project ID: ${newProjectId}`);
+      addDebugLog(`Generated project ID: ${newProjectId}`);
       
       // Store the project ID
       setProjectId(newProjectId);
+      addDebugLog('Project ID stored in state');
       
       // Show success message
+      addDebugLog('Setting formSubmitted to true');
       setFormSubmitted(true);
+      
+      addDebugLog('Setting showThankYouPopup to true');
       setShowThankYouPopup(true);
       
       // Scroll to top to show success message
+      addDebugLog('Scrolling to top of page');
       window.scrollTo({ top: 0, behavior: 'smooth' });
+      
+      // Force render update
+      setTimeout(() => {
+        addDebugLog('Forced render update after timeout');
+        setShowThankYouPopup(true);
+      }, 100);
+      
+      // Log DOM state
+      setTimeout(() => {
+        const overlay = document.querySelector(`.${styles.overlay}`);
+        const popup = document.querySelector(`.${styles.successMessage}`);
+        addDebugLog(`DOM check - Overlay exists: ${!!overlay}, Popup exists: ${!!popup}`);
+      }, 500);
     } catch (error) {
+      const errorMsg = error instanceof Error ? error.message : 'Unknown error occurred';
+      addDebugLog(`ERROR in form submission: ${errorMsg}`);
       console.error('Error submitting form:', error);
+      setErrorMessage(errorMsg);
     } finally {
       setIsSubmitting(false);
+      addDebugLog('Form submission process completed');
     }
   };
 
@@ -139,13 +203,26 @@ export default function SimpleOnboardingForm() {
 
   // Render thank you message if form is submitted
   if (formSubmitted) {
+    addDebugLog('Rendering thank you message (formSubmitted is true)');
     return (
       <div className={styles.container}>
         {showThankYouPopup && (
           <>
-            <div className={styles.overlay} onClick={closeThankYouPopup}></div>
+            <div 
+              className={styles.overlay} 
+              onClick={() => {
+                addDebugLog('Overlay clicked, closing popup');
+                closeThankYouPopup();
+              }}
+            ></div>
             <div className={styles.successMessage}>
-              <button className={styles.closeButton} onClick={closeThankYouPopup}>×</button>
+              <button 
+                className={styles.closeButton} 
+                onClick={() => {
+                  addDebugLog('Close button clicked');
+                  closeThankYouPopup();
+                }}
+              >×</button>
               <h2>Thank You!</h2>
               <p>Your information has been submitted successfully. We're excited to start working on your personal brand!</p>
               
@@ -156,7 +233,10 @@ export default function SimpleOnboardingForm() {
                   
                   <button 
                     className={styles.downloadButton} 
-                    onClick={handleDownloadCSV}
+                    onClick={() => {
+                      addDebugLog('Download CSV button clicked in popup');
+                      handleDownloadCSV();
+                    }}
                   >
                     Download Form Data (CSV)
                   </button>
@@ -178,17 +258,34 @@ export default function SimpleOnboardingForm() {
           <div className={styles.formActions}>
             <button 
               className={styles.submitButton} 
-              onClick={() => setShowThankYouPopup(true)}
+              onClick={() => {
+                addDebugLog('View thank you message button clicked');
+                setShowThankYouPopup(true);
+              }}
             >
               View Thank You Message
             </button>
             
             <button 
               className={styles.downloadButton} 
-              onClick={handleDownloadCSV}
+              onClick={() => {
+                addDebugLog('Download CSV button clicked on confirmation page');
+                handleDownloadCSV();
+              }}
             >
               Download Form Data (CSV)
             </button>
+          </div>
+          
+          {/* Debug logs display */}
+          <div className={styles.debugPanel}>
+            <h3>Debug Information</h3>
+            <p>If you're experiencing issues, please share these logs with the development team:</p>
+            <div className={styles.debugLog}>
+              {debugLogs.map((log, index) => (
+                <div key={index}>{log}</div>
+              ))}
+            </div>
           </div>
         </div>
       </div>
