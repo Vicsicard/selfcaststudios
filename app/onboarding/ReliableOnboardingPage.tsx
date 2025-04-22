@@ -25,6 +25,8 @@ export default function ReliableOnboardingPage() {
   const [supabase, setSupabase] = useState<any>(null);
   const [debugMessages, setDebugMessages] = useState<string[]>([]);
   const [showDebug, setShowDebug] = useState(false);
+  const [formData, setFormData] = useState<Record<string, any>>({});
+  const [showThankYouPopup, setShowThankYouPopup] = useState(false);
 
   // Initialize Supabase client when the script loads
   const initializeSupabase = () => {
@@ -307,6 +309,9 @@ export default function ReliableOnboardingPage() {
       formDataObject.colorPreference = selectedColor;
       formDataObject.stylePackage = selectedStyle;
       
+      // Store form data for CSV export
+      setFormData(formDataObject);
+      
       // Check if Supabase client is initialized
       if (!supabase) {
         const client = initializeSupabase();
@@ -358,6 +363,7 @@ export default function ReliableOnboardingPage() {
       
       // Show success message
       setFormSubmitted(true);
+      setShowThankYouPopup(true);
       
       // Scroll to top to show success message
       window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -370,25 +376,110 @@ export default function ReliableOnboardingPage() {
     }
   };
 
+  // Generate CSV from form data
+  const generateCSV = () => {
+    if (!formData || !projectId) return '';
+    
+    // Create CSV header row
+    const headers = Object.keys(formData);
+    
+    // Add project ID to the data
+    const dataWithProjectId = { ...formData, projectId };
+    
+    // Create CSV content
+    const csvContent = [
+      headers.join(','), // Header row
+      Object.values(dataWithProjectId).map(value => `"${value}"`).join(',') // Data row
+    ].join('\n');
+    
+    return csvContent;
+  };
+
+  // Handle CSV download
+  const handleDownloadCSV = () => {
+    const csvContent = generateCSV();
+    if (!csvContent) return;
+    
+    // Create a Blob with the CSV content
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    
+    // Create a URL for the Blob
+    const url = URL.createObjectURL(blob);
+    
+    // Create a temporary link element
+    const link = document.createElement('a');
+    link.href = url;
+    link.setAttribute('download', `onboarding-data-${projectId}.csv`);
+    
+    // Append the link to the document
+    document.body.appendChild(link);
+    
+    // Click the link to trigger the download
+    link.click();
+    
+    // Clean up
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+  };
+
+  // Close thank you popup
+  const closeThankYouPopup = () => {
+    setShowThankYouPopup(false);
+  };
+
   // Render thank you message if form is submitted
   if (formSubmitted) {
     return (
       <div className={styles.container}>
-        <div className={styles.overlay}></div>
-        <div className={styles.successMessage}>
-          <h2>Thank You!</h2>
-          <p>Your information has been submitted successfully. We're excited to start working on your personal brand!</p>
-          
-          {projectId && (
-            <div className={styles.projectIdContainer}>
-              <p><strong>Your Project ID:</strong> {projectId}</p>
-              <p className={styles.projectIdNote}>Please save this ID for your records. It will be used to identify your project in our system.</p>
+        {showThankYouPopup && (
+          <>
+            <div className={styles.overlay} onClick={closeThankYouPopup}></div>
+            <div className={styles.successMessage}>
+              <button className={styles.closeButton} onClick={closeThankYouPopup}>×</button>
+              <h2>Thank You!</h2>
+              <p>Your information has been submitted successfully. We're excited to start working on your personal brand!</p>
+              
+              {projectId && (
+                <div className={styles.projectIdContainer}>
+                  <p><strong>Your Project ID:</strong> {projectId}</p>
+                  <p className={styles.projectIdNote}>Please save this ID for your records. It will be used to identify your project in our system.</p>
+                  
+                  <button 
+                    className={styles.downloadButton} 
+                    onClick={handleDownloadCSV}
+                  >
+                    Download Form Data (CSV)
+                  </button>
+                </div>
+              )}
+              
+              <p>You should receive a confirmation email shortly with details about your scheduled workshop and next steps.</p>
+              <p>Your personal brand website is being set up and will be available soon. We'll notify you when it's ready for your review.</p>
+              <p>If you have any questions in the meantime, please contact us at <a href="mailto:hello@selfcaststudios.com">hello@selfcaststudios.com</a>.</p>
             </div>
-          )}
+          </>
+        )}
+        
+        <div className={styles.formCard}>
+          <h2>Submission Complete</h2>
+          <p>Thank you for completing the onboarding process. Your project ID is: <strong>{projectId}</strong></p>
+          <p>You can download your form data or view the thank you message again using the buttons below.</p>
           
-          <p>You should receive a confirmation email shortly with details about your scheduled workshop and next steps.</p>
-          <p>Your personal brand website is being set up and will be available soon. We'll notify you when it's ready for your review.</p>
-          <p>If you have any questions in the meantime, please contact us at <a href="mailto:hello@selfcaststudios.com">hello@selfcaststudios.com</a>.</p>
+          <div className={styles.formActions}>
+            <button 
+              className={styles.submitButton} 
+              onClick={() => setShowThankYouPopup(true)}
+            >
+              View Thank You Message
+            </button>
+            
+            <button 
+              className={styles.downloadButton} 
+              onClick={handleDownloadCSV}
+            >
+              Download Form Data (CSV)
+            </button>
+          </div>
         </div>
       </div>
     );
