@@ -396,21 +396,24 @@ export default function ReliableOnboardingForm() {
   // Success message component
   if (formSubmitted) {
     return (
-      <div className={styles.successMessage}>
-        <h2>Thank You!</h2>
-        <p>Your information has been submitted successfully. We're excited to start working on your personal brand!</p>
+      <>
+        <div className={styles.overlay}></div>
+        <div className={styles.successMessage}>
+          <h2>Thank You!</h2>
+          <p>Your information has been submitted successfully. We're excited to start working on your personal brand!</p>
 
-        {projectId && (
-          <div className={styles.projectIdContainer}>
-            <p><strong>Your Project ID:</strong> {projectId}</p>
-            <p className={styles.projectIdNote}>Please save this ID for your records. It will be used to identify your project in our system.</p>
-          </div>
-        )}
+          {projectId && (
+            <div className={styles.projectIdContainer}>
+              <p><strong>Your Project ID:</strong> {projectId}</p>
+              <p className={styles.projectIdNote}>Please save this ID for your records. It will be used to identify your project in our system.</p>
+            </div>
+          )}
 
-        <p>You should receive a confirmation email shortly with details about your scheduled workshop and next steps.</p>
-        <p>Your personal brand website is being set up and will be available soon. We'll notify you when it's ready for your review.</p>
-        <p>If you have any questions in the meantime, please contact us at <a href="mailto:hello@selfcaststudios.com">hello@selfcaststudios.com</a>.</p>
-      </div>
+          <p>You should receive a confirmation email shortly with details about your scheduled workshop and next steps.</p>
+          <p>Your personal brand website is being set up and will be available soon. We'll notify you when it's ready for your review.</p>
+          <p>If you have any questions in the meantime, please contact us at <a href="mailto:hello@selfcaststudios.com">hello@selfcaststudios.com</a>.</p>
+        </div>
+      </>
     );
   }
   
