@@ -1,8 +1,8 @@
 'use client'
 
 import React from 'react'
-import ReliableOnboardingPage from './ReliableOnboardingPage'
+import SimpleOnboardingForm from './SimpleOnboardingForm'
 
 export default function OnboardingPage() {
-  return <ReliableOnboardingPage />
+  return <SimpleOnboardingForm />
 }
