@@ -520,3 +520,35 @@
     font-size: 1.25rem;
   }
 }
+
+.successMessageStatic {
+  background-color: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  margin-top: 2rem;
+}
+
+.successMessageStatic h3 {
+  color: #1a1a1a;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.successMessageStatic p {
+  color: #666666;
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+  line-height: 1.6;
+}
+
+.successMessageStatic a {
+  color: #007AFF;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.successMessageStatic a:hover {
+  text-decoration: underline;
+}

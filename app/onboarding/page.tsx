@@ -1,8 +1,8 @@
 'use client'
 
 import React from 'react'
-import SimpleOnboardingForm from './SimpleOnboardingForm'
+import DirectDownloadForm from './DirectDownloadForm'
 
 export default function OnboardingPage() {
-  return <SimpleOnboardingForm />
+  return <DirectDownloadForm />
 }
