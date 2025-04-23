@@ -163,7 +163,7 @@ export default async function NarrativeTransitionPage() {
           source="Service - Narrative Transition"
           title="Ready to Transform Your Professional Story?"
           description="Schedule a consultation to learn how our Narrative Transition service can help you navigate change with confidence."
-          buttonText="Schedule Consultation"
+          buttonText="Get Started"
         />
 
         <RelatedContent

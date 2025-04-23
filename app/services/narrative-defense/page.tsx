@@ -169,7 +169,7 @@ export default async function NarrativeDefensePage() {
           source="Service - Narrative Defense"
           title="Ready to Protect Your Professional Story?"
           description="Schedule a consultation to learn how our Narrative Defense service can help you maintain control of your narrative."
-          buttonText="Schedule Consultation"
+          buttonText="Get Started"
         />
 
         <RelatedContent

@@ -110,8 +110,8 @@ export default function GetStartedPage() {
               </ul>
 
               <p className={styles.secureLabel}>🔒 Payment secured via Stripe</p>
-              <a href="https://buy.stripe.com/eVa7u55rN4xybe06oD" target="_blank" className={styles.subscribeBtn}>
-                Subscribe Now
+              <a href="https://www.selfcaststudios.com/get-started" target="_blank" className={styles.subscribeBtn}>
+                Get Started
               </a>
               <p className={styles.note}>We onboard a limited number of clients each month to ensure creative quality and attention.</p>
             </div>

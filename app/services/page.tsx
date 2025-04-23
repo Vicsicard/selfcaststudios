@@ -149,7 +149,7 @@ export default function ServicesPage() {
             href="https://www.selfcaststudios.com/get-started"
             className="inline-block bg-accent hover:bg-accent-light text-text-white px-12 py-4 rounded-custom transition-colors text-lg shadow-custom hover:shadow-custom-hover"
           >
-            Subscribe Now
+            Get Started
           </a>
         </div>
       </div>

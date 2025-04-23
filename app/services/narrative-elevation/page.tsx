@@ -175,7 +175,7 @@ export default async function NarrativeElevationPage() {
           source="Service - Narrative Elevation"
           title="Ready to Elevate Your Professional Story?"
           description="Schedule a consultation to discover how our Narrative Elevation service can amplify your impact."
-          buttonText="Schedule Consultation"
+          buttonText="Get Started"
         />
 
         <RelatedContent

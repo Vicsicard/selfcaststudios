@@ -13,7 +13,7 @@ export default function ConsultationCTA({
   source,
   title = "Ready to Transform Your Narrative?",
   description = "Take the first step toward crafting your authentic story with intention.",
-  buttonText = "Subscribe Now"
+  buttonText = "Get Started"
 }: ConsultationCTAProps) {
   const { ModalComponent, showContactForm } = useModal()
 
