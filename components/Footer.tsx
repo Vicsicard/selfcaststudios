@@ -17,10 +17,10 @@ export default function Footer() {
             <p className="text-text-light mb-4">Shape the narrative before it shapes you.</p>
             <p className="text-text-light mb-6">Not sure where to start? Let's talk.</p>
             <a 
-              href="https://www.selfcaststudios.com/get-started"
+              href="mailto:info@selfcaststudios.com"
               className="inline-block bg-accent hover:bg-accent-light text-text-white px-6 py-3 rounded-custom transition-colors"
             >
-              Subscribe Now
+              Contact
             </a>
           </div>
 

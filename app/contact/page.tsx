@@ -50,10 +50,10 @@ export default function ContactPage() {
                 <div>
                   <h2 className="text-2xl font-bold text-primary mb-3">Contact</h2>
                   <a
-                    href="https://www.selfcaststudios.com/get-started"
+                    href="mailto:info@selfcaststudios.com"
                     className="inline-flex items-center px-6 py-3 bg-accent text-text-white rounded-custom hover:bg-accent-light transition-colors shadow-custom hover:shadow-custom-hover"
                   >
-                    <span>Get Started</span>
+                    <span>Contact</span>
                     <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
                     </svg>
