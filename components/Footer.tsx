@@ -16,12 +16,12 @@ export default function Footer() {
             <h3 className="text-2xl font-bold text-primary mb-4">Self Cast Studios</h3>
             <p className="text-text-light mb-4">Shape the narrative before it shapes you.</p>
             <p className="text-text-light mb-6">Not sure where to start? Let's talk.</p>
-            <button 
-              onClick={() => showContactForm('Footer')}
+            <a 
+              href="https://www.selfcaststudios.com/get-started"
               className="inline-block bg-accent hover:bg-accent-light text-text-white px-6 py-3 rounded-custom transition-colors"
             >
-              Book a Private Consultation
-            </button>
+              Subscribe Now
+            </a>
           </div>
 
           {/* Quick Links */}

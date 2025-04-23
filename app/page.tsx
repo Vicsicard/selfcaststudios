@@ -54,13 +54,12 @@ export default function HomePage() {
               <p className="text-xl md:text-2xl text-text-light mb-8">
                 Take control of your narrative before others define it for you.
               </p>
-              <button
-                type="button"
-                onClick={handleConsultationClick}
+              <a
+                href="https://www.selfcaststudios.com/get-started"
                 className="relative z-10 inline-block bg-accent hover:bg-accent-light text-text-white px-12 py-4 rounded-custom transition-colors text-lg shadow-custom-dark hover:shadow-custom-dark-hover cursor-pointer"
               >
-                Book a Private Consultation
-              </button>
+                Subscribe Now
+              </a>
             </div>
 
             {/* Featured Video */}
@@ -125,13 +124,12 @@ export default function HomePage() {
             <p className="text-xl text-text-light mb-12">
               Take the first step toward transforming your personal brand and controlling your story.
             </p>
-            <button
-              type="button"
-              onClick={() => showContactForm('Home CTA')}
+            <a
+              href="https://www.selfcaststudios.com/get-started"
               className="inline-block bg-accent hover:bg-accent-light text-text-white px-12 py-4 rounded-custom transition-colors text-lg shadow-custom-dark hover:shadow-custom-dark-hover cursor-pointer"
             >
-              Book a Private Consultation
-            </button>
+              Subscribe Now
+            </a>
           </div>
         </div>
       </div>
