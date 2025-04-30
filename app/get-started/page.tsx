@@ -65,7 +65,7 @@ export default function GetStartedPage() {
 
           <div className={styles.section}>
             <h2 className={styles.sectionTitle}>Platform-Specific Social Media</h2>
-            <p className={styles.text}>We don't copy-paste across platforms. You get 4 tailored posts per platform every month—each crafted to perform and resonate where it lands:</p>
+            <p className={styles.text}>We don't copy-paste across platforms. Your Core Visibility Package includes 4 tailored posts per platform—each crafted to perform and resonate where it lands:</p>
             <ul className={styles.list}>
               <li className={styles.listItem}>Instagram (visual + quote-based)</li>
               <li className={styles.listItem}>LinkedIn (professional insights)</li>
