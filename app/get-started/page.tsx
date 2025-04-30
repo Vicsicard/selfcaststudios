@@ -43,11 +43,11 @@ export default function GetStartedPage() {
           <div className={styles.section}>
             <h2 className={styles.sectionTitle}>What You Get</h2>
             <ul className={styles.list}>
-              <li className={styles.listItem}>4 Blog Posts</li>
-              <li className={styles.listItem}>4 Social Media Posts (Instagram, Facebook, X, LinkedIn)</li>
-              <li className={styles.listItem}>1 Custom Bio/About Page</li>
-              <li className={styles.listItem}>3 Branded Quote Graphics</li>
-              <li className={styles.listItem}>A Fully Built Personal Brand Website</li>
+              <li className={styles.listItem}>4 Blog Posts (custom written from your workshop content)</li>
+              <li className={styles.listItem}>16 Social Media Posts (4 unique posts each for Instagram, Facebook, X, LinkedIn)</li>
+              <li className={styles.listItem}>1 Custom Bio/About Page (tailored to your authentic voice)</li>
+              <li className={styles.listItem}>3 Branded Quote Graphics (with your key insights)</li>
+              <li className={styles.listItem}>A Personal Brand Website on our Self Cast platform</li>
             </ul>
             <p className={styles.text}>All content is crafted directly from your 60-minute recorded workshop interview.</p>
           </div>
@@ -65,7 +65,7 @@ export default function GetStartedPage() {
 
           <div className={styles.section}>
             <h2 className={styles.sectionTitle}>Platform-Specific Social Media</h2>
-            <p className={styles.text}>We don't copy-paste across platforms. You get 1 tailored post per platform every month—each crafted to perform and resonate where it lands:</p>
+            <p className={styles.text}>We don't copy-paste across platforms. You get 4 tailored posts per platform every month—each crafted to perform and resonate where it lands:</p>
             <ul className={styles.list}>
               <li className={styles.listItem}>Instagram (visual + quote-based)</li>
               <li className={styles.listItem}>LinkedIn (professional insights)</li>
@@ -78,11 +78,11 @@ export default function GetStartedPage() {
             <h2 className={styles.sectionTitle}>Your Personal Brand Website</h2>
             <p className={styles.text}>Your own digital home—built to express your essence:</p>
             <ul className={styles.list}>
-              <li className={styles.listItem}>Mobile-friendly and SEO-optimized</li>
-              <li className={styles.listItem}>Blog and social post integration</li>
-              <li className={styles.listItem}>Editable backend</li>
+              <li className={styles.listItem}>Mobile-friendly and SEO-optimized design</li>
+              <li className={styles.listItem}>All your blog posts and social content displayed</li>
+              <li className={styles.listItem}>User-friendly content editor</li>
               <li className={styles.listItem}>Fully branded layout with your colors, fonts, and tone</li>
-              <li className={styles.listItem}>Hosting and domain setup support included</li>
+              <li className={styles.listItem}>Hosted on our platform with your personalized Self Cast subdomain</li>
             </ul>
           </div>
 
@@ -103,10 +103,10 @@ export default function GetStartedPage() {
               <p className={styles.price}>$2,000<span className={styles.pricePeriod}>/month</span></p>
               <ul className={styles.featuresList}>
                 <li className={styles.featuresItem}>60-min storytelling workshop</li>
-                <li className={styles.featuresItem}>4 blog posts (SEO-optimized)</li>
-                <li className={styles.featuresItem}>4 platform-specific social posts</li>
+                <li className={styles.featuresItem}>4 blog posts (SEO-optimized, custom written)</li>
+                <li className={styles.featuresItem}>16 platform-specific social posts (4 per platform)</li>
                 <li className={styles.featuresItem}>Custom bio & 3 branded quotes</li>
-                <li className={styles.featuresItem}>Fully built personal brand website</li>
+                <li className={styles.featuresItem}>Personal brand website on Self Cast platform</li>
               </ul>
 
               <p className={styles.secureLabel}>🔒 Payment secured via Stripe</p>
