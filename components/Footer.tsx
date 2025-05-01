@@ -2,10 +2,17 @@
 
 import Link from 'next/link'
 import { useModal } from '@/hooks/useModal'
+import { usePathname } from 'next/navigation'
 
 export default function Footer() {
   const currentYear = new Date().getFullYear()
   const { ModalComponent, showContactForm } = useModal()
+  const pathname = usePathname()
+  
+  // Early exit if we're on the get-started page
+  if (pathname === '/get-started') {
+    return null;
+  }
 
   return (
     <footer className="bg-surface py-16">

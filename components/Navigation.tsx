@@ -8,6 +8,11 @@ export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false)
   const pathname = usePathname()
 
+  // Early exit if we're on the get-started page
+  if (pathname === '/get-started') {
+    return null;
+  }
+
   const isActive = (path: string) => {
     return pathname === path
   }
