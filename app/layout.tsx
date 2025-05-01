@@ -85,6 +85,8 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+  const isGetStartedPage = typeof window !== 'undefined' && window.location.pathname === '/get-started';
+  
   return (
     <html lang="en" className={playfair.variable}>
       <head>
@@ -124,17 +126,13 @@ export default function RootLayout({
       <body className="bg-surface text-text-light min-h-screen flex flex-col">
         <DynamicTitle />
         <OrganizationJsonLd />
-        {typeof window !== 'undefined' && window.location.pathname !== '/get-started' && (
-          <Navigation />
-        )}
+        {!isGetStartedPage && <Navigation />}
         <div className="flex-grow">
           <main className="min-h-screen w-full overflow-x-hidden">
             {children}
           </main>
         </div>
-        {typeof window !== 'undefined' && window.location.pathname !== '/get-started' && (
-          <Footer />
-        )}
+        {!isGetStartedPage && <Footer />}
       </body>
     </html>
   )
