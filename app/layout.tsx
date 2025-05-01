@@ -7,6 +7,7 @@ import DynamicTitle from '@/components/DynamicTitle'
 import OrganizationJsonLd from '@/components/structured-data/OrganizationJsonLd'
 import { viewport } from './viewport'
 import Script from 'next/script'
+import { headers } from 'next/headers'
 
 const playfair = Playfair_Display({ 
   subsets: ['latin'],
@@ -85,7 +86,22 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-  const isGetStartedPage = typeof window !== 'undefined' && window.location.pathname === '/get-started';
+  // Server-side path detection that works with Next.js App Router
+  let pathname = '';
+  try {
+    // This will execute on the server side during SSR
+    const headersList = headers();
+    pathname = headersList.get('x-pathname') || headersList.get('x-invoke-path') || '';
+  } catch {
+    // If headers() fails (in certain client contexts), fall back to client detection
+    if (typeof window !== 'undefined') {
+      pathname = window.location.pathname;
+    }
+  }
+  
+  // Using both server and client-side detection for maximum reliability
+  const isGetStartedPage = pathname === '/get-started' || 
+    (typeof window !== 'undefined' && window.location.pathname === '/get-started');
   
   return (
     <html lang="en" className={playfair.variable}>
