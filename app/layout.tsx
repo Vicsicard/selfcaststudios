@@ -6,6 +6,7 @@ import Footer from '@/components/Footer'
 import DynamicTitle from '@/components/DynamicTitle'
 import OrganizationJsonLd from '@/components/structured-data/OrganizationJsonLd'
 import { viewport } from './viewport'
+import Script from 'next/script'
 
 const playfair = Playfair_Display({ 
   subsets: ['latin'],
@@ -86,16 +87,54 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={playfair.variable}>
+      <head>
+        {/* Meta Pixel Code */}
+        <Script id="facebook-pixel" strategy="afterInteractive">
+          {`
+            !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+            n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+            n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+            t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+            document,'script','https://connect.facebook.net/en_US/fbevents.js');
+            fbq('init', '704243318632362', {
+              external_id: (function() {
+                // Generate or retrieve a consistent external ID
+                let externalId = localStorage.getItem('_fbp_external_id');
+                if (!externalId) {
+                  externalId = 'sc_' + Math.random().toString(36).substring(2, 15);
+                  localStorage.setItem('_fbp_external_id', externalId);
+                }
+                return externalId;
+              })()
+            });
+            fbq('track', 'PageView');
+          `}
+        </Script>
+        <noscript>
+          <img 
+            height="1" 
+            width="1" 
+            style={{ display: 'none' }}
+            src="https://www.facebook.com/tr?id=704243318632362&ev=PageView&noscript=1"
+            alt=""
+          />
+        </noscript>
+        {/* End Meta Pixel Code */}
+      </head>
       <body className="bg-surface text-text-light min-h-screen flex flex-col">
         <DynamicTitle />
         <OrganizationJsonLd />
-        <Navigation />
+        {typeof window !== 'undefined' && window.location.pathname !== '/get-started' && (
+          <Navigation />
+        )}
         <div className="flex-grow">
           <main className="min-h-screen w-full overflow-x-hidden">
             {children}
           </main>
         </div>
-        <Footer />
+        {typeof window !== 'undefined' && window.location.pathname !== '/get-started' && (
+          <Footer />
+        )}
       </body>
     </html>
   )

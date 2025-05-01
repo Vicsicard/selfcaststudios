@@ -1,6 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
+import { useEffect } from 'react'
 
 interface SuccessMessageProps {
   message?: string
@@ -11,6 +12,13 @@ export default function SuccessMessage({
   message = "We will be in contact with you as soon as possible.",
   onClose 
 }: SuccessMessageProps) {
+  useEffect(() => {
+    // Track contact form submission with Meta Pixel
+    if (typeof window !== 'undefined' && (window as any).fbq) {
+      (window as any).fbq('track', 'Contact', {content_name: 'contact_form'});
+    }
+  }, []);
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 10 }}

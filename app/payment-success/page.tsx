@@ -14,6 +14,11 @@ export default function PaymentSuccessPage() {
   const router = useRouter();
   
   useEffect(() => {
+    // Track workshop booking conversion with Meta Pixel
+    if (typeof window !== 'undefined' && (window as any).fbq) {
+      (window as any).fbq('track', 'Lead', {content_name: 'workshop_booking'});
+    }
+    
     // Short delay before redirecting to give users a moment to see the success message
     const redirectTimer = setTimeout(() => {
       router.push('/onboarding');
