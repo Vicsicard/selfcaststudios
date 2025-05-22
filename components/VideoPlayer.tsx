@@ -50,14 +50,14 @@ export default function VideoPlayer({
           duration={duration}
         />
       )}
-      <div className="video-container">
+      <div className={`video-container ${isVertical ? 'py-4' : ''}`}>
         {(title || description) && (
           <div className="mt-4 text-center">
             {title && <h2 className="text-xl font-bold mb-2">{title}</h2>}
             {description && <p className="text-text-light">{description}</p>}
           </div>
         )}
-        <div className={`relative ${className} ${isVertical ? 'aspect-[9/16]' : 'aspect-video'}`}>
+        <div className={`relative ${className} ${isVertical ? 'aspect-[9/16] max-w-xs md:max-w-sm mx-auto' : 'aspect-video'}`}>
           <video
             ref={videoRef}
             data-plyr-provider="html5"

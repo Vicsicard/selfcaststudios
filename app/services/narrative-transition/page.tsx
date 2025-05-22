@@ -120,6 +120,7 @@ export default async function NarrativeTransitionPage() {
               title="Client Success Story - Narrative Transition"
               description="See how our Narrative Transition service helped a client successfully pivot their career."
               className="shadow-custom-dark"
+              isVertical={true}
             />
           </div>
 

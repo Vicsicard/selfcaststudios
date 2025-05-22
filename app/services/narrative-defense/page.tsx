@@ -126,6 +126,7 @@ export default async function NarrativeDefensePage() {
               title="Client Success Story - Narrative Defense"
               description="See how our Narrative Defense service helped a client maintain control of their professional narrative."
               className="shadow-custom-dark"
+              isVertical={true}
             />
           </div>
 

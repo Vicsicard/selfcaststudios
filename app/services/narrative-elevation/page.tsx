@@ -129,6 +129,7 @@ export default async function NarrativeElevationPage() {
               title="Client Success Story - Narrative Elevation"
               description="See how our Narrative Elevation service transformed a client's professional presence and impact."
               className="shadow-custom-dark"
+              isVertical={true}
             />
           </div>
 
