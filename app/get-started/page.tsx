@@ -145,7 +145,8 @@ export default function GetStartedPage() {
               <li className={styles.listItem}>All your blog posts and social content displayed</li>
               <li className={styles.listItem}>User-friendly content editor</li>
               <li className={styles.listItem}>Fully branded layout with your colors, fonts, and tone</li>
-              <li className={styles.listItem}>Hosted on our platform with your personalized Self Cast subdomain</li>
+              <li className={styles.listItem}>Hosted on our platform with your personalized Self Cast subdomain for 12 months (included in package price)</li>
+              <li className={styles.listItem}>Option to renew hosting after 12 months for a nominal annual fee</li>
             </ul>
           </div>
 
@@ -170,6 +171,8 @@ export default function GetStartedPage() {
                 <li className={styles.featuresItem}>16 Social Posts Included (4 per platform)</li>
                 <li className={styles.featuresItem}>Custom Bio & 3 Branded Quotes</li>
                 <li className={styles.featuresItem}>Professional Brand Website</li>
+                <li className={styles.featuresItem}>12 months of website hosting included</li>
+                <li className={styles.featuresItem}>Annual hosting renewal available after first year</li>
               </ul>
 
               {/* Urgency badge */}
@@ -255,6 +258,11 @@ export default function GetStartedPage() {
             <div className={styles.faqItem} onClick={handleFAQInteraction}>
               <strong>How long does it take to receive my content?</strong>
               <p>Most clients receive their complete digital presence—including website, blog, and social posts—within 2–3 weeks of their workshop interview.</p>
+            </div>
+            
+            <div className={styles.faqItem} style={{marginBottom: '1.25rem'}} onClick={handleFAQInteraction}>
+              <strong>How long will my website be hosted?</strong>
+              <p>Your Core Visibility Package includes 12 months of website hosting on our Self Cast platform. After the initial 12-month period, you can continue hosting your site for a nominal annual fee. We'll notify you before your included hosting period expires to ensure a seamless renewal process if you choose to continue.</p>
             </div>
             
             {/* Bottom CTA */}

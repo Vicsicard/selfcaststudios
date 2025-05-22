@@ -26,7 +26,7 @@ export default function TermsPage() {
     },
     {
       title: 'Payment and Fees',
-      content: 'Where applicable, our services are provided for a fee. Fees and payment terms will be communicated prior to service engagement. All payments must be made in full according to the agreed-upon schedule. Fees are non-refundable unless expressly stated otherwise in a separate agreement.'
+      content: 'Where applicable, our services are provided for a fee. Fees and payment terms will be communicated prior to service engagement. All payments must be made in full according to the agreed-upon schedule. Fees are non-refundable unless expressly stated otherwise in a separate agreement. The Core Visibility Package includes 12 months of website hosting on our platform. After the initial 12-month period, continued hosting requires an annual renewal fee. Current renewal rates and payment options will be communicated to clients prior to the expiration of their included hosting period.'
     },
     {
       title: 'Intellectual Property',
