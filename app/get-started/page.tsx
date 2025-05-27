@@ -219,91 +219,9 @@ export default function GetStartedPage() {
             </div>
           </div>
 
-          <div className={styles.carouselSection} style={{margin: '3rem auto 2rem auto', maxWidth: '1000px', background: 'white', borderRadius: '1rem', boxShadow: '0 4px 20px rgba(0,0,0,0.10)', padding: '2rem 1rem'}}>
-            <h2 className={styles.sectionTitle} style={{textAlign: 'center', marginBottom: '1.5rem'}}>See Real Client Results</h2>
-            <div className={styles.carousel} style={{display: 'flex', alignItems: 'center', justifyContent: 'flex-start', gap: '1.5rem', overflowX: 'auto', scrollSnapType: 'x mandatory', paddingBottom: '1rem', WebkitOverflowScrolling: 'touch', maxWidth: '100%', minHeight: '240px'}}>
-              {[1,2,3,4,5,6].map(num => (
-                <img
-                  key={num}
-                  src={`/carousel image ${num}.PNG`}
-                  alt={`Sample website section ${num}`}
-                  style={{
-                    width: '280px',
-                    height: 'auto',
-                    borderRadius: '0.75rem',
-                    boxShadow: '0 2px 8px rgba(0,0,0,0.10)',
-                    objectFit: 'cover',
-                    scrollSnapAlign: 'center',
-                    background: '#f5f5f5',
-                    flexShrink: 0
-                  }}
-                />
-              ))}
-            </div>
-            <div style={{textAlign: 'center', fontSize: '1rem', color: '#666', marginTop: '1rem'}}>
-              <em>Actual sections from recent Self Cast Studios client sites</em>
-            </div>
-          </div>
-
           <div className={styles.footerCard}>
             <p className={styles.footerTagline}>We'll handle everything—from interview to visibility. You just show up with your story.</p>
             <p className={styles.copyright}> 2025 <a href="https://www.selfcaststudios.com/" target="_blank" className={styles.link}>Self Cast Studios</a>. All rights reserved.</p>
-          </div>
-
-          {/* FAQ Section */}
-          <div className={styles.faqSection} style={{margin: '3rem auto 2rem auto', maxWidth: '700px', background: 'white', borderRadius: '1rem', boxShadow: '0 4px 20px rgba(0,0,0,0.10)', padding: '2rem'}}>
-            <h2 className={styles.sectionTitle} style={{textAlign: 'center', marginBottom: '1.5rem'}}>Frequently Asked Questions</h2>
-            <div className={styles.faqItem} style={{marginBottom: '1.25rem'}} onClick={handleFAQInteraction}>
-              <strong>How does the Self Cast workshop work?</strong>
-              <p>Our process starts with a 60-minute recorded interview, where we get to know your story and goals. From that single conversation, we create your website, blog posts, and social content—so you don't have to fill out endless forms or questionnaires.</p>
-            </div>
-            <div className={styles.faqItem} style={{marginBottom: '1.25rem'}} onClick={handleFAQInteraction}>
-              <strong>Is this package right for me?</strong>
-              <p>If you want a professional online presence built from your authentic story—and you're ready to stand out in your field—this package is for you. We work with executives, consultants, coaches, and anyone seeking to elevate their personal brand.</p>
-            </div>
-            <div className={styles.faqItem} style={{marginBottom: '1.25rem'}} onClick={handleFAQInteraction}>
-              <strong>What happens after I click "Get Started"?</strong>
-              <p>You'll be securely taken to our payment page. Once complete, you'll get immediate access to book your workshop interview and start the onboarding process.</p>
-            </div>
-            <div className={styles.faqItem} onClick={handleFAQInteraction}>
-              <strong>How long does it take to receive my content?</strong>
-              <p>Most clients receive their complete digital presence—including website, blog, and social posts—within 2–3 weeks of their workshop interview.</p>
-            </div>
-            
-            <div className={styles.faqItem} style={{marginBottom: '1.25rem'}} onClick={handleFAQInteraction}>
-              <strong>How long will my website be hosted?</strong>
-              <p>Your Core Visibility Package includes 12 months of website hosting on our Self Cast platform. After the initial 12-month period, you can continue hosting your site for a nominal annual fee. We'll notify you before your included hosting period expires to ensure a seamless renewal process if you choose to continue.</p>
-            </div>
-            
-            {/* Bottom CTA */}
-            <div style={{
-              textAlign: 'center',
-              marginTop: '2.5rem',
-              padding: '1.5rem',
-              borderRadius: '0.75rem',
-              background: 'linear-gradient(to bottom, rgba(0,122,255,0.05), rgba(0,122,255,0.1))'
-            }}>
-              <p style={{
-                fontSize: '1.1rem',
-                fontWeight: 500,
-                marginBottom: '1rem',
-                color: '#333'
-              }}>Ready to amplify your voice and transform your digital presence?</p>
-              <a 
-                href="https://buy.stripe.com/dRmcN53TS94l2e884Ccwg0i" 
-                target="_blank" 
-                className={styles.subscribeBtn}
-                onClick={handleGetStartedClick}
-                style={{display: 'inline-block'}}
-              >
-                Get Started Now
-              </a>
-              <p style={{
-                fontSize: '0.85rem',
-                marginTop: '0.75rem',
-                color: '#666'
-              }}>Complete your brand transformation in less than 30 days</p>
-            </div>
           </div>
         </div>
       </div>
