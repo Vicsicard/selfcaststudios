@@ -14,7 +14,7 @@ export default function GetStartedPage() {
     // Track Get Started form submission with Meta Pixel
     if (typeof window !== 'undefined' && (window as any).fbq) {
       (window as any).fbq('track', 'Lead', {content_name: 'get_started'});
-      (window as any).fbq('track', 'InitiateCheckout', {content_name: 'core_visibility_package'});
+      (window as any).fbq('track', 'InitiateCheckout', {content_name: 'free_workshop'});
     }
   };
 
@@ -47,25 +47,26 @@ export default function GetStartedPage() {
       {/* Content */}
       <div className="relative z-10 min-h-screen py-20">
         <div className={`${styles.page} ${playfair.className}`}>
+          {/* Hero Section */}
           <div className={styles.header}>
-            <h1 className={styles.title}>The Core Visibility Package</h1>
-            <p className={styles.tagline}>Your Story. Your Voice. <span className={styles.bold}>Cast with Intention.</span></p>
+            <h1 className={styles.title}>Your Story. Your Voice. Start Here.</h1>
+            <p className={styles.tagline}>One free conversation. One clear direction.</p>
             <p style={{
               fontSize: '1.2rem', 
               fontWeight: 500,
               color: '#444',
               marginBottom: '1.5rem'
-            }}>Control Your Narrative. Build Your Authority. Amplify Your Voice.</p>
+            }}>Book your personalized Self Cast Workshop and uncover the message that moves your brand forward.</p>
 
             {/* Above-the-fold CTA */}
             <div className={styles.aboveFoldCta} style={{textAlign: 'center', marginBottom: '2rem'}}>
               <a 
-                href="https://buy.stripe.com/eVa7u55rN4xybe06oD" 
-                target="_blank" 
+                href="https://buy.stripe.com/dRmcN53TS94l2e884Ccwg0i" 
+                target="_blank"
                 className={styles.subscribeBtn}
                 onClick={handleGetStartedClick}
               >
-                Get Started
+                Get Started – Book Your Free Workshop
               </a>
             </div>
 
@@ -95,117 +96,126 @@ export default function GetStartedPage() {
 
           <div className={styles.section}>
             <h2 className={styles.sectionTitle}>Why Self Cast?</h2>
-            <p className={styles.text}>We believe your story deserves to be seen, heard, and trusted. Most people build their personal brand from the outside in. At Self Cast, we build from the inside out—starting with your truth.</p>
+            <p className={styles.text}>We don't build your brand from trends. We build it from your truth.</p>
             <ul className={styles.list}>
-              <li className={styles.listItem}>Real human interviews</li>
-              <li className={styles.listItem}>Custom content based on your lived experience</li>
-              <li className={styles.listItem}>High-trust visibility, not just empty exposure</li>
+              <li className={styles.listItem}>Everything we create begins with a real, human conversation.</li>
+              <li className={styles.listItem}>Sarah (your intelligent guide) helps you reflect, speak clearly, and articulate what makes your story matter.</li>
             </ul>
           </div>
 
           <div className={styles.section}>
-            <h2 className={styles.sectionTitle}>What You Get</h2>
+            <h2 className={styles.sectionTitle}>What Is the Self Cast Workshop?</h2>
+            <p className={styles.text}>The Self Cast Workshop is a 1:1 recorded interview guided by Sarah—our intelligent storytelling assistant trained to help you articulate your voice and purpose.</p>
+            <p className={styles.text}>In this free session, you'll:</p>
             <ul className={styles.list}>
-              <li className={styles.listItem}>4 Blog Posts (custom written from your workshop content)</li>
-              <li className={styles.listItem}>16 Social Media Posts (4 unique posts each for Instagram, Facebook, X, LinkedIn)</li>
-              <li className={styles.listItem}>1 Custom Bio/About Page (tailored to your authentic voice)</li>
-              <li className={styles.listItem}>3 Branded Quote Graphics (with your key insights)</li>
-              <li className={styles.listItem}>A Personal Brand Website on our Self Cast platform</li>
+              <li className={styles.listItem}>Reflect on your journey and professional story</li>
+              <li className={styles.listItem}>Gain clarity on what makes your message meaningful</li>
+              <li className={styles.listItem}>Walk away with a personalized summary of what Sarah heard in your words</li>
             </ul>
-            <p className={styles.text}>All content is crafted directly from your 60-minute recorded workshop interview.</p>
+            <p className={styles.text}>You don't need to prepare. Just show up. Sarah will handle the rest.</p>
           </div>
 
           <div className={styles.section}>
-            <h2 className={styles.sectionTitle}>The Self Cast Workshop Interview</h2>
-            <p className={styles.text}><strong>Where your story begins.</strong></p>
-            <p className={styles.text}>At Self Cast, we don’t start with forms or formulas—we start with you. The Workshop Interview is a 60-minute, human-first conversation where we listen deeply to your story, your values, and your lived experience. We don’t just gather facts—we uncover the voice behind them.</p>
-            <p className={styles.text}>From this one conversation, we build your entire visibility system: your bio, your blogs, your social presence, your site’s tone and rhythm.</p>
-            <div className={styles.highlight}>
-              <p className={styles.text}>It’s not content pulled from a template. It’s content shaped from your truth.</p>
-            </div>
-            <p className={styles.text}>This is the heartbeat of Self Cast—and the reason our work resonates.</p>
-          </div>
-
-          <div className={styles.section}>
-            <h2 className={styles.sectionTitle}>Platform-Specific Social Media</h2>
-            <p className={styles.text}>We don’t copy-paste across platforms. Your Core Visibility Package includes 4 tailored posts per platform—each crafted to perform and resonate where it lands:</p>
+            <h2 className={styles.sectionTitle}>What Happens After?</h2>
             <ul className={styles.list}>
-              <li className={styles.listItem}>Instagram (visual + quote-based)</li>
-              <li className={styles.listItem}>LinkedIn (professional insights)</li>
-              <li className={styles.listItem}>Twitter/X (punchy, direct thoughts)</li>
-              <li className={styles.listItem}>Facebook (connection-driven storytelling)</li>
+              <li className={styles.listItem}>You'll receive a custom narrative summary based on your workshop.</li>
+              <li className={styles.listItem}>If it resonates, you can upgrade—starting with a $29 short bio.</li>
+              <li className={styles.listItem}>You'll always know what's next—but you'll never feel pressured.</li>
             </ul>
           </div>
 
           <div className={styles.section}>
-            <h2 className={styles.sectionTitle}>Your Personal Brand Website</h2>
-            <p className={styles.text}>Your own digital home—built to express your essence:</p>
+            <h2 className={styles.sectionTitle}>Who This Is For</h2>
+            <p className={styles.text}>Whether you're:</p>
             <ul className={styles.list}>
-              <li className={styles.listItem}>Mobile-friendly and SEO-optimized design</li>
-              <li className={styles.listItem}>All your blog posts and social content displayed</li>
-              <li className={styles.listItem}>User-friendly content editor</li>
-              <li className={styles.listItem}>Fully branded layout with your colors, fonts, and tone</li>
-              <li className={styles.listItem}>Hosted on our platform with your personalized Self Cast subdomain for 12 months (included in package price)</li>
-              <li className={styles.listItem}>Option to renew hosting after 12 months for a nominal annual fee</li>
+              <li className={styles.listItem}>Starting a business</li>
+              <li className={styles.listItem}>Reclaiming your voice after a setback</li>
+              <li className={styles.listItem}>Changing careers</li>
+              <li className={styles.listItem}>Building a reputation as a thought leader</li>
+              <li className={styles.listItem}>Or just trying to show up more authentically online...</li>
             </ul>
+            <p className={styles.text}>This is where your visibility journey begins.</p>
           </div>
 
           <div className={styles.section}>
-            <h2 className={styles.sectionTitle}>Why It Works</h2>
-            <p className={styles.text}>We don’t guess. We listen. Every word, image, and design element comes from your story—not a stock template.</p>
-            <div className={styles.highlight}>
-              <p className={styles.text}>You’re not just getting content. You’re building a high-trust narrative system that works across platforms.</p>
-            </div>
-          </div>
-
-          <div className={styles.pricingSection}>
-            <h2 className={styles.sectionTitle}>Start Your Visibility Journey</h2>
-            <p className={styles.subheadline}>One story. One system. Endless resonance.</p>
-
-            <div className={styles.pricingCard}>
-              <h3 className={styles.cardTitle}>Core Visibility Package</h3>
-              <p className={styles.price}>$2,000</p>
-              <ul className={styles.featuresList}>
-                <li className={styles.featuresItem}>60-Min Workshop Interview</li>
-                <li className={styles.featuresItem}>4 blog posts (SEO-optimized, custom written)</li>
-                <li className={styles.featuresItem}>16 Social Posts Included (4 per platform)</li>
-                <li className={styles.featuresItem}>Custom Bio & 3 Branded Quotes</li>
-                <li className={styles.featuresItem}>Professional Brand Website</li>
-                <li className={styles.featuresItem}>12 months of website hosting included</li>
-                <li className={styles.featuresItem}>Annual hosting renewal available after first year</li>
-              </ul>
-
-              {/* Urgency badge */}
-              <div style={{
-                background: 'linear-gradient(135deg, #ff6b6b 0%, #ff9a8b 100%)',
-                color: 'white',
-                padding: '0.75rem clamp(0.5rem, 4vw, 1rem)',
-                borderRadius: '2rem',
-                fontWeight: 600,
-                fontSize: 'clamp(0.85rem, 3.5vw, 0.95rem)',
-                maxWidth: 'min(100%, fit-content)',
-                margin: '0 auto 1.5rem auto',
-                boxShadow: '0 4px 12px rgba(0,0,0,0.12)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                gap: '0.5rem',
-                flexWrap: 'wrap',
-                textAlign: 'center'
-              }}>
-                <span style={{fontSize: '1.2rem'}}>⏱️</span> Only 3 Spots Left for May Onboarding
-              </div>
-
-              <p className={styles.secureLabel}>🔒 Payment secured via Stripe</p>
+            <h2 className={styles.sectionTitle}>Ready to Start?</h2>
+            <p className={styles.text}>We onboard a limited number of clients each month to ensure personal attention and creative quality.</p>
+            <div className={styles.aboveFoldCta} style={{textAlign: 'center', marginTop: '1.5rem'}}>
               <a 
-                href="https://buy.stripe.com/eVa7u55rN4xybe06oD" 
-                target="_blank" 
+                href="https://buy.stripe.com/dRmcN53TS94l2e884Ccwg0i" 
+                target="_blank"
                 className={styles.subscribeBtn}
                 onClick={handleGetStartedClick}
               >
-                Get Started
+                Get Started – Book Your Free Workshop
               </a>
-              <p className={styles.note}>We onboard a limited number of clients each month to ensure creative quality and attention.</p>
+            </div>
+            <p className={styles.text} style={{marginTop: '1.5rem', fontStyle: 'italic'}}>
+              <strong>Private. Human. Commitment-Free.</strong><br/>
+              Your session is confidential. There's no charge to book.
+              You simply show up and share your story—we'll guide the rest.
+            </p>
+          </div>
+
+          {/* FAQ Section */}
+          <div className={styles.faqSection} style={{margin: '3rem auto 2rem auto', maxWidth: '700px', background: 'white', borderRadius: '1rem', boxShadow: '0 4px 20px rgba(0,0,0,0.10)', padding: '2rem'}}>
+            <h2 className={styles.sectionTitle} style={{textAlign: 'center', marginBottom: '1.5rem'}}>Frequently Asked Questions</h2>
+            <div className={styles.faqItem} style={{marginBottom: '1.25rem'}} onClick={handleFAQInteraction}>
+              <strong>How does the Self Cast workshop work?</strong>
+              <p>It's a recorded, 1:1 conversation guided by Sarah—our intelligent story assistant. She'll ask thoughtful, personalized questions designed to help you explore your voice, values, and message. No preparation needed. Just show up and speak your truth.</p>
+            </div>
+            <div className={styles.faqItem} style={{marginBottom: '1.25rem'}} onClick={handleFAQInteraction}>
+              <strong>Is this right for me?</strong>
+              <p>Yes—if you want to:</p>
+              <ul style={{paddingLeft: '1.5rem', marginTop: '0.5rem', listStyleType: 'disc'}}>
+                <li>Clarify your story or personal brand</li>
+                <li>Show up more confidently online</li>
+                <li>Create meaningful, authentic content</li>
+                <li>Reclaim your voice during a career or life transition</li>
+              </ul>
+              <p style={{marginTop: '0.5rem'}}>We work with professionals, creatives, consultants, and entrepreneurs at all stages of visibility.</p>
+            </div>
+            <div className={styles.faqItem} style={{marginBottom: '1.25rem'}} onClick={handleFAQInteraction}>
+              <strong>What happens after I click "Get Started"?</strong>
+              <p>You'll fill out a brief onboarding form and receive a private phone number or link to book your free workshop session. It's quick, simple, and completely secure.</p>
+            </div>
+            <div className={styles.faqItem} style={{marginBottom: '1.25rem'}} onClick={handleFAQInteraction}>
+              <strong>Is the workshop really free?</strong>
+              <p>Yes. There's no cost to book your session, and no pressure to buy anything afterward.</p>
+            </div>
+            <div className={styles.faqItem} onClick={handleFAQInteraction}>
+              <strong>What happens after the workshop?</strong>
+              <p>You'll receive a personalized summary based on what Sarah heard during your conversation. From there, you can choose to unlock additional content—like posts, quotes, or a full personal brand site—at your own pace.</p>
+            </div>
+            
+            {/* Bottom CTA */}
+            <div style={{
+              textAlign: 'center',
+              marginTop: '2.5rem',
+              padding: '1.5rem',
+              borderRadius: '0.75rem',
+              background: 'linear-gradient(to bottom, rgba(0,122,255,0.05), rgba(0,122,255,0.1))'
+            }}>
+              <p style={{
+                fontSize: '1.1rem',
+                fontWeight: 500,
+                marginBottom: '1rem',
+                color: '#333'
+              }}>Ready to find your authentic voice and transform your digital presence?</p>
+              <a 
+                href="https://buy.stripe.com/dRmcN53TS94l2e884Ccwg0i" 
+                target="_blank"
+                className={styles.subscribeBtn}
+                onClick={handleGetStartedClick}
+                style={{display: 'inline-block'}}
+              >
+                Get Started Now
+              </a>
+              <p style={{
+                fontSize: '0.85rem',
+                marginTop: '0.75rem',
+                color: '#666'
+              }}>Book your free workshop today</p>
             </div>
           </div>
 
@@ -236,7 +246,7 @@ export default function GetStartedPage() {
           </div>
 
           <div className={styles.footerCard}>
-            <p className={styles.footerTagline}>We’ll handle everything—from interview to visibility. You just show up with your story.</p>
+            <p className={styles.footerTagline}>We'll handle everything—from interview to visibility. You just show up with your story.</p>
             <p className={styles.copyright}> 2025 <a href="https://www.selfcaststudios.com/" target="_blank" className={styles.link}>Self Cast Studios</a>. All rights reserved.</p>
           </div>
 
@@ -245,15 +255,15 @@ export default function GetStartedPage() {
             <h2 className={styles.sectionTitle} style={{textAlign: 'center', marginBottom: '1.5rem'}}>Frequently Asked Questions</h2>
             <div className={styles.faqItem} style={{marginBottom: '1.25rem'}} onClick={handleFAQInteraction}>
               <strong>How does the Self Cast workshop work?</strong>
-              <p>Our process starts with a 60-minute recorded interview, where we get to know your story and goals. From that single conversation, we create your website, blog posts, and social content—so you don’t have to fill out endless forms or questionnaires.</p>
+              <p>Our process starts with a 60-minute recorded interview, where we get to know your story and goals. From that single conversation, we create your website, blog posts, and social content—so you don't have to fill out endless forms or questionnaires.</p>
             </div>
             <div className={styles.faqItem} style={{marginBottom: '1.25rem'}} onClick={handleFAQInteraction}>
               <strong>Is this package right for me?</strong>
-              <p>If you want a professional online presence built from your authentic story—and you’re ready to stand out in your field—this package is for you. We work with executives, consultants, coaches, and anyone seeking to elevate their personal brand.</p>
+              <p>If you want a professional online presence built from your authentic story—and you're ready to stand out in your field—this package is for you. We work with executives, consultants, coaches, and anyone seeking to elevate their personal brand.</p>
             </div>
             <div className={styles.faqItem} style={{marginBottom: '1.25rem'}} onClick={handleFAQInteraction}>
-              <strong>What happens after I click “Get Started”?</strong>
-              <p>You’ll be securely taken to our payment page. Once complete, you’ll get immediate access to book your workshop interview and start the onboarding process.</p>
+              <strong>What happens after I click "Get Started"?</strong>
+              <p>You'll be securely taken to our payment page. Once complete, you'll get immediate access to book your workshop interview and start the onboarding process.</p>
             </div>
             <div className={styles.faqItem} onClick={handleFAQInteraction}>
               <strong>How long does it take to receive my content?</strong>
@@ -280,7 +290,7 @@ export default function GetStartedPage() {
                 color: '#333'
               }}>Ready to amplify your voice and transform your digital presence?</p>
               <a 
-                href="https://buy.stripe.com/eVa7u55rN4xybe06oD" 
+                href="https://buy.stripe.com/dRmcN53TS94l2e884Ccwg0i" 
                 target="_blank" 
                 className={styles.subscribeBtn}
                 onClick={handleGetStartedClick}

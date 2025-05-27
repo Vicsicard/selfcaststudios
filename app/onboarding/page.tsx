@@ -24,32 +24,81 @@ export default function OnboardingPage() {
       
       <div className={`${styles.container} ${playfair.className} relative z-10`}>
         <div className={styles.welcomeCard}>
-          <h1>Welcome to Self Cast Studios!</h1>
-          <p>Thank you for subscribing to our Core Visibility Package. You're in the right place to transform your personal brand with authentic storytelling.</p>
+          <h1>Your Story. Your Voice. Start Here.</h1>
+          <p>You're in the right place to transform your personal brand with authentic storytelling.</p>
         </div>
         
-        <div className={styles.packageDetails}>
-          <h2>Your Core Visibility Package Includes:</h2>
+        <div className={styles.section}>
+          <h2>🎙️ What Is the Self Cast Workshop?</h2>
+          <p>The Self Cast Workshop is a 1:1 recorded interview guided by Sarah—our intelligent storytelling assistant trained to help you articulate your voice and purpose.</p>
+          <p>In this free session, you'll:</p>
           <ul className={styles.packageList}>
-            <li>60-min storytelling workshop</li>
-            <li>4 custom blog posts</li>
-            <li>4 platform-specific social posts</li>
-            <li>Personal bio + branded quote graphics</li>
-            <li>Your own custom personal brand website</li>
+            <li>Reflect on your journey and professional story</li>
+            <li>Gain clarity on what makes your message meaningful</li>
+            <li>Walk away with a personalized summary of what Sarah heard in your words</li>
+          </ul>
+          <p>You don't need to prepare. Just show up. Sarah will handle the rest.</p>
+        </div>
+        
+        <div className={styles.section}>
+          <h2>🔁 What Happens After?</h2>
+          <ul className={styles.packageList}>
+            <li>You'll receive a custom narrative summary based on your workshop.</li>
+            <li>If it resonates, you can upgrade—starting with a $29 short bio.</li>
+            <li>You'll always know what's next—but you'll never feel pressured.</li>
           </ul>
         </div>
         
+        <div className={styles.section}>
+          <h2>👥 Who This Is For</h2>
+          <p>Whether you're:</p>
+          <ul className={styles.packageList}>
+            <li>Starting a business</li>
+            <li>Reclaiming your voice after a setback</li>
+            <li>Changing careers</li>
+            <li>Building a reputation as a thought leader</li>
+            <li>Or just trying to show up more authentically online...</li>
+          </ul>
+          <p>This is where your visibility journey begins.</p>
+        </div>
+        
+        <div className={styles.section}>
+          <h2>✅ Ready to Start?</h2>
+          <p>We onboard a limited number of clients each month to ensure personal attention and creative quality.</p>
+          <div className={styles.ctaContainer} style={{textAlign: 'center', margin: '1.5rem 0'}}>
+            <a 
+              href="https://buy.stripe.com/dRmcN53TS94l2e884Ccwg0i"
+              target="_blank"
+              className={styles.ctaButton}
+              style={{
+                display: 'inline-block',
+                padding: '12px 24px',
+                backgroundColor: '#007AFF',
+                color: 'white',
+                borderRadius: '6px',
+                textDecoration: 'none',
+                fontWeight: 600,
+                fontSize: '1.1rem',
+                boxShadow: '0 4px 6px rgba(0,0,0,0.1)'
+              }}
+            >
+              Get Started – Book Your Free Workshop
+            </a>
+          </div>
+          <p style={{textAlign: 'center', fontStyle: 'italic', margin: '1rem 0'}}>
+            <strong>🔒 Private. Human. Commitment-Free.</strong><br/>
+            Your session is confidential. There's no charge to book.<br/>
+            You simply show up and share your story—we'll guide the rest.
+          </p>
+        </div>
+        
         <div className={styles.nextSteps}>
-          <h2>Next Steps</h2>
-          <p>To get started on your personal brand journey, we need to gather some information and schedule your storytelling workshop. This workshop is where we'll uncover the authentic voice and stories that will form the foundation of all your content.</p>
-          <p>Please complete the form below and select a time for your workshop. Once submitted, you'll receive a confirmation email with all the details.</p>
+          <h2>Schedule Your Storytelling Workshop</h2>
+          <p>Select a date and time that works for you. The workshop will last 60 minutes.</p>
         </div>
         
         <form className={styles.formContainer} onSubmit={(e) => e.preventDefault()}>
           <div className={styles.formSection}>
-            <h3>Schedule Your Storytelling Workshop</h3>
-            <p>Select a date and time that works for you. The workshop will last 60 minutes.</p>
-            
             <div className={styles.calendarContainer}>
               {/* Calendly Embed */}
               <div className="calendly-inline-widget" data-url="https://calendly.com/vicsicard/30min" style={{minWidth: '320px', height: '700px'}}></div>
@@ -164,78 +213,6 @@ export default function OnboardingPage() {
             <div className={styles.formGroup}>
               <label htmlFor="existingContent">Any existing content that represents your voice (URLs or descriptions)</label>
               <textarea id="existingContent" name="existingContent"></textarea>
-            </div>
-          </div>
-          
-          <div className={styles.formSection}>
-            <h3>Visual Branding</h3>
-            
-            <div className={styles.formGroup}>
-              <label>Color preferences for your personal brand</label>
-              <p className={styles.formText}>Select a base color scheme (you can refine this later)</p>
-              
-              <div className={styles.colorOptions}>
-                <div className={`${styles.colorOption} ${styles.blue}`} title="Blue"></div>
-                <div className={`${styles.colorOption} ${styles.navy}`} title="Navy"></div>
-                <div className={`${styles.colorOption} ${styles.gold}`} title="Gold"></div>
-                <div className={`${styles.colorOption} ${styles.green}`} title="Green"></div>
-                <div className={`${styles.colorOption} ${styles.red}`} title="Red"></div>
-              </div>
-            </div>
-          </div>
-          
-          <div className={styles.formSection}>
-            <h3>Website Details</h3>
-            
-            <div className={styles.formGroup}>
-              <label htmlFor="domainPreference">Domain name preferences (if you don't already have one)</label>
-              <input type="text" id="domainPreference" name="domainPreference" placeholder="e.g., yourname.com, yourbrand.com" />
-            </div>
-          </div>
-          
-          <div className={styles.formSection}>
-            <h3>Goals & Expectations</h3>
-            
-            <div className={styles.formGroup}>
-              <label htmlFor="successDefinition">What success looks like for you with this package</label>
-              <textarea id="successDefinition" name="successDefinition"></textarea>
-            </div>
-            
-            <div className={styles.formGroup}>
-              <label htmlFor="contentGoals">Specific goals for your content</label>
-              <select id="contentGoals" name="contentGoals">
-                <option value="">Select primary goal...</option>
-                <option value="thoughtLeadership">Thought Leadership</option>
-                <option value="careerTransition">Career Transition</option>
-                <option value="clientAcquisition">Client Acquisition</option>
-                <option value="personalBranding">Personal Branding</option>
-                <option value="speakingOpportunities">Speaking Opportunities</option>
-                <option value="other">Other (please specify)</option>
-              </select>
-            </div>
-            
-            <div className={styles.formGroup}>
-              <label htmlFor="successMetrics">How you plan to measure success</label>
-              <textarea id="successMetrics" name="successMetrics" placeholder="e.g., engagement, inquiries, opportunities"></textarea>
-            </div>
-          </div>
-          
-          <div className={styles.formSection}>
-            <h3>Previous Experience</h3>
-            
-            <div className={styles.formGroup}>
-              <label htmlFor="pastExperience">Past experiences with personal branding services</label>
-              <textarea id="pastExperience" name="pastExperience"></textarea>
-            </div>
-            
-            <div className={styles.formGroup}>
-              <label htmlFor="pastLessons">What worked/didn't work in previous efforts</label>
-              <textarea id="pastLessons" name="pastLessons"></textarea>
-            </div>
-            
-            <div className={styles.formGroup}>
-              <label htmlFor="challenges">Specific challenges you've faced with your personal brand</label>
-              <textarea id="challenges" name="challenges"></textarea>
             </div>
           </div>
           
