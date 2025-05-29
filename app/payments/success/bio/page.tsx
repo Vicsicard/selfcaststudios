@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, Suspense } from 'react'
 
 // Force dynamic rendering for this page
 export const dynamic = 'force-dynamic'
@@ -13,7 +13,8 @@ const playfair = Playfair_Display({
   weight: ['400', '500', '600', '700'],
 })
 
-export default function BioSuccessPage() {
+// Client component that uses searchParams
+function BioSuccessContent() {
   const searchParams = useSearchParams()
   const sessionId = searchParams.get('session_id')
   
@@ -179,5 +180,32 @@ export default function BioSuccessPage() {
         </div>
       </div>
     </div>
+  )
+}
+
+// Loading fallback for Suspense
+function LoadingFallback() {
+  return (
+    <div className="relative min-h-screen w-full overflow-hidden bg-gradient-surface-dark">
+      <div className="absolute inset-0 bg-gradient-radial from-transparent to-surface-darker opacity-45" />
+      <div className="container mx-auto px-4 py-20 relative z-10">
+        <div className="max-w-3xl mx-auto bg-white rounded-custom p-8 shadow-lg">
+          <div className="flex flex-col items-center justify-center py-12">
+            <div className="w-16 h-16 border-4 border-accent border-t-transparent rounded-full animate-spin mb-6"></div>
+            <h2 className="text-2xl font-semibold text-primary">Loading payment details...</h2>
+            <p className="text-light mt-2">Please wait while we verify your payment</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+// Main page component with Suspense boundary
+export default function BioSuccessPage() {
+  return (
+    <Suspense fallback={<LoadingFallback />}>
+      <BioSuccessContent />
+    </Suspense>
   )
 }
