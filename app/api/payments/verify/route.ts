@@ -1,5 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 
+// Force dynamic rendering for this API route
+export const dynamic = 'force-dynamic';
+
 const MARKETING_AUTOMATION_URL = process.env.MARKETING_AUTOMATION_URL || 'http://localhost:3001';
 const API_KEY = process.env.MARKETING_AUTOMATION_API_KEY || 'development-api-key';
 

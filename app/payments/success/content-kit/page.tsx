@@ -1,6 +1,9 @@
 'use client'
 
 import React, { useState, useEffect } from 'react'
+
+// Force dynamic rendering for this page
+export const dynamic = 'force-dynamic'
 import { useSearchParams } from 'next/navigation'
 import { Playfair_Display } from 'next/font/google'
 import Link from 'next/link'
