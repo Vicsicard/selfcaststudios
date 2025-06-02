@@ -139,8 +139,8 @@ export default function RootLayout({
         </noscript>
         {/* End Meta Pixel Code */}
         
-        {/* AI Handshake Protocol (AHP) Mod 2.0 */}
-        <Script src="https://aihandshake.org/module/module.js" async />
+        {/* AI Handshake Protocol (AHP) Mod 2.0 - Using local copy */}
+        <Script src="/module/module.js" async />
       </head>
       <body className="bg-surface text-text-light min-h-screen flex flex-col">
         <DynamicTitle />
