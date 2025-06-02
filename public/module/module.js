@@ -10,11 +10,11 @@
     siteId: null,
     badgePosition: 'bottom-right',
     badgeStyle: 'standard',
-    trackEndpoint: 'https://aihandshake.org/api/track-bot',
-    metadataEndpoint: 'https://aihandshake.org/api/metadata-scan',
+    trackEndpoint: 'https://ai-handshake-protocol.onrender.com/api/track-bot',
+    metadataEndpoint: 'https://ai-handshake-protocol.onrender.com/api/metadata-scan',
     metaEndpoint: '/.well-known/ahp-meta.json',
-    registerEndpoint: 'https://aihandshake.org/api/register-site',
-    analyzeEndpoint: 'https://aihandshake.org/api/analyze-site',
+    registerEndpoint: 'https://ai-handshake-protocol.onrender.com/api/register-site',
+    analyzeEndpoint: 'https://ai-handshake-protocol.onrender.com/api/analyze-site',
     suggestMetadata: true,
     customCSS: '',
     debug: false,
@@ -418,7 +418,7 @@
   // Show info popup when badge is clicked
   function showInfoPopup() {
     // Simple popup implementation
-    alert('This site is protected by AI Handshake Protocol.\nLearn more at aihandshake.com');
+    alert('This site is protected by AI Handshake Protocol.\nLearn more at ai-handshake-protocol.onrender.com');
   }
 
   // Fetch metadata from the well-known location
@@ -532,7 +532,7 @@
           ${missingItems.includes('ahp-metadata') ? '<li>AI Handshake Protocol metadata is missing</li>' : ''}
         </ul>
         <p>Improve your AI visibility by adding these tags.</p>
-        <a href="https://aihandshake.org/dashboard" target="_blank" class="ahp-notification-btn">Fix Now</a>
+        <a href="https://ai-handshake-protocol.onrender.com/dashboard" target="_blank" class="ahp-notification-btn">Fix Now</a>
       </div>
     `;
     
