@@ -61,7 +61,7 @@ export default function GetStartedPage() {
             {/* Above-the-fold CTA */}
             <div className={styles.aboveFoldCta} style={{textAlign: 'center', marginBottom: '2rem'}}>
               <a 
-                href="https://buy.stripe.com/dRmcN53TS94l2e884Ccwg0i" 
+                href="https://onboard.selfcaststudios.com" 
                 target="_blank"
                 className={styles.subscribeBtn}
                 onClick={handleGetStartedClick}
@@ -142,7 +142,7 @@ export default function GetStartedPage() {
             <p className={styles.text}>We onboard a limited number of clients each month to ensure personal attention and creative quality.</p>
             <div className={styles.aboveFoldCta} style={{textAlign: 'center', marginTop: '1.5rem'}}>
               <a 
-                href="https://buy.stripe.com/dRmcN53TS94l2e884Ccwg0i" 
+                href="https://onboard.selfcaststudios.com" 
                 target="_blank"
                 className={styles.subscribeBtn}
                 onClick={handleGetStartedClick}
@@ -203,7 +203,7 @@ export default function GetStartedPage() {
                 color: '#333'
               }}>Ready to find your authentic voice and transform your digital presence?</p>
               <a 
-                href="https://buy.stripe.com/dRmcN53TS94l2e884Ccwg0i" 
+                href="https://onboard.selfcaststudios.com" 
                 target="_blank"
                 className={styles.subscribeBtn}
                 onClick={handleGetStartedClick}
