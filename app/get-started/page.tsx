@@ -1,5 +1,6 @@
 'use client'
 
+// IMPORTANT: Updated links to Render subdomain - June 4, 2025
 import React from 'react'
 import styles from './styles.module.css'
 import { Playfair_Display } from 'next/font/google'
