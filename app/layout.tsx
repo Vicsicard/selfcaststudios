@@ -140,7 +140,23 @@ export default function RootLayout({
         {/* End Meta Pixel Code */}
         
         {/* AI Handshake Protocol (AHP) Mod 2.0 - Using remote version from Render */}
-        <Script src="https://ai-handshake-protocol.onrender.com/module/module.js" async />
+        <Script src="https://aihandshakeprotocol-1xgm.onrender.com/module/module.js" strategy="afterInteractive" />
+        <Script src="https://aihandshakeprotocol-1xgm.onrender.com/universal-ahp-patch.js" strategy="afterInteractive" />
+        <Script id="ahp-init" strategy="afterInteractive">
+          {`
+            document.addEventListener('DOMContentLoaded', function() {
+              if (window.AHP && typeof window.AHP.init === 'function') {
+                window.AHP.init({
+                  siteId: 'selfcaststudios',
+                  badgeEnabled: true,
+                  badgePosition: 'bottom-right'
+                });
+              } else {
+                console.error('AHP Module not loaded correctly');
+              }
+            });
+          `}
+        </Script>
       </head>
       <body className="bg-surface text-text-light min-h-screen flex flex-col">
         <DynamicTitle />
