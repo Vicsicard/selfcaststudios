@@ -166,16 +166,14 @@
     const apiUrl = window.AHP.getApiUrl('/api/register-site');
     console.log('📡 Sending registration to:', apiUrl);
     
-    // Send registration directly to the Render backend with detailed logging
+    // Send registration directly to the Render backend with minimal headers to avoid CORS issues
     fetch(apiUrl, {
       method: 'POST',
       headers: { 
-        'Content-Type': 'application/json',
-        'X-Source': 'selfcaststudios-standalone-script'
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify(data),
-      mode: 'cors',
-      credentials: 'omit'
+      mode: 'cors'
     })
     .then(response => {
       window.AHP.log('Registration response status', response.status);
