@@ -1,9 +1,18 @@
 // AHP Standalone Implementation for Selfcast Studios
 (function() {
+  // Check if already initialized to prevent multiple instances
+  if (window.AHP && window.AHP._initialized) {
+    console.log('🔄 AHP Standalone Implementation already initialized, skipping');
+    return;
+  }
+  
   console.log('🚀 AHP Standalone Implementation loading...');
   
   // Create AHP object if it doesn't exist
   window.AHP = window.AHP || {};
+  
+  // Set initialization flag
+  window.AHP._initialized = true;
   
   // Configuration
   window.AHP.config = {
@@ -57,6 +66,12 @@
   // Create and show the modal
   window.AHP.createModal = function() {
     window.AHP.log('Creating registration modal');
+    
+    // Check if modal already exists
+    if (document.querySelector('.ahp-modal')) {
+      window.AHP.log('Modal already exists, not creating another one');
+      return;
+    }
     
     // Create modal HTML
     const modalHTML = `
@@ -187,9 +202,9 @@
   window.AHP.showInstallationSuccessNotification = function() {
     window.AHP.log('Showing installation notification');
     
-    // Check if already shown
-    if (localStorage.getItem('ahp-installation-shown') === 'true') {
-      window.AHP.log('Installation notification already shown');
+    // Check if already shown or if modal already exists
+    if (localStorage.getItem('ahp-installation-shown') === 'true' || document.querySelector('.ahp-modal')) {
+      window.AHP.log('Installation notification already shown or modal already exists');
       return;
     }
     
