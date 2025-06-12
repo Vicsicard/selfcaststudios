@@ -160,6 +160,7 @@ export default function RootLayout({
                   badgePosition: 'bottom-right',
                   showInstallNotification: true,
                   installationDate: new Date().getTime(), // Force new installation date
+                  baseUrl: 'https://aihandshakeprotocol-1xgm.onrender.com', // Explicitly set the base URL
                   debug: true
                 });
                 
