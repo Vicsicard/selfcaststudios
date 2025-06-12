@@ -154,15 +154,25 @@ export default function RootLayout({
                 const uniqueSiteId = 'selfcaststudios-' + Math.random().toString(36).substring(2, 15) + '-' + new Date().getTime();
                 console.log('Initializing AHP with siteId:', uniqueSiteId);
                 
-                // Override the fetch function to log all API calls
+                // Override the fetch function to log all API calls and fix API URLs
                 const originalFetch = window.fetch;
                 window.fetch = function(url, options) {
-                  console.log('AHP API Call:', url, options);
-                  return originalFetch(url, options).then(response => {
-                    console.log('AHP API Response:', url, response.status);
+                  // Fix API URLs to ensure they go to the correct server
+                  let modifiedUrl = url;
+                  if (typeof url === 'string') {
+                    // If it's a relative API URL, redirect it to the AHP server
+                    if (url.includes('/api/register-site')) {
+                      modifiedUrl = 'https://aihandshakeprotocol-1xgm.onrender.com/api/register-site';
+                      console.log('Redirecting registration API call to:', modifiedUrl);
+                    }
+                  }
+                  
+                  console.log('AHP API Call:', modifiedUrl, options);
+                  return originalFetch(modifiedUrl, options).then(response => {
+                    console.log('AHP API Response:', modifiedUrl, response.status);
                     return response;
                   }).catch(error => {
-                    console.error('AHP API Error:', url, error);
+                    console.error('AHP API Error:', modifiedUrl, error);
                     throw error;
                   });
                 };
