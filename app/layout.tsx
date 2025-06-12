@@ -154,6 +154,33 @@ export default function RootLayout({
                 const uniqueSiteId = 'selfcaststudios-' + Math.random().toString(36).substring(2, 15) + '-' + new Date().getTime();
                 console.log('Initializing AHP with siteId:', uniqueSiteId);
                 
+                // Override the fetch function to log all API calls
+                const originalFetch = window.fetch;
+                window.fetch = function(url, options) {
+                  console.log('AHP API Call:', url, options);
+                  return originalFetch(url, options).then(response => {
+                    console.log('AHP API Response:', url, response.status);
+                    return response;
+                  }).catch(error => {
+                    console.error('AHP API Error:', url, error);
+                    throw error;
+                  });
+                };
+                
+                // Override the registration submit handler
+                const originalHandleRegistrationSubmit = window.AHP.handleRegistrationSubmit;
+                if (window.AHP.handleRegistrationSubmit) {
+                  window.AHP.handleRegistrationSubmit = function(event) {
+                    console.log('Registration form submitted');
+                    try {
+                      return originalHandleRegistrationSubmit.call(this, event);
+                    } catch (error) {
+                      console.error('Registration error:', error);
+                      throw error;
+                    }
+                  };
+                }
+                
                 window.AHP.init({
                   siteId: uniqueSiteId,
                   badgeEnabled: true,
@@ -163,6 +190,8 @@ export default function RootLayout({
                   baseUrl: 'https://aihandshakeprotocol-1xgm.onrender.com', // Explicitly set the base URL
                   debug: true
                 });
+                
+                console.log('AHP Config after init:', JSON.stringify(window.AHP.config));
                 
                 // Force check installation status after a short delay
                 setTimeout(function() {
