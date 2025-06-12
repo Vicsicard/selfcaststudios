@@ -162,12 +162,20 @@
     
     window.AHP.log('Sending registration data', data);
     
-    // Send registration directly to the Render backend
-    fetch(window.AHP.getApiUrl('/api/register-site'), {
+    // Log the full API URL for debugging
+    const apiUrl = window.AHP.getApiUrl('/api/register-site');
+    console.log('📡 Sending registration to:', apiUrl);
+    
+    // Send registration directly to the Render backend with detailed logging
+    fetch(apiUrl, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 
+        'Content-Type': 'application/json',
+        'X-Source': 'selfcaststudios-standalone-script'
+      },
       body: JSON.stringify(data),
-      mode: 'cors'
+      mode: 'cors',
+      credentials: 'omit'
     })
     .then(response => {
       window.AHP.log('Registration response status', response.status);
