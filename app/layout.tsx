@@ -139,24 +139,34 @@ export default function RootLayout({
         </noscript>
         {/* End Meta Pixel Code */}
         
-        {/* AI Handshake Protocol (AHP) Universal Connector - Reliable API Connection */}
-        <Script id="ahp-universal-connector" strategy="beforeInteractive" src="https://aihandshakeprotocol-1xgm.onrender.com/universal-connector.js" />
+        {/* AI Handshake Protocol (AHP) Module with Direct Fix */}
+        <Script id="ahp-module" strategy="beforeInteractive" src="https://aihandshakeprotocol-1xgm.onrender.com/module/module.js" />
+        <Script id="ahp-direct-fix" strategy="beforeInteractive" src="/ahp-direct-fix.js" />
         
-        {/* Inline script to ensure AHP module loads properly */}
-        <Script id="ahp-inline-loader" strategy="beforeInteractive">
+        {/* Backup loading mechanism */}
+        <Script id="ahp-backup-loader" strategy="beforeInteractive">
           {`
             // Direct script injection as a fallback
             (function() {
-              var script = document.createElement('script');
-              script.src = 'https://aihandshakeprotocol-1xgm.onrender.com/universal-connector.js';
-              script.async = false;
-              script.onload = function() {
-                console.log('AHP Universal Connector loaded via inline script');
+              // Load the module first
+              var moduleScript = document.createElement('script');
+              moduleScript.src = 'https://aihandshakeprotocol-1xgm.onrender.com/module/module.js';
+              moduleScript.async = false;
+              
+              moduleScript.onload = function() {
+                console.log('AHP Module loaded via inline script');
+                
+                // Then load the direct fix
+                var fixScript = document.createElement('script');
+                fixScript.src = '/ahp-direct-fix.js';
+                fixScript.async = false;
+                fixScript.onload = function() {
+                  console.log('AHP Direct Fix loaded via inline script');
+                };
+                document.head.appendChild(fixScript);
               };
-              script.onerror = function() {
-                console.error('Failed to load AHP Universal Connector');
-              };
-              document.head.appendChild(script);
+              
+              document.head.appendChild(moduleScript);
             })();
           `}
         </Script>
