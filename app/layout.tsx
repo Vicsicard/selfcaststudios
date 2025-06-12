@@ -139,34 +139,28 @@ export default function RootLayout({
         </noscript>
         {/* End Meta Pixel Code */}
         
-        {/* AI Handshake Protocol (AHP) Module with Direct Fix */}
-        <Script id="ahp-module" strategy="beforeInteractive" src="https://aihandshakeprotocol-1xgm.onrender.com/module/module.js" />
-        <Script id="ahp-direct-fix" strategy="beforeInteractive" src="/ahp-direct-fix.js" />
+        {/* AI Handshake Protocol (AHP) Standalone Implementation */}
+        <Script id="ahp-standalone" strategy="afterInteractive" src="/ahp-standalone.js" />
         
         {/* Backup loading mechanism */}
-        <Script id="ahp-backup-loader" strategy="beforeInteractive">
+        <Script id="ahp-backup-loader" strategy="afterInteractive">
           {`
             // Direct script injection as a fallback
             (function() {
-              // Load the module first
-              var moduleScript = document.createElement('script');
-              moduleScript.src = 'https://aihandshakeprotocol-1xgm.onrender.com/module/module.js';
-              moduleScript.async = false;
+              // Check if script already loaded
+              if (window.AHP && window.AHP.init) {
+                console.log('AHP already loaded, skipping backup loader');
+                return;
+              }
               
-              moduleScript.onload = function() {
-                console.log('AHP Module loaded via inline script');
-                
-                // Then load the direct fix
-                var fixScript = document.createElement('script');
-                fixScript.src = '/ahp-direct-fix.js';
-                fixScript.async = false;
-                fixScript.onload = function() {
-                  console.log('AHP Direct Fix loaded via inline script');
-                };
-                document.head.appendChild(fixScript);
+              // Load the standalone implementation
+              var script = document.createElement('script');
+              script.src = '/ahp-standalone.js';
+              script.async = true;
+              script.onload = function() {
+                console.log('AHP Standalone loaded via backup mechanism');
               };
-              
-              document.head.appendChild(moduleScript);
+              document.head.appendChild(script);
             })();
           `}
         </Script>
