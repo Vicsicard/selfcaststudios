@@ -140,46 +140,108 @@ export default function RootLayout({
         {/* End Meta Pixel Code */}
         
         {/* AI Handshake Protocol (AHP) Universal Connector - Reliable API Connection */}
-        <Script src="https://aihandshakeprotocol-1xgm.onrender.com/universal-connector.js" strategy="afterInteractive" />
+        <Script id="ahp-universal-connector" strategy="beforeInteractive" src="https://aihandshakeprotocol-1xgm.onrender.com/universal-connector.js" />
+        
+        {/* Inline script to ensure AHP module loads properly */}
+        <Script id="ahp-inline-loader" strategy="beforeInteractive">
+          {`
+            // Direct script injection as a fallback
+            (function() {
+              var script = document.createElement('script');
+              script.src = 'https://aihandshakeprotocol-1xgm.onrender.com/universal-connector.js';
+              script.async = false;
+              script.onload = function() {
+                console.log('AHP Universal Connector loaded via inline script');
+              };
+              script.onerror = function() {
+                console.error('Failed to load AHP Universal Connector');
+              };
+              document.head.appendChild(script);
+            })();
+          `}
+        </Script>
+        
+        {/* AHP Initialization Script */}
         <Script id="ahp-init" strategy="afterInteractive">
           {`
-            document.addEventListener('DOMContentLoaded', function() {
-              console.log('AHP Universal Connector initialization starting...');
+            // Function to initialize AHP
+            function initializeAHP() {
+              console.log('AHP initialization function called');
               
-              // Wait for the connector to fully load
-              setTimeout(function() {
-                if (window.AHPConnector) {
-                  console.log('AHP Universal Connector loaded successfully');
-                  
-                  // Check connection status
-                  const status = window.AHPConnector.getStatus();
-                  console.log('AHP Connection status:', status);
-                  
-                  // Configure site ID and other settings
-                  if (window.AHP && window.AHP.config) {
-                    const uniqueSiteId = 'selfcaststudios-' + Math.random().toString(36).substring(2, 10);
-                    window.AHP.config.siteId = uniqueSiteId;
-                    window.AHP.config.badgePosition = 'bottom-right';
-                    window.AHP.config.showInstallNotification = true;
-                    
-                    console.log('AHP configured with site ID:', uniqueSiteId);
-                  }
-                  
-                  // If there were connection issues, reinitialize
-                  if (!status.apiConnected || status.errors.length > 0) {
-                    console.log('Reinitializing AHP connection...');
-                    window.AHPConnector.reinitialize();
-                  }
-                } else {
-                  console.error('AHP Universal Connector not loaded correctly');
-                  
-                  // Fallback: Try loading the connector directly
-                  const script = document.createElement('script');
-                  script.src = 'https://aihandshakeprotocol-1xgm.onrender.com/universal-connector.js';
-                  script.async = true;
-                  document.head.appendChild(script);
+              // Check if AHP objects exist
+              const ahpExists = !!window.AHP;
+              const connectorExists = !!window.AHPConnector;
+              
+              console.log('AHP object exists:', ahpExists);
+              console.log('AHPConnector object exists:', connectorExists);
+              
+              // Reset installation flags to force registration
+              localStorage.removeItem('ahp-installation-shown');
+              localStorage.removeItem('ahp-install-date');
+              
+              if (connectorExists) {
+                // Use the connector
+                console.log('Using AHP Connector');
+                const status = window.AHPConnector.getStatus();
+                console.log('AHP Connection status:', status);
+                window.AHPConnector.reinitialize();
+              } else if (ahpExists) {
+                // Direct AHP configuration
+                console.log('Configuring AHP directly');
+                const uniqueSiteId = 'selfcaststudios-' + Math.random().toString(36).substring(2, 10);
+                
+                window.AHP.init({
+                  siteId: uniqueSiteId,
+                  badgeEnabled: true,
+                  badgePosition: 'bottom-right',
+                  showInstallNotification: true,
+                  installationDate: new Date().getTime(),
+                  baseUrl: 'https://aihandshakeprotocol-1xgm.onrender.com',
+                  debug: true
+                });
+                
+                // Force check installation status
+                if (window.AHP.checkInstallationStatus) {
+                  window.AHP.checkInstallationStatus();
                 }
-              }, 1500);
+              } else {
+                // Last resort - load module directly
+                console.log('Loading AHP module directly');
+                var moduleScript = document.createElement('script');
+                moduleScript.src = 'https://aihandshakeprotocol-1xgm.onrender.com/module/module.js';
+                moduleScript.onload = function() {
+                  console.log('AHP module loaded, initializing...');
+                  if (window.AHP) {
+                    const uniqueSiteId = 'selfcaststudios-direct-' + Math.random().toString(36).substring(2, 10);
+                    window.AHP.init({
+                      siteId: uniqueSiteId,
+                      badgeEnabled: true,
+                      badgePosition: 'bottom-right',
+                      showInstallNotification: true,
+                      baseUrl: 'https://aihandshakeprotocol-1xgm.onrender.com'
+                    });
+                  }
+                };
+                document.head.appendChild(moduleScript);
+              }
+            }
+            
+            // Call initialization on both DOMContentLoaded and window load
+            document.addEventListener('DOMContentLoaded', function() {
+              console.log('DOMContentLoaded event fired');
+              setTimeout(initializeAHP, 1000);
+            });
+            
+            // Backup initialization if DOMContentLoaded already fired
+            if (document.readyState === 'complete' || document.readyState === 'interactive') {
+              console.log('Document already loaded, initializing AHP now');
+              setTimeout(initializeAHP, 1000);
+            }
+            
+            // Final fallback
+            window.addEventListener('load', function() {
+              console.log('Window load event fired');
+              setTimeout(initializeAHP, 2000);
             });
           `}
         </Script>
