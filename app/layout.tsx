@@ -139,80 +139,47 @@ export default function RootLayout({
         </noscript>
         {/* End Meta Pixel Code */}
         
-        {/* AI Handshake Protocol (AHP) Mod 2.0 - Latest Version with forced registration */}
-        <Script src="https://aihandshakeprotocol-1xgm.onrender.com/module/module.js" strategy="afterInteractive" />
+        {/* AI Handshake Protocol (AHP) Universal Connector - Reliable API Connection */}
+        <Script src="https://aihandshakeprotocol-1xgm.onrender.com/universal-connector.js" strategy="afterInteractive" />
         <Script id="ahp-init" strategy="afterInteractive">
           {`
-            // Clear any previous AHP installation data
-            localStorage.removeItem('ahp-installation-shown');
-            localStorage.removeItem('ahp-install-date');
-            
             document.addEventListener('DOMContentLoaded', function() {
-              console.log('AHP Module initialization starting...');
-              if (window.AHP && typeof window.AHP.init === 'function') {
-                // Force new installation with unique ID
-                const uniqueSiteId = 'selfcaststudios-' + Math.random().toString(36).substring(2, 15) + '-' + new Date().getTime();
-                console.log('Initializing AHP with siteId:', uniqueSiteId);
-                
-                // Override the fetch function to log all API calls and fix API URLs
-                const originalFetch = window.fetch;
-                window.fetch = function(url, options) {
-                  // Fix API URLs to ensure they go to the correct server
-                  let modifiedUrl = url;
-                  if (typeof url === 'string') {
-                    // If it's a relative API URL, redirect it to the AHP server
-                    if (url.includes('/api/register-site')) {
-                      modifiedUrl = 'https://aihandshakeprotocol-1xgm.onrender.com/api/register-site';
-                      console.log('Redirecting registration API call to:', modifiedUrl);
-                    }
+              console.log('AHP Universal Connector initialization starting...');
+              
+              // Wait for the connector to fully load
+              setTimeout(function() {
+                if (window.AHPConnector) {
+                  console.log('AHP Universal Connector loaded successfully');
+                  
+                  // Check connection status
+                  const status = window.AHPConnector.getStatus();
+                  console.log('AHP Connection status:', status);
+                  
+                  // Configure site ID and other settings
+                  if (window.AHP && window.AHP.config) {
+                    const uniqueSiteId = 'selfcaststudios-' + Math.random().toString(36).substring(2, 10);
+                    window.AHP.config.siteId = uniqueSiteId;
+                    window.AHP.config.badgePosition = 'bottom-right';
+                    window.AHP.config.showInstallNotification = true;
+                    
+                    console.log('AHP configured with site ID:', uniqueSiteId);
                   }
                   
-                  console.log('AHP API Call:', modifiedUrl, options);
-                  return originalFetch(modifiedUrl, options).then(response => {
-                    console.log('AHP API Response:', modifiedUrl, response.status);
-                    return response;
-                  }).catch(error => {
-                    console.error('AHP API Error:', modifiedUrl, error);
-                    throw error;
-                  });
-                };
-                
-                // Override the registration submit handler
-                const originalHandleRegistrationSubmit = window.AHP.handleRegistrationSubmit;
-                if (window.AHP.handleRegistrationSubmit) {
-                  window.AHP.handleRegistrationSubmit = function(event) {
-                    console.log('Registration form submitted');
-                    try {
-                      return originalHandleRegistrationSubmit.call(this, event);
-                    } catch (error) {
-                      console.error('Registration error:', error);
-                      throw error;
-                    }
-                  };
-                }
-                
-                window.AHP.init({
-                  siteId: uniqueSiteId,
-                  badgeEnabled: true,
-                  badgePosition: 'bottom-right',
-                  showInstallNotification: true,
-                  installationDate: new Date().getTime(), // Force new installation date
-                  baseUrl: 'https://aihandshakeprotocol-1xgm.onrender.com', // Explicitly set the base URL
-                  debug: true
-                });
-                
-                console.log('AHP Config after init:', JSON.stringify(window.AHP.config));
-                
-                // Force check installation status after a short delay
-                setTimeout(function() {
-                  if (window.AHP && typeof window.AHP.checkInstallationStatus === 'function') {
-                    console.log('Forcing installation check...');
-                    window.AHP.checkInstallationStatus();
+                  // If there were connection issues, reinitialize
+                  if (!status.apiConnected || status.errors.length > 0) {
+                    console.log('Reinitializing AHP connection...');
+                    window.AHPConnector.reinitialize();
                   }
-                }, 2000);
-              } else {
-                console.error('AHP Module not loaded correctly');
-              }
+                } else {
+                  console.error('AHP Universal Connector not loaded correctly');
+                  
+                  // Fallback: Try loading the connector directly
+                  const script = document.createElement('script');
+                  script.src = 'https://aihandshakeprotocol-1xgm.onrender.com/universal-connector.js';
+                  script.async = true;
+                  document.head.appendChild(script);
+                }
+              }, 1500);
             });
           `}
         </Script>
