@@ -139,19 +139,37 @@ export default function RootLayout({
         </noscript>
         {/* End Meta Pixel Code */}
         
-        {/* AI Handshake Protocol (AHP) Mod 2.0 - Latest Version */}
+        {/* AI Handshake Protocol (AHP) Mod 2.0 - Latest Version with forced registration */}
         <Script src="https://aihandshakeprotocol-1xgm.onrender.com/module/module.js" strategy="afterInteractive" />
         <Script id="ahp-init" strategy="afterInteractive">
           {`
+            // Clear any previous AHP installation data
+            localStorage.removeItem('ahp-installation-shown');
+            localStorage.removeItem('ahp-install-date');
+            
             document.addEventListener('DOMContentLoaded', function() {
+              console.log('AHP Module initialization starting...');
               if (window.AHP && typeof window.AHP.init === 'function') {
+                // Force new installation with unique ID
+                const uniqueSiteId = 'selfcaststudios-' + Math.random().toString(36).substring(2, 15) + '-' + new Date().getTime();
+                console.log('Initializing AHP with siteId:', uniqueSiteId);
+                
                 window.AHP.init({
-                  siteId: 'selfcaststudios-' + new Date().getTime(),  // Generate new siteId to trigger installation
+                  siteId: uniqueSiteId,
                   badgeEnabled: true,
                   badgePosition: 'bottom-right',
-                  showInstallNotification: true,  // Ensure notification is shown
-                  debug: true  // Enable debug mode for testing
+                  showInstallNotification: true,
+                  installationDate: new Date().getTime(), // Force new installation date
+                  debug: true
                 });
+                
+                // Force check installation status after a short delay
+                setTimeout(function() {
+                  if (window.AHP && typeof window.AHP.checkInstallationStatus === 'function') {
+                    console.log('Forcing installation check...');
+                    window.AHP.checkInstallationStatus();
+                  }
+                }, 2000);
               } else {
                 console.error('AHP Module not loaded correctly');
               }
